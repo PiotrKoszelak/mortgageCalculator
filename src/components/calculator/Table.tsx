@@ -41,6 +41,8 @@ const StyledTableContainer = styled(TableContainer)`
 
 const StyledTableCell = styled(TableCell)`
     border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+    padding: 5px;
+    vertical-align: baseline;
 `;
 
 function DataTable() {
@@ -53,9 +55,9 @@ function DataTable() {
                     <TableHead>
                         <TableRow>
                             {Object.values(calculatorHeaders).map((name) => (
-                                <TableCell align="right">
+                                <StyledTableCell align="center">
                                     {name[selectedLanguage]}
-                                </TableCell>
+                                </StyledTableCell>
                             ))}
                         </TableRow>
                     </TableHead>

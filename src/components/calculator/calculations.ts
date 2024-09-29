@@ -1,9 +1,9 @@
-enum InstallementType {
+export enum InstallementType {
     decreasing = 'decreasing',
     equal = 'equal',
 }
 
-enum OverpaymentResult {
+export enum OverpaymentResult {
     amount = 'amount',
     time = 'time',
 }

@@ -4,8 +4,8 @@ export const colors = {
     darkPurple: '#730099',
     lightPurple: '#b300b3',
     white: '#fff',
-    darkBlue: '#29293d',
-    lightBlue: '#47476b',
+    darkGrey: '#404040',
+    lightGrey: '#595959',
 };
 
 export const darkTheme = createTheme({
@@ -18,8 +18,8 @@ export const darkTheme = createTheme({
             contrastText: colors.white,
         },
         background: {
-            default: colors.darkBlue,
-            paper: colors.lightBlue,
+            default: colors.darkGrey,
+            paper: colors.lightGrey,
         },
     },
 });
