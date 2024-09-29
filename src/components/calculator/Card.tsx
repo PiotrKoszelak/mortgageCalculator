@@ -3,17 +3,23 @@ import Paper from '@mui/material/Paper';
 import DataTable from './Table';
 import Form from './Form';
 
-const StyledContainer = styled(Paper)`
+interface CardProps {
+    isSingle?: boolean;
+}
+
+const StyledContainer = styled(Paper)<CardProps>`
     height: 80%;
-    max-width: 500px;
+    max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
     padding: 20px;
     flex-direction: column;
 `;
 
-const Card = () => {
+const Card = (props: CardProps) => {
+    const { isSingle } = props;
+
     return (
-        <StyledContainer variant="outlined">
+        <StyledContainer variant="outlined" isSingle={isSingle}>
             <Form />
             <DataTable />
         </StyledContainer>

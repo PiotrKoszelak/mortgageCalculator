@@ -36,7 +36,7 @@ function App(props: AppProps) {
         <StyledApp>
             <ThemeProvider theme={darkTheme}>
                 <LanguageToggle />
-                <Card />
+                <Card isSingle />
             </ThemeProvider>
         </StyledApp>
     );
