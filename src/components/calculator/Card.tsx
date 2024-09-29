@@ -2,6 +2,7 @@ import { styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import DataTable from './Table';
 import Form from './Form';
+import Summary from './Summary';
 
 interface CardProps {
     isSingle?: boolean;
@@ -21,6 +22,7 @@ const Card = (props: CardProps) => {
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
             <Form />
+            <Summary />
             <DataTable />
         </StyledContainer>
     );

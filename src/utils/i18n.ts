@@ -44,6 +44,21 @@ export const calculatorInputs = {
     },
 };
 
+export const calculatorSummary = {
+    totalPayment: {
+        [LanguageList.en]: 'Total payment',
+        [LanguageList.pl]: 'Calkowita spłata',
+    },
+    totalInterest: {
+        [LanguageList.en]: 'Total interest payments',
+        [LanguageList.pl]: 'Odsetki razem',
+    },
+    totalOverpayment: {
+        [LanguageList.en]: 'Total overpayment',
+        [LanguageList.pl]: 'Nadpłata razem',
+    },
+};
+
 export const calculatorHeaders = {
     nr: {
         [LanguageList.en]: 'No',
