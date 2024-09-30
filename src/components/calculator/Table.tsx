@@ -1,4 +1,4 @@
-import { exampleData } from './calculations';
+import { DataRow } from './calculations';
 
 import { calculatorHeaders } from '../../utils/i18n';
 import { useAppSelector } from '../../store/hooks';
@@ -13,6 +13,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material';
 import { colors } from '../../utils/theme';
+
+interface TableProps {
+    data: DataRow[];
+}
 
 const StyledTableContainer = styled(TableContainer)`
     height: 100%;
@@ -45,7 +49,8 @@ const StyledTableCell = styled(TableCell)`
     vertical-align: baseline;
 `;
 
-function DataTable() {
+function DataTable(props: TableProps) {
+    const { data } = props;
     const selectedLanguage = useAppSelector(selectLanguage);
 
     return (
@@ -62,7 +67,7 @@ function DataTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {exampleData.map((row) => (
+                        {data.map((row) => (
                             <TableRow key={row.nr}>
                                 <StyledTableCell component="th" scope="row">
                                     {row.nr}

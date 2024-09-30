@@ -1,6 +1,7 @@
 import { calculatorSummary } from '../../utils/i18n';
 import { useAppSelector } from '../../store/hooks';
 import { selectLanguage } from '../../store/globalSlice';
+import { SummaryData } from './types';
 
 import { Box, styled } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -9,6 +10,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+
+interface SumamryProps {
+    data: SummaryData;
+}
 
 const StyledTableContainer = styled(TableContainer)`
     height: 200px;
@@ -20,8 +25,17 @@ const StyledTableCell = styled(TableCell)`
     vertical-align: baseline;
 `;
 
-function Summary() {
+function Summary(props: SumamryProps) {
+    const { data } = props;
     const selectedLanguage = useAppSelector(selectLanguage);
+
+    const dataValues = Object.values(data);
+    const summaryValues = Object.values(calculatorSummary).map(
+        (name, index) => ({
+            name: name[selectedLanguage],
+            value: dataValues[index],
+        })
+    );
 
     return (
         <Box>
@@ -34,13 +48,13 @@ function Summary() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Object.values(calculatorSummary).map((name) => (
+                        {summaryValues.map(({ name, value }) => (
                             <TableRow>
                                 <StyledTableCell component="th" scope="row">
-                                    {name[selectedLanguage]}
+                                    {name}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    100 000
+                                    {value}
                                 </StyledTableCell>
                             </TableRow>
                         ))}

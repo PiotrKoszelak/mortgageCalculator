@@ -5,7 +5,7 @@ import { selectLanguage } from '../../store/globalSlice';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { InputAdornment, MenuItem } from '@mui/material';
-import { InstallementType, OverpaymentResult } from './calculations';
+import { InstallementType, OverpaymentResult } from './types';
 
 const Form = () => {
     const selectedLanguage = useAppSelector(selectLanguage);

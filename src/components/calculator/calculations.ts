@@ -1,22 +1,5 @@
-export enum InstallementType {
-    decreasing = 'decreasing',
-    equal = 'equal',
-}
-
-export enum OverpaymentResult {
-    amount = 'amount',
-    time = 'time',
-}
-
-interface DataRow {
-    nr: number;
-    month: string;
-    debt: number;
-    principalInstallment?: number;
-    interest?: number;
-    installmentAmount?: number;
-    overpayment?: number;
-}
+import { DataRow, InstallementType, OverpaymentResult } from './types';
+import { parseNumber } from './utils';
 
 interface DataRowInputs {
     nr: number;
@@ -36,16 +19,6 @@ interface DataInputs {
     type: InstallementType;
     overpaymentResult: OverpaymentResult;
 }
-
-const inputs: DataInputs = {
-    debt: 200000,
-    interestRate: 0.05,
-    months: 240,
-    type: InstallementType.equal,
-    overpaymentResult: OverpaymentResult.amount,
-};
-
-const parseNumber = (number: number) => Number(number.toFixed(2));
 
 const calculateDataRow = (inputs: DataRowInputs): DataRow => {
     const { nr, month, debt, type } = inputs;
@@ -82,7 +55,7 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
     };
 };
 
-const calculateData = (inputs: DataInputs): DataRow[] => {
+export const calculateData = (inputs: DataInputs): DataRow[] => {
     const { debt, months, ...rest } = inputs;
     const firstRow = calculateDataRow({
         nr: 0,
@@ -109,5 +82,3 @@ const calculateData = (inputs: DataInputs): DataRow[] => {
 
     return [firstRow, ...data];
 };
-
-export const exampleData = calculateData(inputs);
