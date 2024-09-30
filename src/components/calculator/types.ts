@@ -1,25 +1,31 @@
+import { Parameters } from '../../utils/constants';
+
 export interface SummaryData {
-    totalPayment: number;
-    totalInterest: number;
-    totalOverpayment: number;
+    [Parameters.totalPayment]: number;
+    [Parameters.totalInterestPayment]: number;
+    [Parameters.totalOverpayment]: number;
 }
 
-export enum InstallementType {
-    decreasing = 'decreasing',
-    equal = 'equal',
-}
+export type InstallementType = Parameters.decreasing | Parameters.equal;
 
-export enum OverpaymentResult {
-    amount = 'amount',
-    time = 'time',
-}
+export type OverpaymentResult =
+    | Parameters.lowerInterest
+    | Parameters.shortenTime;
 
 export interface DataRow {
-    nr: number;
-    month: string;
-    debt: number;
-    principalInstallment?: number;
-    interest?: number;
-    installmentAmount?: number;
-    overpayment?: number;
+    [Parameters.nr]: number;
+    [Parameters.month]: string;
+    [Parameters.principalBalance]: number;
+    [Parameters.principalInstallment]?: number;
+    [Parameters.interest]?: number;
+    [Parameters.installmentAmount]?: number;
+    [Parameters.overpayment]?: number;
+}
+
+export interface DataInputs {
+    [Parameters.principalBalance]: number;
+    [Parameters.interestRate]: number;
+    [Parameters.numberOfMonths]: number;
+    [Parameters.installementType]: InstallementType;
+    [Parameters.overpaymentResult]: OverpaymentResult;
 }

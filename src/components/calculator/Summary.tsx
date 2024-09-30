@@ -1,7 +1,7 @@
-import { calculatorSummary } from '../../utils/i18n';
 import { useAppSelector } from '../../store/hooks';
-import { selectLanguage } from '../../store/globalSlice';
-import { SummaryData } from './types';
+import { selectTranslations } from '../../store/globalSlice';
+import { type SummaryData } from './types';
+import { SummaryParameters } from '../../utils/constants';
 
 import { Box, styled } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -27,15 +27,12 @@ const StyledTableCell = styled(TableCell)`
 
 function Summary(props: SumamryProps) {
     const { data } = props;
-    const selectedLanguage = useAppSelector(selectLanguage);
+    const translations = useAppSelector(selectTranslations);
 
-    const dataValues = Object.values(data);
-    const summaryValues = Object.values(calculatorSummary).map(
-        (name, index) => ({
-            name: name[selectedLanguage],
-            value: dataValues[index],
-        })
-    );
+    const summaryValues = SummaryParameters.map((param) => ({
+        name: translations[param],
+        value: data[param as keyof SummaryData],
+    }));
 
     return (
         <Box>

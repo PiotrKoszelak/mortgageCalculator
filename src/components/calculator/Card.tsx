@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { InstallementType, OverpaymentResult } from './types';
 import { calculateSummary } from './utils';
 import { calculateData } from './calculations';
+import { Parameters } from '../../utils/constants';
+import { type DataInputs } from './types';
 
 import { styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -24,12 +25,12 @@ const StyledContainer = styled(Paper)<CardProps>`
 const Card = (props: CardProps) => {
     const { isSingle } = props;
 
-    const [inputs] = useState({
-        debt: 200000,
-        interestRate: 0.05,
-        months: 240,
-        type: InstallementType.equal,
-        overpaymentResult: OverpaymentResult.amount,
+    const [inputs] = useState<DataInputs>({
+        [Parameters.principalBalance]: 200000,
+        [Parameters.interestRate]: 5 / 100,
+        [Parameters.numberOfMonths]: 240,
+        [Parameters.installementType]: Parameters.equal,
+        [Parameters.overpaymentResult]: Parameters.lowerInterest,
     });
 
     const data = calculateData(inputs);

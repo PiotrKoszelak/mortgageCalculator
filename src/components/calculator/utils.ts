@@ -1,4 +1,5 @@
-import { DataRow, SummaryData } from './types';
+import { Parameters } from '../../utils/constants';
+import { type DataRow, type SummaryData } from './types';
 
 const sumValues = (data: number[]) =>
     parseNumber(
@@ -9,9 +10,15 @@ const sumValues = (data: number[]) =>
     );
 
 export const calculateSummary = (data: DataRow[]): SummaryData => ({
-    totalPayment: sumValues(data.map((row) => row.installmentAmount as number)),
-    totalInterest: sumValues(data.map((row) => row.interest as number)),
-    totalOverpayment: sumValues(data.map((row) => row.overpayment as number)),
+    [Parameters.totalPayment]: sumValues(
+        data.map((row) => row.installmentAmount as number)
+    ),
+    [Parameters.totalInterestPayment]: sumValues(
+        data.map((row) => row.interest as number)
+    ),
+    [Parameters.totalOverpayment]: sumValues(
+        data.map((row) => row.overpayment as number)
+    ),
 });
 
 export const parseNumber = (number: number) => Number(number.toFixed(2));

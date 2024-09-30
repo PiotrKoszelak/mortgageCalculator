@@ -1,91 +1,47 @@
-import { LanguageList } from './constants';
+import { Parameters } from './constants';
 
-export const appPlaceholder = {
-    [LanguageList.en]: 'Application is under development',
-    [LanguageList.pl]: 'Aplikacja w budowie',
+export const translationsEn = {
+    [Parameters.appPlaceholder]: 'Application is under development',
+    [Parameters.totalPrincipal]: 'Total principal',
+    [Parameters.interestRate]: 'Interest rate',
+    [Parameters.interest]: 'Interest',
+    [Parameters.numberOfMonths]: 'Number of months',
+    [Parameters.installementType]: 'Installements type',
+    [Parameters.decreasing]: 'Decreasing',
+    [Parameters.equal]: 'Equal',
+    [Parameters.overpaymentResult]: 'Overpayment result',
+    [Parameters.lowerInterest]: 'Lower interest',
+    [Parameters.shortenTime]: 'Shorten time',
+    [Parameters.totalPayment]: 'Total payment',
+    [Parameters.totalInterestPayment]: 'Total interest payment',
+    [Parameters.totalOverpayment]: 'Total overpayment',
+    [Parameters.nr]: 'No',
+    [Parameters.month]: 'Month',
+    [Parameters.principalBalance]: 'Principal balance',
+    [Parameters.principalInstallment]: 'Principal installment',
+    [Parameters.installmentAmount]: 'Installment total',
+    [Parameters.overpayment]: 'Overpayment',
 };
 
-export const calculatorInputs = {
-    totalPrincipal: {
-        [LanguageList.en]: 'Total principal',
-        [LanguageList.pl]: 'Kowta kredytu',
-    },
-    interest: {
-        [LanguageList.en]: 'Interest',
-        [LanguageList.pl]: 'Odsetki',
-    },
-    numberOfMonths: {
-        [LanguageList.en]: 'Number of months',
-        [LanguageList.pl]: 'Liczba miesięcy',
-    },
-    installementType: {
-        [LanguageList.en]: 'Installement type',
-        [LanguageList.pl]: 'Typ raty',
-    },
-    decreasing: {
-        [LanguageList.en]: 'Decreasing',
-        [LanguageList.pl]: 'Malejące',
-    },
-    equal: {
-        [LanguageList.en]: 'Equal',
-        [LanguageList.pl]: 'Równe',
-    },
-    overpaymentResult: {
-        [LanguageList.en]: 'Overpayment result',
-        [LanguageList.pl]: 'Skutek nadpłaty',
-    },
-    lowerInterest: {
-        [LanguageList.en]: 'Lower interest',
-        [LanguageList.pl]: 'Mniejsza rata',
-    },
-    shortenTime: {
-        [LanguageList.en]: 'Shorten time',
-        [LanguageList.pl]: 'Krótszy okres',
-    },
-};
-
-export const calculatorSummary = {
-    totalPayment: {
-        [LanguageList.en]: 'Total payment',
-        [LanguageList.pl]: 'Calkowita spłata',
-    },
-    totalInterest: {
-        [LanguageList.en]: 'Total interest payments',
-        [LanguageList.pl]: 'Odsetki razem',
-    },
-    totalOverpayment: {
-        [LanguageList.en]: 'Total overpayment',
-        [LanguageList.pl]: 'Nadpłata razem',
-    },
-};
-
-export const calculatorHeaders = {
-    nr: {
-        [LanguageList.en]: 'No',
-        [LanguageList.pl]: 'Nr',
-    },
-    month: {
-        [LanguageList.en]: 'Month',
-        [LanguageList.pl]: 'Miesiąc',
-    },
-    debt: {
-        [LanguageList.en]: 'Principal balance',
-        [LanguageList.pl]: 'Pozostała kwota kredytu',
-    },
-    principalInstallment: {
-        [LanguageList.en]: 'Principal installment',
-        [LanguageList.pl]: 'Kapitał',
-    },
-    interest: {
-        [LanguageList.en]: 'Interest',
-        [LanguageList.pl]: 'Odsetki',
-    },
-    installmentAmount: {
-        [LanguageList.en]: 'Installment total',
-        [LanguageList.pl]: 'Wysokość raty',
-    },
-    overpayment: {
-        [LanguageList.en]: 'Overpayment',
-        [LanguageList.pl]: 'Nadpłata',
-    },
+export const translationsPl = {
+    [Parameters.appPlaceholder]: 'Aplikacja w budowie',
+    [Parameters.totalPrincipal]: 'Kowta kredytu',
+    [Parameters.interestRate]: 'Oprocentowanie',
+    [Parameters.interest]: 'Odsetki',
+    [Parameters.numberOfMonths]: 'Liczba miesięcy',
+    [Parameters.installementType]: 'Typ rat',
+    [Parameters.decreasing]: 'Malejące',
+    [Parameters.equal]: 'Równe',
+    [Parameters.overpaymentResult]: 'Skutek nadpłaty',
+    [Parameters.lowerInterest]: 'Mniejsza rata',
+    [Parameters.shortenTime]: 'Krótszy okres',
+    [Parameters.totalPayment]: 'Calkowita spłata',
+    [Parameters.totalInterestPayment]: 'Odsetki razem',
+    [Parameters.totalOverpayment]: 'Nadpłata razem',
+    [Parameters.nr]: 'Nr',
+    [Parameters.month]: 'Miesiąc',
+    [Parameters.principalBalance]: 'Pozostała kwota kredytu',
+    [Parameters.principalInstallment]: 'Kapitał',
+    [Parameters.installmentAmount]: 'Wysokość raty',
+    [Parameters.overpayment]: 'Nadpłata',
 };

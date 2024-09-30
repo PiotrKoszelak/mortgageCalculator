@@ -1,6 +1,5 @@
 import { useAppSelector } from '../store/hooks';
-import { selectLanguage } from '../store/globalSlice';
-import { appPlaceholder } from '../utils/i18n';
+import { selectTranslations } from '../store/globalSlice';
 
 import styled from 'styled-components';
 
@@ -17,11 +16,9 @@ const StyledContainer = styled.div`
 `;
 
 const Placeholder = () => {
-    const selectedLanguage = useAppSelector(selectLanguage);
+    const translations = useAppSelector(selectTranslations);
 
-    return (
-        <StyledContainer>{appPlaceholder[selectedLanguage]}</StyledContainer>
-    );
+    return <StyledContainer>{translations.appPlaceholder}</StyledContainer>;
 };
 
 export default Placeholder;

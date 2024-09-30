@@ -1,9 +1,10 @@
-import { DataRow } from './calculations';
-
-import { calculatorHeaders } from '../../utils/i18n';
 import { useAppSelector } from '../../store/hooks';
-import { selectLanguage } from '../../store/globalSlice';
+import { selectTranslations } from '../../store/globalSlice';
+import { type DataRow } from './types';
+import { calculatorParameters } from '../../utils/constants';
 
+import { styled } from '@mui/material';
+import { colors } from '../../utils/theme';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,8 +12,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material';
-import { colors } from '../../utils/theme';
 
 interface TableProps {
     data: DataRow[];
@@ -51,7 +50,7 @@ const StyledTableCell = styled(TableCell)`
 
 function DataTable(props: TableProps) {
     const { data } = props;
-    const selectedLanguage = useAppSelector(selectLanguage);
+    const translations = useAppSelector(selectTranslations);
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -59,9 +58,9 @@ function DataTable(props: TableProps) {
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {Object.values(calculatorHeaders).map((name) => (
+                            {calculatorParameters.map((name) => (
                                 <StyledTableCell align="center">
-                                    {name[selectedLanguage]}
+                                    {translations[name]}
                                 </StyledTableCell>
                             ))}
                         </TableRow>
@@ -76,7 +75,7 @@ function DataTable(props: TableProps) {
                                     {row.month}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.debt}
+                                    {row.principalBalance}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
                                     {row.principalInstallment}

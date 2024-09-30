@@ -1,53 +1,51 @@
-import { DataRow, InstallementType, OverpaymentResult } from './types';
+import { Parameters } from '../../utils/constants';
+import {
+    type DataInputs,
+    type DataRow,
+    type InstallementType,
+    type OverpaymentResult,
+} from './types';
 import { parseNumber } from './utils';
 
 interface DataRowInputs {
-    nr: number;
-    month: string;
-    debt: number;
-    interestRate: number;
-    type: InstallementType;
-    overpaymentResult: OverpaymentResult;
-    totalMonthsNumber: number;
-    totalDebt: number;
-}
-
-interface DataInputs {
-    debt: number;
-    interestRate: number;
-    months: number;
-    type: InstallementType;
-    overpaymentResult: OverpaymentResult;
+    [Parameters.nr]: number;
+    [Parameters.month]: string;
+    [Parameters.principalBalance]: number;
+    [Parameters.interestRate]: number;
+    [Parameters.installementType]: InstallementType;
+    [Parameters.overpaymentResult]: OverpaymentResult;
+    [Parameters.numberOfMonths]: number;
+    [Parameters.totalPrincipal]: number;
 }
 
 const calculateDataRow = (inputs: DataRowInputs): DataRow => {
-    const { nr, month, debt, type } = inputs;
+    const { nr, month, principalBalance, installementType } = inputs;
     if (nr === 0) {
-        return { nr, month, debt };
+        return { nr, month, principalBalance };
     }
 
-    const { interestRate, totalMonthsNumber, totalDebt } = inputs;
+    const { interestRate, numberOfMonths, totalPrincipal } = inputs;
 
     const interestRateMonthly = interestRate / 12;
 
     let principalInstallment;
-    const interest = parseNumber(debt * interestRateMonthly);
+    const interest = parseNumber(principalBalance * interestRateMonthly);
 
-    if (type === InstallementType.decreasing) {
-        principalInstallment = parseNumber(totalDebt / totalMonthsNumber);
+    if (installementType === Parameters.decreasing) {
+        principalInstallment = parseNumber(totalPrincipal / numberOfMonths);
     } else {
         const totalAmount =
-            (totalDebt *
+            (totalPrincipal *
                 interestRateMonthly *
-                Math.pow(1 + interestRateMonthly, totalMonthsNumber)) /
-            (Math.pow(1 + interestRateMonthly, totalMonthsNumber) - 1);
+                Math.pow(1 + interestRateMonthly, numberOfMonths)) /
+            (Math.pow(1 + interestRateMonthly, numberOfMonths) - 1);
         principalInstallment = parseNumber(totalAmount - interest);
     }
 
     return {
         nr,
         month,
-        debt: parseNumber(debt - principalInstallment),
+        principalBalance: parseNumber(principalBalance - principalInstallment),
         principalInstallment,
         interest,
         installmentAmount: parseNumber(principalInstallment + interest),
@@ -56,26 +54,23 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
 };
 
 export const calculateData = (inputs: DataInputs): DataRow[] => {
-    const { debt, months, ...rest } = inputs;
+    const { principalBalance, numberOfMonths } = inputs;
     const firstRow = calculateDataRow({
         nr: 0,
         month: '01.2021',
-        debt,
-        totalMonthsNumber: months,
-        totalDebt: debt,
-        ...rest,
+        ...inputs,
+        totalPrincipal: principalBalance,
     });
-    let remainingDebt = debt;
-    const data = [...Array(months).keys()].map((index) => {
+    let remainingDebt = principalBalance;
+    const data = [...Array(numberOfMonths).keys()].map((index) => {
         const dataRow = calculateDataRow({
             nr: index + 1,
             month: '01.2021',
-            debt: remainingDebt,
-            totalMonthsNumber: months,
-            totalDebt: debt,
-            ...rest,
+            ...inputs,
+            principalBalance: remainingDebt,
+            totalPrincipal: principalBalance,
         });
-        remainingDebt = dataRow.debt;
+        remainingDebt = dataRow.principalBalance;
 
         return dataRow;
     });
