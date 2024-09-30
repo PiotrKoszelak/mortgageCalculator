@@ -25,22 +25,36 @@ const StyledContainer = styled(Paper)<CardProps>`
 const Card = (props: CardProps) => {
     const { isSingle } = props;
 
-    const [inputs] = useState<DataInputs>({
-        [Parameters.principalBalance]: 200000,
-        [Parameters.interestRate]: 5 / 100,
-        [Parameters.numberOfMonths]: 240,
+    const [inputs, setInputs] = useState<DataInputs>({
+        [Parameters.totalPrincipal]: 0,
+        [Parameters.interestRate]: 0,
+        [Parameters.numberOfMonths]: 0,
         [Parameters.installementType]: Parameters.equal,
         [Parameters.overpaymentResult]: Parameters.lowerInterest,
     });
+
+    const updateInputValue = (name: Parameters, value: unknown) => {
+        setInputs({ ...inputs, [name]: value });
+    };
+
+    const canCalculate = !!(
+        inputs.totalPrincipal &&
+        inputs.interestRate &&
+        inputs.numberOfMonths
+    );
 
     const data = calculateData(inputs);
     const summaryData = calculateSummary(data.slice(1));
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
-            <Form />
-            <Summary data={summaryData} />
-            <DataTable data={data} />
+            <Form updateInputValue={updateInputValue} inputs={inputs} />
+            {canCalculate && (
+                <>
+                    <Summary data={summaryData} />
+                    <DataTable data={data} />
+                </>
+            )}
         </StyledContainer>
     );
 };

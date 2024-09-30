@@ -26,7 +26,7 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
 
     const { interestRate, numberOfMonths, totalPrincipal } = inputs;
 
-    const interestRateMonthly = interestRate / 12;
+    const interestRateMonthly = interestRate / 100 / 12;
 
     let principalInstallment;
     const interest = parseNumber(principalBalance * interestRateMonthly);
@@ -54,21 +54,20 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
 };
 
 export const calculateData = (inputs: DataInputs): DataRow[] => {
-    const { principalBalance, numberOfMonths } = inputs;
+    const { totalPrincipal, numberOfMonths } = inputs;
     const firstRow = calculateDataRow({
         nr: 0,
         month: '01.2021',
         ...inputs,
-        totalPrincipal: principalBalance,
+        principalBalance: totalPrincipal,
     });
-    let remainingDebt = principalBalance;
+    let remainingDebt = totalPrincipal;
     const data = [...Array(numberOfMonths).keys()].map((index) => {
         const dataRow = calculateDataRow({
             nr: index + 1,
             month: '01.2021',
             ...inputs,
             principalBalance: remainingDebt,
-            totalPrincipal: principalBalance,
         });
         remainingDebt = dataRow.principalBalance;
 

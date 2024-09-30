@@ -23,7 +23,7 @@ export interface DataRow {
 }
 
 export interface DataInputs {
-    [Parameters.principalBalance]: number;
+    [Parameters.totalPrincipal]: number;
     [Parameters.interestRate]: number;
     [Parameters.numberOfMonths]: number;
     [Parameters.installementType]: InstallementType;
