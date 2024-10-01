@@ -6,6 +6,7 @@ import {
     type Translations,
     type DataInputs,
     type UpdateInputFunction,
+    type TextFieldRules,
 } from './types';
 import { defaultDataInputs } from './utils';
 
@@ -20,6 +21,7 @@ interface TextFieldComponentProps {
     updateInputValue: UpdateInputFunction;
     value: number;
     endAdornment?: string;
+    rules?: TextFieldRules;
 }
 const TextFieldComponent = (props: TextFieldComponentProps) => {
     const {
@@ -29,16 +31,45 @@ const TextFieldComponent = (props: TextFieldComponentProps) => {
         updateInputValue,
         value,
         endAdornment,
+        rules,
     } = props;
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            updateDataInputs(Parameters[parameterName], value);
+            const isValid = isValidValue(value);
+            updateDataInputs(Parameters[parameterName], isValid ? value : '');
         }
+    };
+
+    const isValidValue = (value: number | '') => {
+        if (value === '') {
+            setErrorMessage('');
+            return true;
+        }
+
+        if (rules?.integer && !Number.isInteger(value)) {
+            setErrorMessage(translations.mustBeInteger);
+            return false;
+        } else if (rules?.min !== undefined && value < rules.min) {
+            setErrorMessage(`${translations.minLimit} ${rules.min}`);
+            return false;
+        } else if (rules?.max !== undefined && value > rules.max) {
+            setErrorMessage(`${translations.maxLimit} ${rules.max}`);
+            return false;
+        }
+
+        setErrorMessage('');
+
+        return true;
     };
 
     return (
         <TextField
+            required
+            error={!!errorMessage}
+            helperText={errorMessage}
             id={parameterName}
             label={translations[parameterName]}
             type="number"
@@ -55,18 +86,20 @@ const TextFieldComponent = (props: TextFieldComponentProps) => {
                     ),
                 },
             }}
-            value={value || undefined}
+            value={value}
             onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+                const newValue = Number(event.target.value);
+                const isValid = isValidValue(newValue);
                 updateDataInputs(
                     Parameters[parameterName],
-                    Number(event.target.value)
+                    isValid ? newValue : ''
                 );
             }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                updateInputValue(
-                    Parameters[parameterName],
-                    Number(event.target.value)
-                );
+                const value = event.target.value;
+                const newValue = value === '' ? value : Number(value);
+                isValidValue(newValue);
+                updateInputValue(Parameters[parameterName], newValue);
             }}
             onKeyDown={handleKeyDown}
         />
@@ -111,6 +144,11 @@ const Form = (props: FormProps) => {
                     updateDataInputs={updateDataInputs}
                     updateInputValue={updateInputValue}
                     value={totalPrincipal}
+                    rules={{
+                        integer: true,
+                        min: 0,
+                        max: 100000000,
+                    }}
                 />
                 <TextFieldComponent
                     parameterName={Parameters.interestRate}
@@ -119,6 +157,11 @@ const Form = (props: FormProps) => {
                     updateInputValue={updateInputValue}
                     value={interestRate}
                     endAdornment="%"
+                    rules={{
+                        integer: false,
+                        min: 0,
+                        max: 100,
+                    }}
                 />
                 <TextFieldComponent
                     parameterName={Parameters.numberOfMonths}
@@ -126,6 +169,11 @@ const Form = (props: FormProps) => {
                     updateDataInputs={updateDataInputs}
                     updateInputValue={updateInputValue}
                     value={numberOfMonths}
+                    rules={{
+                        integer: true,
+                        min: 0,
+                        max: 360,
+                    }}
                 />
                 <TextField
                     id={Parameters.installementType}

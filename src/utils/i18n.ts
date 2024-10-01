@@ -23,6 +23,9 @@ export const translationsEn = {
     [Parameters.overpayment]: 'Overpayment',
     [Parameters.availableSoon]: 'Available soon',
     [Parameters.provideData]: 'Provide required values',
+    [Parameters.minLimit]: 'Min limit:',
+    [Parameters.maxLimit]: 'Max limit:',
+    [Parameters.mustBeInteger]: 'Must be integer',
 };
 
 export const translationsPl = {
@@ -48,4 +51,7 @@ export const translationsPl = {
     [Parameters.overpayment]: 'Nadpłata',
     [Parameters.availableSoon]: 'Dostępne wkrótce',
     [Parameters.provideData]: 'Podaj wymaagane dane',
+    [Parameters.minLimit]: 'Dolny limit:',
+    [Parameters.maxLimit]: 'Górny limit:',
+    [Parameters.mustBeInteger]: 'Musi być liczbą całkowitą',
 };

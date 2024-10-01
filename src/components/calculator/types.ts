@@ -33,3 +33,9 @@ export interface DataInputs {
 export type Translations = { [key: string]: string };
 
 export type UpdateInputFunction = (name: Parameters, value: unknown) => void;
+
+export interface TextFieldRules {
+    integer: boolean;
+    min: number;
+    max: number;
+}

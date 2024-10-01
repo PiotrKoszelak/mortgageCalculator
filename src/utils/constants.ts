@@ -26,6 +26,9 @@ export enum Parameters {
     overpayment = 'overpayment',
     availableSoon = 'availableSoon',
     provideData = 'provideData',
+    minLimit = 'minLimit',
+    maxLimit = 'maxLimit',
+    mustBeInteger = 'mustBeInteger',
 }
 
 export const SummaryParameters = [
