@@ -25,6 +25,7 @@ export enum Parameters {
     installmentAmount = 'installmentAmount',
     overpayment = 'overpayment',
     availableSoon = 'availableSoon',
+    provideData = 'provideData',
 }
 
 export const SummaryParameters = [

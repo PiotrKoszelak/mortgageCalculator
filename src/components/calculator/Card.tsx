@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import DataTable from './Table';
 import Form from './Form';
 import Summary from './Summary';
+import Curtain from './Curtain';
 
 interface CardProps {
     isSingle?: boolean;
@@ -47,11 +48,13 @@ const Card = (props: CardProps) => {
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
             <Form updateDataInputs={updateDataInputs} />
-            {canCalculate && (
+            {canCalculate ? (
                 <>
                     <Summary data={summaryData} />
                     <DataTable data={data} />
                 </>
+            ) : (
+                <Curtain />
             )}
         </StyledContainer>
     );
