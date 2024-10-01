@@ -1,6 +1,10 @@
 # Mortgage calculator app
 
+https://mortgagecalculator.onrender.com/
+
 Please note that the app is under development.
+
+![Alt text](src/assets/app.png?raw=true 'Title')
 
 ## Configuration
 
