@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { type DataRow } from './types';
-import { calculatorParameters } from '../../utils/constants';
+import { calculatorParameters, Parameters } from '../../utils/constants';
 import { parseNumber } from './utils';
 
-import { styled } from '@mui/material';
+import { styled, Tooltip } from '@mui/material';
 import { colors } from '../../utils/theme';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -59,11 +59,24 @@ function DataTable(props: TableProps) {
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {calculatorParameters.map((name) => (
-                                <StyledTableCell align="center">
-                                    {translations[name]}
-                                </StyledTableCell>
-                            ))}
+                            {calculatorParameters.map((name) => {
+                                if (name === Parameters.overpayment) {
+                                    return (
+                                        <Tooltip
+                                            title={translations.availableSoon}
+                                        >
+                                            <StyledTableCell align="center">
+                                                {translations[name]}
+                                            </StyledTableCell>
+                                        </Tooltip>
+                                    );
+                                }
+                                return (
+                                    <StyledTableCell align="center">
+                                        {translations[name]}
+                                    </StyledTableCell>
+                                );
+                            })}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -91,6 +104,7 @@ function DataTable(props: TableProps) {
                                         ? parseNumber(row.installmentAmount)
                                         : ''}
                                 </StyledTableCell>
+
                                 <StyledTableCell align="right">
                                     {row.overpayment}
                                 </StyledTableCell>

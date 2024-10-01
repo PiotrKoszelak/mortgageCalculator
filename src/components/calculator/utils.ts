@@ -27,8 +27,8 @@ export const calculateSummary = (data: DataRow[]): SummaryData => {
     };
 };
 
-function numberWithSpaces(nr) {
-    return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+function numberWithSpaces(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
 export const parseNumber = (number: number) =>

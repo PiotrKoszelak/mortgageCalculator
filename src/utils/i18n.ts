@@ -21,6 +21,7 @@ export const translationsEn = {
     [Parameters.principalInstallment]: 'Principal installment',
     [Parameters.installmentAmount]: 'Installment total',
     [Parameters.overpayment]: 'Overpayment',
+    [Parameters.availableSoon]: 'Available soon',
 };
 
 export const translationsPl = {
@@ -44,4 +45,5 @@ export const translationsPl = {
     [Parameters.principalInstallment]: 'Kapitał',
     [Parameters.installmentAmount]: 'Wysokość raty',
     [Parameters.overpayment]: 'Nadpłata',
+    [Parameters.availableSoon]: 'Dostępne wkrótce',
 };

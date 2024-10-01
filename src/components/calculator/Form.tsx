@@ -11,7 +11,7 @@ import { defaultDataInputs } from './utils';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { InputAdornment, MenuItem } from '@mui/material';
+import { InputAdornment, MenuItem, Tooltip } from '@mui/material';
 
 interface TextFieldComponentProps {
     parameterName: Parameters;
@@ -156,38 +156,42 @@ const Form = (props: FormProps) => {
                         {translations.decreasing}
                     </MenuItem>
                 </TextField>
-                <TextField
-                    id={Parameters.overpaymentResult}
-                    select
-                    label={translations.overpaymentResult}
-                    defaultValue={Parameters.lowerInterest}
-                    size="small"
-                    disabled
-                    value={overpaymentResult}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
-                            Parameters.overpaymentResult,
-                            event.target.value
-                        );
-                        updateDataInputs(
-                            Parameters.overpaymentResult,
-                            event.target.value
-                        );
-                    }}
-                >
-                    <MenuItem
-                        key={Parameters.lowerInterest}
-                        value={Parameters.lowerInterest}
+                <Tooltip title={translations.availableSoon}>
+                    <TextField
+                        id={Parameters.overpaymentResult}
+                        select
+                        label={translations.overpaymentResult}
+                        defaultValue={Parameters.lowerInterest}
+                        size="small"
+                        disabled
+                        value={overpaymentResult}
+                        onChange={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
+                            updateInputValue(
+                                Parameters.overpaymentResult,
+                                event.target.value
+                            );
+                            updateDataInputs(
+                                Parameters.overpaymentResult,
+                                event.target.value
+                            );
+                        }}
                     >
-                        {translations.lowerInterest}
-                    </MenuItem>
-                    <MenuItem
-                        key={Parameters.shortenTime}
-                        value={Parameters.shortenTime}
-                    >
-                        {translations.shortenTime}
-                    </MenuItem>
-                </TextField>
+                        <MenuItem
+                            key={Parameters.lowerInterest}
+                            value={Parameters.lowerInterest}
+                        >
+                            {translations.lowerInterest}
+                        </MenuItem>
+                        <MenuItem
+                            key={Parameters.shortenTime}
+                            value={Parameters.shortenTime}
+                        >
+                            {translations.shortenTime}
+                        </MenuItem>
+                    </TextField>
+                </Tooltip>
             </div>
         </Box>
     );
