@@ -1,21 +1,94 @@
+import { useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { Parameters } from '../../utils/constants';
-import { type DataInputs } from './types';
+import {
+    type Translations,
+    type DataInputs,
+    UpdateInputFunction,
+} from './types';
+import { defaultDataInputs } from './utils';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { InputAdornment, MenuItem } from '@mui/material';
 
+interface TextFieldComponentProps {
+    parameterName: Parameters;
+    translations: Translations;
+    updateDataInputs: UpdateInputFunction;
+    updateInputValue: UpdateInputFunction;
+    value: number;
+    endAdornment?: string;
+}
+const TextFieldComponent = (props: TextFieldComponentProps) => {
+    const {
+        parameterName,
+        translations,
+        updateDataInputs,
+        updateInputValue,
+        value,
+        endAdornment,
+    } = props;
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            updateDataInputs(Parameters[parameterName], value);
+        }
+    };
+
+    return (
+        <TextField
+            id={parameterName}
+            label={translations[parameterName]}
+            type="number"
+            size="small"
+            slotProps={{
+                inputLabel: {
+                    shrink: true,
+                },
+                input: {
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            {endAdornment}
+                        </InputAdornment>
+                    ),
+                },
+            }}
+            value={value || undefined}
+            onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+                updateDataInputs(
+                    Parameters[parameterName],
+                    Number(event.target.value)
+                );
+            }}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                updateInputValue(
+                    Parameters[parameterName],
+                    Number(event.target.value)
+                );
+            }}
+            onKeyDown={handleKeyDown}
+        />
+    );
+};
+
 interface FormProps {
-    updateInputValue: (name: Parameters, value: unknown) => void;
-    inputs: DataInputs;
+    updateDataInputs: UpdateInputFunction;
 }
 
 const Form = (props: FormProps) => {
     const translations = useAppSelector(selectTranslations);
+    const { updateDataInputs } = props;
 
-    const { updateInputValue, inputs } = props;
+    const [inputs, setInputs] = useState<DataInputs>({
+        ...defaultDataInputs,
+    });
+
+    const updateInputValue = (name: Parameters, value: unknown) => {
+        setInputs({ ...inputs, [name]: value });
+    };
+
     const {
         totalPrincipal,
         interestRate,
@@ -32,69 +105,27 @@ const Form = (props: FormProps) => {
             autoComplete="off"
         >
             <div>
-                <TextField
-                    required
-                    id={Parameters.totalPrincipal}
-                    label={translations.totalPrincipal}
-                    type="number"
-                    size="small"
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
+                <TextFieldComponent
+                    parameterName={Parameters.totalPrincipal}
+                    translations={translations}
+                    updateDataInputs={updateDataInputs}
+                    updateInputValue={updateInputValue}
                     value={totalPrincipal}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
-                            Parameters.totalPrincipal,
-                            event.target.value
-                        );
-                    }}
                 />
-                <TextField
-                    required
-                    id={Parameters.interestRate}
-                    label={translations.interestRate}
-                    type="number"
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                        input: {
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    %
-                                </InputAdornment>
-                            ),
-                        },
-                    }}
-                    size="small"
+                <TextFieldComponent
+                    parameterName={Parameters.interestRate}
+                    translations={translations}
+                    updateDataInputs={updateDataInputs}
+                    updateInputValue={updateInputValue}
                     value={interestRate}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
-                            Parameters.interestRate,
-                            event.target.value
-                        );
-                    }}
+                    endAdornment="%"
                 />
-                <TextField
-                    required
-                    id={Parameters.numberOfMonths}
-                    label={translations.numberOfMonths}
-                    type="number"
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
-                    size="small"
+                <TextFieldComponent
+                    parameterName={Parameters.numberOfMonths}
+                    translations={translations}
+                    updateDataInputs={updateDataInputs}
+                    updateInputValue={updateInputValue}
                     value={numberOfMonths}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
-                            Parameters.numberOfMonths,
-                            event.target.value
-                        );
-                    }}
                 />
                 <TextField
                     id={Parameters.installementType}
@@ -106,6 +137,10 @@ const Form = (props: FormProps) => {
                     value={installementType}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateInputValue(
+                            Parameters.installementType,
+                            event.target.value
+                        );
+                        updateDataInputs(
                             Parameters.installementType,
                             event.target.value
                         );
@@ -131,6 +166,10 @@ const Form = (props: FormProps) => {
                     value={overpaymentResult}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateInputValue(
+                            Parameters.overpaymentResult,
+                            event.target.value
+                        );
+                        updateDataInputs(
                             Parameters.overpaymentResult,
                             event.target.value
                         );

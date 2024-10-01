@@ -29,3 +29,7 @@ export interface DataInputs {
     [Parameters.installementType]: InstallementType;
     [Parameters.overpaymentResult]: OverpaymentResult;
 }
+
+export type Translations = { [key: string]: string };
+
+export type UpdateInputFunction = (name: Parameters, value: unknown) => void;

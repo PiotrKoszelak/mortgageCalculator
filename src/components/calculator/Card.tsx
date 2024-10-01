@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { calculateSummary } from './utils';
+import { useMemo, useState } from 'react';
+import { calculateSummary, defaultDataInputs } from './utils';
 import { calculateData } from './calculations';
 import { Parameters } from '../../utils/constants';
 import { type DataInputs } from './types';
@@ -25,30 +25,28 @@ const StyledContainer = styled(Paper)<CardProps>`
 const Card = (props: CardProps) => {
     const { isSingle } = props;
 
-    const [inputs, setInputs] = useState<DataInputs>({
-        [Parameters.totalPrincipal]: 0,
-        [Parameters.interestRate]: 0,
-        [Parameters.numberOfMonths]: 0,
-        [Parameters.installementType]: Parameters.equal,
-        [Parameters.overpaymentResult]: Parameters.lowerInterest,
+    const [dataInputs, setDataInputs] = useState<DataInputs>({
+        ...defaultDataInputs,
     });
 
-    const updateInputValue = (name: Parameters, value: unknown) => {
-        setInputs({ ...inputs, [name]: value });
+    const updateDataInputs = (name: Parameters, value: unknown) => {
+        setDataInputs({ ...dataInputs, [name]: value });
     };
-
     const canCalculate = !!(
-        inputs.totalPrincipal &&
-        inputs.interestRate &&
-        inputs.numberOfMonths
+        dataInputs.totalPrincipal &&
+        dataInputs.interestRate &&
+        dataInputs.numberOfMonths
     );
 
-    const data = calculateData(inputs);
-    const summaryData = calculateSummary(data.slice(1));
+    const data = useMemo(
+        () => (canCalculate ? calculateData(dataInputs) : []),
+        [canCalculate, dataInputs]
+    );
+    const summaryData = useMemo(() => calculateSummary(data), [data]);
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
-            <Form updateInputValue={updateInputValue} inputs={inputs} />
+            <Form updateDataInputs={updateDataInputs} />
             {canCalculate && (
                 <>
                     <Summary data={summaryData} />
