@@ -2,6 +2,7 @@ import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { type SummaryData } from './types';
 import { SummaryParameters } from '../../utils/constants';
+import { parseNumber } from './utils';
 
 import { Box, styled } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -51,7 +52,7 @@ function Summary(props: SumamryProps) {
                                     {name}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {value}
+                                    {parseNumber(value)}
                                 </StyledTableCell>
                             </TableRow>
                         ))}

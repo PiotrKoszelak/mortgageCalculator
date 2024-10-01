@@ -5,7 +5,7 @@ import { Parameters } from '../../utils/constants';
 import {
     type Translations,
     type DataInputs,
-    UpdateInputFunction,
+    type UpdateInputFunction,
 } from './types';
 import { defaultDataInputs } from './utils';
 

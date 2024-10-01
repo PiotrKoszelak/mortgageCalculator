@@ -5,7 +5,6 @@ import {
     type InstallementType,
     type OverpaymentResult,
 } from './types';
-import { parseNumber } from './utils';
 
 interface DataRowInputs {
     [Parameters.nr]: number;
@@ -21,7 +20,15 @@ interface DataRowInputs {
 const calculateDataRow = (inputs: DataRowInputs): DataRow => {
     const { nr, month, principalBalance, installementType } = inputs;
     if (nr === 0) {
-        return { nr, month, principalBalance };
+        return {
+            nr,
+            month,
+            principalBalance,
+            principalInstallment: 0,
+            interest: 0,
+            installmentAmount: 0,
+            overpayment: 0,
+        };
     }
 
     const { interestRate, numberOfMonths, totalPrincipal } = inputs;
@@ -29,26 +36,26 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
     const interestRateMonthly = interestRate / 100 / 12;
 
     let principalInstallment;
-    const interest = parseNumber(principalBalance * interestRateMonthly);
+    const interest = principalBalance * interestRateMonthly;
 
     if (installementType === Parameters.decreasing) {
-        principalInstallment = parseNumber(totalPrincipal / numberOfMonths);
+        principalInstallment = totalPrincipal / numberOfMonths;
     } else {
         const totalAmount =
             (totalPrincipal *
                 interestRateMonthly *
                 Math.pow(1 + interestRateMonthly, numberOfMonths)) /
             (Math.pow(1 + interestRateMonthly, numberOfMonths) - 1);
-        principalInstallment = parseNumber(totalAmount - interest);
+        principalInstallment = totalAmount - interest;
     }
 
     return {
         nr,
         month,
-        principalBalance: parseNumber(principalBalance - principalInstallment),
+        principalBalance: principalBalance - principalInstallment,
         principalInstallment,
         interest,
-        installmentAmount: parseNumber(principalInstallment + interest),
+        installmentAmount: principalInstallment + interest,
         overpayment: 0,
     };
 };

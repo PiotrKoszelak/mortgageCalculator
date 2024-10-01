@@ -2,6 +2,7 @@ import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { type DataRow } from './types';
 import { calculatorParameters } from '../../utils/constants';
+import { parseNumber } from './utils';
 
 import { styled } from '@mui/material';
 import { colors } from '../../utils/theme';
@@ -66,7 +67,7 @@ function DataTable(props: TableProps) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row) => (
+                        {data.map((row, index) => (
                             <TableRow key={row.nr}>
                                 <StyledTableCell component="th" scope="row">
                                     {row.nr}
@@ -75,16 +76,20 @@ function DataTable(props: TableProps) {
                                     {row.month}
                                 </StyledTableCell> */}
                                 <StyledTableCell align="right">
-                                    {row.principalBalance}
+                                    {parseNumber(row.principalBalance)}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.principalInstallment}
+                                    {index
+                                        ? parseNumber(row.principalInstallment)
+                                        : ''}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.interest}
+                                    {index ? parseNumber(row.interest) : ''}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.installmentAmount}
+                                    {index
+                                        ? parseNumber(row.installmentAmount)
+                                        : ''}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
                                     {row.overpayment}

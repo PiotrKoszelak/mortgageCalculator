@@ -16,10 +16,10 @@ export interface DataRow {
     [Parameters.nr]: number;
     [Parameters.month]: string;
     [Parameters.principalBalance]: number;
-    [Parameters.principalInstallment]?: number;
-    [Parameters.interest]?: number;
-    [Parameters.installmentAmount]?: number;
-    [Parameters.overpayment]?: number;
+    [Parameters.principalInstallment]: number;
+    [Parameters.interest]: number;
+    [Parameters.installmentAmount]: number;
+    [Parameters.overpayment]: number;
 }
 
 export interface DataInputs {

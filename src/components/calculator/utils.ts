@@ -8,12 +8,7 @@ export const fallbackSummaryValue = {
 };
 
 const sumValues = (data: number[]) =>
-    parseNumber(
-        data.reduce(
-            (accumulator, currentValue) => accumulator + currentValue,
-            0
-        )
-    );
+    data.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
 export const calculateSummary = (data: DataRow[]): SummaryData => {
     if (!data.length) return fallbackSummaryValue;
@@ -32,7 +27,12 @@ export const calculateSummary = (data: DataRow[]): SummaryData => {
     };
 };
 
-export const parseNumber = (number: number) => Number(number.toFixed(2));
+function numberWithSpaces(nr) {
+    return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+export const parseNumber = (number: number) =>
+    number && numberWithSpaces(Number(number.toFixed(2)));
 
 export const defaultDataInputs = {
     [Parameters.totalPrincipal]: 0,
