@@ -34,7 +34,7 @@ export const SummaryParameters = [
 
 export const calculatorParameters = [
     Parameters.nr,
-    Parameters.month,
+    // Parameters.month,
     Parameters.principalBalance,
     Parameters.principalInstallment,
     Parameters.interest,

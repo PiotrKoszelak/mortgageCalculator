@@ -71,9 +71,9 @@ function DataTable(props: TableProps) {
                                 <StyledTableCell component="th" scope="row">
                                     {row.nr}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">
+                                {/* <StyledTableCell align="right">
                                     {row.month}
-                                </StyledTableCell>
+                                </StyledTableCell> */}
                                 <StyledTableCell align="right">
                                     {row.principalBalance}
                                 </StyledTableCell>
