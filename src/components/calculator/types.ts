@@ -32,7 +32,11 @@ export interface DataInputs {
 
 export type Translations = { [key: string]: string };
 
-export type UpdateInputFunction = (name: Parameters, value: unknown) => void;
+export type UpdateInputFunction = (
+    name: Parameters,
+    value: number | string,
+    nr?: number
+) => void;
 
 export interface TextFieldRules {
     integer: boolean;
