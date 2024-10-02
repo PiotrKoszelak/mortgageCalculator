@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { calculateSummary, defaultDataInputs } from './utils';
 import { calculateData } from './calculations';
-import { Parameters } from '../../utils/constants';
+import { menuHeight, Parameters } from '../../utils/constants';
 import { type DataInputs } from './types';
 
 import { styled } from '@mui/material';
@@ -16,7 +16,7 @@ interface CardProps {
 }
 
 const StyledContainer = styled(Paper)<CardProps>`
-    height: 80%;
+    height: max(calc(100% - ${menuHeight + 42}px), 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
     padding: 20px;

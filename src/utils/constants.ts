@@ -46,3 +46,5 @@ export const calculatorParameters = [
     Parameters.installmentAmount,
     Parameters.overpayment,
 ];
+
+export const menuHeight = 50;

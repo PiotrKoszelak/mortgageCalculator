@@ -1,8 +1,12 @@
 import { MouseEvent } from 'react';
 import { changeLanguage, selectLanguage } from '../../store/globalSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { LanguageList } from '../../utils/constants';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { LanguageList, menuHeight } from '../../utils/constants';
+import { styled, ToggleButton, ToggleButtonGroup } from '@mui/material';
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
+    height: ${menuHeight}px;
+`;
 
 function LanguageToggle() {
     const dispatch = useAppDispatch();
@@ -16,7 +20,7 @@ function LanguageToggle() {
     };
 
     return (
-        <ToggleButtonGroup
+        <StyledToggleButtonGroup
             color="primary"
             value={selectedLanguage}
             exclusive
@@ -25,7 +29,7 @@ function LanguageToggle() {
         >
             <ToggleButton value={LanguageList.pl}>Pl</ToggleButton>
             <ToggleButton value={LanguageList.en}>En</ToggleButton>
-        </ToggleButtonGroup>
+        </StyledToggleButtonGroup>
     );
 }
 
