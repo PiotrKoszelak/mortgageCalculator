@@ -33,6 +33,7 @@ function Summary(props: SumamryProps) {
     const summaryValues = SummaryParameters.map((param) => ({
         name: translations[param],
         value: data[param as keyof SummaryData],
+        key: param,
     }));
 
     return (
@@ -46,8 +47,8 @@ function Summary(props: SumamryProps) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {summaryValues.map(({ name, value }) => (
-                            <TableRow>
+                        {summaryValues.map(({ name, value, key }) => (
+                            <TableRow key={key}>
                                 <StyledTableCell component="th" scope="row">
                                     {name}
                                 </StyledTableCell>

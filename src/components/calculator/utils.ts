@@ -10,20 +10,22 @@ export const fallbackSummaryValue = {
 const sumValues = (data: number[]) =>
     data.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-export const calculateSummary = (data: DataRow[]): SummaryData => {
+export const calculateSummary = (
+    data: DataRow[],
+    overpayment: OverpaymentData,
+    totalPrincipal: number
+): SummaryData => {
     if (!data.length) return fallbackSummaryValue;
 
-    const summaryData = data.slice(1);
+    const totalInterestPayment = sumValues(
+        data
+            .map((row) => row.interest as number)
+            .filter((interest) => interest >= 0)
+    );
     return {
-        [Parameters.totalPayment]: sumValues(
-            summaryData.map((row) => row.installmentAmount as number)
-        ),
-        [Parameters.totalInterestPayment]: sumValues(
-            summaryData.map((row) => row.interest as number)
-        ),
-        [Parameters.totalOverpayment]: sumValues(
-            summaryData.map((row) => row.overpayment as number)
-        ),
+        [Parameters.totalPayment]: totalInterestPayment + totalPrincipal,
+        [Parameters.totalInterestPayment]: totalInterestPayment,
+        [Parameters.totalOverpayment]: sumValues(Object.values(overpayment)),
     };
 };
 
