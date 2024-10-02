@@ -1,10 +1,15 @@
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import { type DataRow } from './types';
+import {
+    type OverpaymentData,
+    type DataRow,
+    type UpdateInputFunction,
+} from './types';
 import { calculatorParameters, Parameters } from '../../utils/constants';
 import { parseNumber } from './utils';
 
-import { styled, Tooltip } from '@mui/material';
+import { styled } from '@mui/material';
 import { colors } from '../../utils/theme';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,9 +18,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Input from './Input';
 
 interface TableProps {
     data: DataRow[];
+    overpaymentData: OverpaymentData;
+    updateOverpayment: UpdateInputFunction;
 }
 
 const StyledTableContainer = styled(TableContainer)`
@@ -50,8 +58,32 @@ const StyledTableCell = styled(TableCell)`
 `;
 
 function DataTable(props: TableProps) {
-    const { data } = props;
+    const { data, overpaymentData, updateOverpayment } = props;
     const translations = useAppSelector(selectTranslations);
+
+    const [overpayment, setOverpayment] = useState<OverpaymentData>({});
+
+    useEffect(() => {
+        if (!Object.keys(overpayment)) {
+            setOverpayment(overpaymentData);
+        }
+    }, [overpaymentData, overpayment]);
+
+    const updateOverpaymenDataValue = (
+        _: Parameters,
+        value: number | string,
+        nr?: number
+    ) => {
+        nr && updateOverpayment(Parameters.overpayment, value, nr);
+    };
+
+    const updateOverpaymentValue = (
+        _: Parameters,
+        value: number | string,
+        nr?: number
+    ) => {
+        nr && setOverpayment({ ...overpayment, [nr]: value as number });
+    };
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -59,24 +91,11 @@ function DataTable(props: TableProps) {
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {calculatorParameters.map((name) => {
-                                if (name === Parameters.overpayment) {
-                                    return (
-                                        <Tooltip
-                                            title={translations.availableSoon}
-                                        >
-                                            <StyledTableCell align="center">
-                                                {translations[name]}
-                                            </StyledTableCell>
-                                        </Tooltip>
-                                    );
-                                }
-                                return (
-                                    <StyledTableCell align="center">
-                                        {translations[name]}
-                                    </StyledTableCell>
-                                );
-                            })}
+                            {calculatorParameters.map((name) => (
+                                <StyledTableCell align="center" key={name}>
+                                    {translations[name]}
+                                </StyledTableCell>
+                            ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -92,21 +111,40 @@ function DataTable(props: TableProps) {
                                     {parseNumber(row.principalBalance)}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {index
-                                        ? parseNumber(row.principalInstallment)
-                                        : ''}
+                                    {parseNumber(row.principalInstallment)}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {index ? parseNumber(row.interest) : ''}
+                                    {parseNumber(row.interest)}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {index
-                                        ? parseNumber(row.installmentAmount)
-                                        : ''}
+                                    {parseNumber(row.installmentAmount)}
                                 </StyledTableCell>
 
                                 <StyledTableCell align="right">
-                                    {row.overpayment}
+                                    {row.interest > 0 ? (
+                                        <Input
+                                            parameterName={
+                                                Parameters.overpayment
+                                            }
+                                            translations={translations}
+                                            updateDataInputs={
+                                                updateOverpaymenDataValue
+                                            }
+                                            updateInputValue={
+                                                updateOverpaymentValue
+                                            }
+                                            value={overpayment[row.nr] || ''}
+                                            rules={{
+                                                integer: false,
+                                                min: 0,
+                                                max: data[index]
+                                                    .principalBalance,
+                                            }}
+                                            nr={row.nr}
+                                        />
+                                    ) : (
+                                        ''
+                                    )}
                                 </StyledTableCell>
                             </TableRow>
                         ))}

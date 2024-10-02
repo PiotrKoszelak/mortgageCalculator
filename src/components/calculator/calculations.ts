@@ -18,20 +18,15 @@ interface DataRowInputs {
 }
 
 const calculateDataRow = (inputs: DataRowInputs): DataRow => {
-    const { nr, month, principalBalance, installementType } = inputs;
-    if (nr === 0) {
-        return {
-            nr,
-            month,
-            principalBalance,
-            principalInstallment: 0,
-            interest: 0,
-            installmentAmount: 0,
-            overpayment: 0,
-        };
-    }
-
-    const { interestRate, numberOfMonths, totalPrincipal } = inputs;
+    const {
+        nr,
+        month,
+        principalBalance,
+        installementType,
+        interestRate,
+        numberOfMonths,
+        totalPrincipal,
+    } = inputs;
 
     const interestRateMonthly = interestRate / 100 / 12;
 
@@ -52,34 +47,40 @@ const calculateDataRow = (inputs: DataRowInputs): DataRow => {
     return {
         nr,
         month,
-        principalBalance: principalBalance - principalInstallment,
+        principalBalance,
         principalInstallment,
         interest,
         installmentAmount: principalInstallment + interest,
-        overpayment: 0,
     };
 };
 
 export const calculateData = (inputs: DataInputs): DataRow[] => {
-    const { totalPrincipal, numberOfMonths } = inputs;
-    const firstRow = calculateDataRow({
-        nr: 0,
-        month: '01.2021',
-        ...inputs,
-        principalBalance: totalPrincipal,
-    });
+    const { totalPrincipal, numberOfMonths, overpayment } = inputs;
     let remainingDebt = totalPrincipal;
-    const data = [...Array(numberOfMonths).keys()].map((index) => {
+    let updatedTotalPrincipal = totalPrincipal;
+    const data = [];
+
+    for (let index = 1; index <= numberOfMonths; ++index) {
         const dataRow = calculateDataRow({
-            nr: index + 1,
+            nr: index,
             month: '01.2021',
             ...inputs,
             principalBalance: remainingDebt,
+            totalPrincipal: updatedTotalPrincipal,
         });
-        remainingDebt = dataRow.principalBalance;
 
-        return dataRow;
-    });
+        remainingDebt = dataRow.principalBalance - dataRow.principalInstallment;
+        remainingDebt -= overpayment[index] || 0;
+        if (inputs.overpaymentResult === Parameters.lowerInterest) {
+            updatedTotalPrincipal -= overpayment[index] || 0;
+        }
 
-    return [firstRow, ...data];
+        data.push(dataRow);
+
+        if (dataRow.principalBalance < 0) {
+            break;
+        }
+    }
+
+    return data;
 };

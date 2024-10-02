@@ -1,5 +1,10 @@
 import { Parameters } from '../../utils/constants';
-import { type DataInputs, type DataRow, type SummaryData } from './types';
+import {
+    type OverpaymentData,
+    type DataInputs,
+    type DataRow,
+    type SummaryData,
+} from './types';
 
 export const fallbackSummaryValue = {
     [Parameters.totalPayment]: 0,
@@ -42,4 +47,5 @@ export const defaultDataInputs = {
     [Parameters.numberOfMonths]: 0,
     [Parameters.installementType]: Parameters.equal,
     [Parameters.overpaymentResult]: Parameters.lowerInterest,
+    [Parameters.overpayment]: {},
 } as DataInputs;

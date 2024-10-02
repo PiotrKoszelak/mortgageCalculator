@@ -19,7 +19,6 @@ export interface DataRow {
     [Parameters.principalInstallment]: number;
     [Parameters.interest]: number;
     [Parameters.installmentAmount]: number;
-    [Parameters.overpayment]: number;
 }
 
 export interface DataInputs {
@@ -28,6 +27,7 @@ export interface DataInputs {
     [Parameters.numberOfMonths]: number;
     [Parameters.installementType]: InstallementType;
     [Parameters.overpaymentResult]: OverpaymentResult;
+    [Parameters.overpayment]: OverpaymentData;
 }
 
 export type Translations = { [key: string]: string };
@@ -43,3 +43,5 @@ export interface TextFieldRules {
     min: number;
     max: number;
 }
+
+export type OverpaymentData = { [nr: number]: number };

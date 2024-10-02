@@ -30,9 +30,31 @@ const Card = (props: CardProps) => {
         ...defaultDataInputs,
     });
 
-    const updateDataInputs = (name: Parameters, value: unknown) => {
+    const updateDataInputs = (name: Parameters, value: number | string) => {
         setDataInputs({ ...dataInputs, [name]: value });
     };
+
+    const updateOverpayment = (
+        _: Parameters,
+        value: number | string,
+        nr?: number
+    ) => {
+        if (nr) {
+            if (!value) {
+                delete dataInputs.overpayment[nr];
+                setDataInputs(dataInputs);
+            } else {
+                setDataInputs({
+                    ...dataInputs,
+                    overpayment: {
+                        ...dataInputs.overpayment,
+                        [nr]: value as number,
+                    },
+                });
+            }
+        }
+    };
+
     const canCalculate = !!(
         dataInputs.totalPrincipal &&
         dataInputs.interestRate &&
@@ -43,7 +65,12 @@ const Card = (props: CardProps) => {
         () => (canCalculate ? calculateData(dataInputs) : []),
         [canCalculate, dataInputs]
     );
-    const summaryData = useMemo(() => calculateSummary(data), [data]);
+
+    const { overpayment, totalPrincipal } = dataInputs;
+    const summaryData = useMemo(
+        () => calculateSummary(data, overpayment, totalPrincipal),
+        [data, overpayment, totalPrincipal]
+    );
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
@@ -51,7 +78,11 @@ const Card = (props: CardProps) => {
             {canCalculate ? (
                 <>
                     <Summary data={summaryData} />
-                    <DataTable data={data} />
+                    <DataTable
+                        data={data}
+                        overpaymentData={dataInputs.overpayment}
+                        updateOverpayment={updateOverpayment}
+                    />
                 </>
             ) : (
                 <Curtain />
