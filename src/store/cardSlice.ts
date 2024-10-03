@@ -28,6 +28,8 @@ const cardSlice = createSlice({
             }>
         ) => {
             const { name, value } = action.payload;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             state.dataInputs[name] = value;
         },
         updateOverpaymentInput: (

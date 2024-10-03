@@ -70,7 +70,6 @@ const Input = (props: InputProps) => {
             rules?.max !== undefined &&
             value > (parseNumber(rules.max, true) as number)
         ) {
-            console.log(value, rules.max);
             setErrorMessage(
                 `${translations.maxLimit} ${parseNumber(rules.max)}`
             );
