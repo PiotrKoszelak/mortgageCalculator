@@ -33,5 +33,12 @@ function numberWithSpaces(number: number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-export const parseNumber = (number: number) =>
-    number && numberWithSpaces(Number(number.toFixed(2)));
+export const parseNumber = (number: number, noSpace?: boolean) => {
+    if (number) {
+        if (noSpace) return Number(number.toFixed(2));
+
+        return numberWithSpaces(Number(number.toFixed(2)));
+    }
+
+    return 0;
+};

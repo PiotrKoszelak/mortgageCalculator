@@ -58,12 +58,19 @@ const Input = (props: InputProps) => {
         if (rules?.integer && !Number.isInteger(value)) {
             setErrorMessage(translations.mustBeInteger);
             return false;
-        } else if (rules?.min !== undefined && value < rules.min) {
+        } else if (
+            rules?.min !== undefined &&
+            value < (parseNumber(rules.min, true) as number)
+        ) {
             setErrorMessage(
                 `${translations.minLimit} ${parseNumber(rules.min)}`
             );
             return false;
-        } else if (rules?.max !== undefined && value > rules.max) {
+        } else if (
+            rules?.max !== undefined &&
+            value > (parseNumber(rules.max, true) as number)
+        ) {
+            console.log(value, rules.max);
             setErrorMessage(
                 `${translations.maxLimit} ${parseNumber(rules.max)}`
             );
