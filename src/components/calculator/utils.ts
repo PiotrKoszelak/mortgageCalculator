@@ -1,10 +1,5 @@
 import { Parameters } from '../../utils/constants';
-import {
-    type OverpaymentData,
-    type DataInputs,
-    type DataRow,
-    type SummaryData,
-} from './types';
+import { type OverpaymentData, type DataRow, type SummaryData } from './types';
 
 export const fallbackSummaryValue = {
     [Parameters.totalPayment]: 0,
@@ -40,12 +35,3 @@ function numberWithSpaces(number: number) {
 
 export const parseNumber = (number: number) =>
     number && numberWithSpaces(Number(number.toFixed(2)));
-
-export const defaultDataInputs = {
-    [Parameters.totalPrincipal]: 0,
-    [Parameters.interestRate]: 0,
-    [Parameters.numberOfMonths]: 0,
-    [Parameters.installementType]: Parameters.equal,
-    [Parameters.overpaymentResult]: Parameters.lowerInterest,
-    [Parameters.overpayment]: {},
-} as DataInputs;

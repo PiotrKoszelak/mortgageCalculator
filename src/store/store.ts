@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import globalReducer from './globalSlice';
-// Create the root reducer independently to obtain the RootState type
+import cardReducer from './cardSlice';
+
 const rootReducer = combineReducers({
     global: globalReducer,
+    card: cardReducer,
 });
 export function setupStore(preloadedState?: Partial<RootState>) {
     return configureStore({

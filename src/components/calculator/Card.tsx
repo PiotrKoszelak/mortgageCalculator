@@ -1,10 +1,13 @@
-import { useMemo, useState } from 'react';
-import { calculateSummary, defaultDataInputs } from './utils';
-import { calculateData } from './calculations';
-import { menuHeight, Parameters } from '../../utils/constants';
-import { type DataInputs } from './types';
+import { useMemo } from 'react';
+import { useAppSelector } from '../../store/hooks';
+import { selectDataInputs, selectLoadingStatus } from '../../store/cardSlice';
 
-import { styled } from '@mui/material';
+import { calculateSummary } from './utils';
+import { calculateData } from './calculations';
+import { menuHeight } from '../../utils/constants';
+import { colors } from '../../utils/theme';
+
+import { Backdrop, CircularProgress, styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import DataTable from './Table';
 import Form from './Form';
@@ -26,34 +29,8 @@ const StyledContainer = styled(Paper)<CardProps>`
 const Card = (props: CardProps) => {
     const { isSingle } = props;
 
-    const [dataInputs, setDataInputs] = useState<DataInputs>({
-        ...defaultDataInputs,
-    });
-
-    const updateDataInputs = (name: Parameters, value: number | string) => {
-        setDataInputs({ ...dataInputs, [name]: value });
-    };
-
-    const updateOverpayment = (
-        _: Parameters,
-        value: number | string,
-        nr?: number
-    ) => {
-        if (nr) {
-            if (!value) {
-                delete dataInputs.overpayment[nr];
-                setDataInputs(dataInputs);
-            } else {
-                setDataInputs({
-                    ...dataInputs,
-                    overpayment: {
-                        ...dataInputs.overpayment,
-                        [nr]: value as number,
-                    },
-                });
-            }
-        }
-    };
+    const dataInputs = useAppSelector(selectDataInputs);
+    const isLoading = useAppSelector(selectLoadingStatus);
 
     const canCalculate = !!(
         dataInputs.totalPrincipal &&
@@ -74,15 +51,20 @@ const Card = (props: CardProps) => {
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
-            <Form updateDataInputs={updateDataInputs} />
+            <Backdrop
+                sx={(theme) => ({
+                    color: colors.white,
+                    zIndex: theme.zIndex.drawer + 1,
+                })}
+                open={canCalculate && isLoading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            <Form />
             {canCalculate ? (
                 <>
                     <Summary data={summaryData} />
-                    <DataTable
-                        data={data}
-                        overpaymentData={dataInputs.overpayment}
-                        updateOverpayment={updateOverpayment}
-                    />
+                    <DataTable data={data} />
                 </>
             ) : (
                 <Curtain />

@@ -11,43 +11,46 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
 
 interface InputProps {
-    parameterName: Parameters;
+    parameter: Parameters | number;
     translations: Translations;
-    updateDataInputs: UpdateInputFunction;
     updateInputValue: UpdateInputFunction;
-    value: number | '';
+    value: number | string;
     endAdornment?: string;
     rules?: TextFieldRules;
-    nr?: number;
 }
 
 const Input = (props: InputProps) => {
     const {
-        parameterName,
+        parameter,
         translations,
-        updateDataInputs,
         updateInputValue,
         value,
         endAdornment,
         rules,
-        nr,
     } = props;
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            const isValid = isValidValue(value);
-            updateDataInputs(
-                Parameters[parameterName],
-                isValid ? value : '',
-                nr
-            );
+    const [inputValue, setInputValue] = useState<number | string>(value);
+
+    const updateValue = () => {
+        if (isValidValue(inputValue) && value !== inputValue) {
+            const name =
+                typeof parameter === 'number'
+                    ? parameter
+                    : Parameters[parameter];
+            updateInputValue(name, inputValue);
         }
     };
 
-    const isValidValue = (value: number | '') => {
-        if (value === '') {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            updateValue();
+        }
+    };
+
+    const isValidValue = (value: number | string) => {
+        if (typeof value === 'string') {
             setErrorMessage('');
             return true;
         }
@@ -72,15 +75,15 @@ const Input = (props: InputProps) => {
         return true;
     };
 
-    const tableInput = !isNaN(Number(nr));
+    const tableInput = typeof parameter === 'number';
 
     return (
         <TextField
             required={!tableInput}
             error={!!errorMessage}
             helperText={errorMessage}
-            id={nr ? `${parameterName}-${nr}` : parameterName}
-            label={tableInput ? '' : translations[parameterName]}
+            id={`${parameter}`}
+            label={tableInput ? '' : translations[parameter]}
             type="number"
             size="small"
             slotProps={{
@@ -95,21 +98,15 @@ const Input = (props: InputProps) => {
                     ),
                 },
             }}
-            value={value}
-            onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                const newValue = Number(event.target.value);
-                const isValid = isValidValue(newValue);
-                updateDataInputs(
-                    Parameters[parameterName],
-                    isValid ? newValue : '',
-                    nr
-                );
+            value={inputValue}
+            onBlur={() => {
+                updateValue();
             }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const value = event.target.value;
                 const newValue = value === '' ? value : Number(value);
                 isValidValue(newValue);
-                updateInputValue(Parameters[parameterName], newValue, nr);
+                setInputValue(newValue);
             }}
             onKeyDown={handleKeyDown}
         />

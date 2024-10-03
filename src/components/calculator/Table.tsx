@@ -1,11 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import {
-    type OverpaymentData,
-    type DataRow,
-    type UpdateInputFunction,
-} from './types';
+import { type DataRow } from './types';
 import { calculatorParameters, Parameters } from '../../utils/constants';
 import { parseNumber } from './utils';
 
@@ -19,11 +14,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Input from './Input';
+import {
+    selectOverpayment,
+    updateOverpaymentInput,
+} from '../../store/cardSlice';
 
 interface TableProps {
     data: DataRow[];
-    overpaymentData: OverpaymentData;
-    updateOverpayment: UpdateInputFunction;
 }
 
 const StyledTableContainer = styled(TableContainer)`
@@ -58,31 +55,17 @@ const StyledTableCell = styled(TableCell)`
 `;
 
 function DataTable(props: TableProps) {
-    const { data, overpaymentData, updateOverpayment } = props;
+    const { data } = props;
+    const dispatch = useAppDispatch();
     const translations = useAppSelector(selectTranslations);
+    const overpayment = useAppSelector(selectOverpayment);
 
-    const [overpayment, setOverpayment] = useState<OverpaymentData>({});
-
-    useEffect(() => {
-        if (!Object.keys(overpayment)) {
-            setOverpayment(overpaymentData);
-        }
-    }, [overpaymentData, overpayment]);
-
-    const updateOverpaymenDataValue = (
-        _: Parameters,
-        value: number | string,
-        nr?: number
+    const updateInputValue = (
+        nr: Parameters | number,
+        value: number | string
     ) => {
-        nr && updateOverpayment(Parameters.overpayment, value, nr);
-    };
-
-    const updateOverpaymentValue = (
-        _: Parameters,
-        value: number | string,
-        nr?: number
-    ) => {
-        nr && setOverpayment({ ...overpayment, [nr]: value as number });
+        const typedNr = nr as number;
+        dispatch(updateOverpaymentInput({ nr: typedNr, value }));
     };
 
     return (
@@ -123,16 +106,9 @@ function DataTable(props: TableProps) {
                                 <StyledTableCell align="right">
                                     {row.interest > 0 ? (
                                         <Input
-                                            parameterName={
-                                                Parameters.overpayment
-                                            }
+                                            parameter={row.nr}
                                             translations={translations}
-                                            updateDataInputs={
-                                                updateOverpaymenDataValue
-                                            }
-                                            updateInputValue={
-                                                updateOverpaymentValue
-                                            }
+                                            updateInputValue={updateInputValue}
                                             value={overpayment[row.nr] || ''}
                                             rules={{
                                                 integer: false,
@@ -140,7 +116,6 @@ function DataTable(props: TableProps) {
                                                 max: data[index]
                                                     .principalBalance,
                                             }}
-                                            nr={row.nr}
                                         />
                                     ) : (
                                         ''

@@ -1,29 +1,24 @@
-import { useState } from 'react';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
+import { selectDataInputs, updateDataInput } from '../../store/cardSlice';
 import { Parameters } from '../../utils/constants';
-import { type DataInputs, type UpdateInputFunction } from './types';
-import { defaultDataInputs } from './utils';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import Input from './Input';
 
-interface FormProps {
-    updateDataInputs: UpdateInputFunction;
-}
-
-const Form = (props: FormProps) => {
+const Form = () => {
+    const dispatch = useAppDispatch();
     const translations = useAppSelector(selectTranslations);
-    const { updateDataInputs } = props;
+    const dataInputs = useAppSelector(selectDataInputs);
 
-    const [inputs, setInputs] = useState<DataInputs>({
-        ...defaultDataInputs,
-    });
-
-    const updateInputValue = (name: Parameters, value: number | string) => {
-        setInputs({ ...inputs, [name]: value });
+    const updateInputValue = (
+        name: Parameters | number,
+        value: number | string
+    ) => {
+        const typedName = name as Parameters;
+        dispatch(updateDataInput({ name: typedName, value }));
     };
 
     const {
@@ -32,7 +27,7 @@ const Form = (props: FormProps) => {
         numberOfMonths,
         installementType,
         overpaymentResult,
-    } = inputs;
+    } = dataInputs;
 
     return (
         <Box
@@ -43,9 +38,8 @@ const Form = (props: FormProps) => {
         >
             <div>
                 <Input
-                    parameterName={Parameters.totalPrincipal}
+                    parameter={Parameters.totalPrincipal}
                     translations={translations}
-                    updateDataInputs={updateDataInputs}
                     updateInputValue={updateInputValue}
                     value={totalPrincipal}
                     rules={{
@@ -55,9 +49,8 @@ const Form = (props: FormProps) => {
                     }}
                 />
                 <Input
-                    parameterName={Parameters.interestRate}
+                    parameter={Parameters.interestRate}
                     translations={translations}
-                    updateDataInputs={updateDataInputs}
                     updateInputValue={updateInputValue}
                     value={interestRate}
                     endAdornment="%"
@@ -68,9 +61,8 @@ const Form = (props: FormProps) => {
                     }}
                 />
                 <Input
-                    parameterName={Parameters.numberOfMonths}
+                    parameter={Parameters.numberOfMonths}
                     translations={translations}
-                    updateDataInputs={updateDataInputs}
                     updateInputValue={updateInputValue}
                     value={numberOfMonths}
                     rules={{
@@ -89,10 +81,6 @@ const Form = (props: FormProps) => {
                     value={installementType}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateInputValue(
-                            Parameters.installementType,
-                            event.target.value
-                        );
-                        updateDataInputs(
                             Parameters.installementType,
                             event.target.value
                         );
@@ -117,10 +105,6 @@ const Form = (props: FormProps) => {
                     value={overpaymentResult}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateInputValue(
-                            Parameters.overpaymentResult,
-                            event.target.value
-                        );
-                        updateDataInputs(
                             Parameters.overpaymentResult,
                             event.target.value
                         );
