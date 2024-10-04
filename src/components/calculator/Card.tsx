@@ -19,10 +19,10 @@ interface CardProps {
 }
 
 const StyledContainer = styled(Paper)<CardProps>`
-    height: max(calc(100% - ${menuHeight + 42}px), 800px);
+    height: max(calc(100% - ${menuHeight + 50}px), 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
-    padding: 20px;
+    padding: 24px;
     flex-direction: column;
 `;
 

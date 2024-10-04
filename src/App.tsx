@@ -4,11 +4,12 @@ import { useAppDispatch } from './store/hooks';
 import { LanguageList } from './utils/constants';
 import { changeLanguage } from './store/globalSlice';
 
+import { colors, darkTheme } from './utils/theme';
+
 import { ThemeProvider } from '@mui/material';
 import styled from 'styled-components';
 import Card from './components/calculator/Card';
-import LanguageToggle from './components/menu/Lanuage';
-import { colors, darkTheme } from './utils/theme';
+import MenuToolbar from './components/menu/MenuToolbar';
 
 import './App.css';
 
@@ -35,7 +36,7 @@ function App(props: AppProps) {
     return (
         <StyledApp>
             <ThemeProvider theme={darkTheme}>
-                <LanguageToggle />
+                <MenuToolbar />
                 <Card isSingle />
             </ThemeProvider>
         </StyledApp>

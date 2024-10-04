@@ -30,7 +30,7 @@ export const translationsEn = {
 
 export const translationsPl = {
     [Parameters.appPlaceholder]: 'Aplikacja w budowie',
-    [Parameters.totalPrincipal]: 'Kowta kredytu',
+    [Parameters.totalPrincipal]: 'Kwota kredytu',
     [Parameters.interestRate]: 'Oprocentowanie',
     [Parameters.interest]: 'Odsetki',
     [Parameters.numberOfMonths]: 'Liczba miesięcy',
