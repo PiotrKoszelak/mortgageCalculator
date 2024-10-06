@@ -1,7 +1,6 @@
 import { Parameters } from './constants';
 
 export const translationsEn = {
-    [Parameters.appPlaceholder]: 'Application is under development',
     [Parameters.totalPrincipal]: 'Total principal',
     [Parameters.interestRate]: 'Interest rate',
     [Parameters.interest]: 'Interest',
@@ -29,7 +28,6 @@ export const translationsEn = {
 };
 
 export const translationsPl = {
-    [Parameters.appPlaceholder]: 'Aplikacja w budowie',
     [Parameters.totalPrincipal]: 'Kwota kredytu',
     [Parameters.interestRate]: 'Oprocentowanie',
     [Parameters.interest]: 'Odsetki',

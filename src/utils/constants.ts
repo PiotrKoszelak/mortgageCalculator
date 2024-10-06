@@ -4,7 +4,6 @@ export enum LanguageList {
 }
 
 export enum Parameters {
-    appPlaceholder = 'appPlaceholder',
     totalPrincipal = 'totalPrincipal',
     interestRate = 'interestRate',
     interest = 'interest',
