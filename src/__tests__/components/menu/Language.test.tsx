@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '../../test-utils';
 
-import LanguageToggle from '../../../components/menu/Lanuage';
+import LanguageToggle from '../../../components/menu/Language';
 
 test('Displays all elements', () => {
     renderWithProviders(<LanguageToggle />);

@@ -9,7 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Logo from './Logo';
-import LanguageToggle from './Lanuage';
+import LanguageToggle from './Language';
 
 const StyledToolbar = styled(Toolbar)`
     min-height: ${menuHeight}px !important;
