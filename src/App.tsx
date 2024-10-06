@@ -8,7 +8,7 @@ import { colors, darkTheme } from './utils/theme';
 
 import { ThemeProvider } from '@mui/material';
 import styled from 'styled-components';
-import Card from './components/calculator/Card';
+import Content from './components/layout/Content';
 import MenuToolbar from './components/menu/MenuToolbar';
 
 import './App.css';
@@ -37,7 +37,7 @@ function App(props: AppProps) {
         <StyledApp>
             <ThemeProvider theme={darkTheme}>
                 <MenuToolbar />
-                <Card isSingle />
+                <Content />
             </ThemeProvider>
         </StyledApp>
     );

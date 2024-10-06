@@ -54,3 +54,5 @@ export enum MenuList {
     signIn = 'signIn',
     about = 'about',
 }
+
+export const contentThreshold = 968;

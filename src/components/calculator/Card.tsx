@@ -4,7 +4,6 @@ import { selectDataInputs, selectLoadingStatus } from '../../store/cardSlice';
 
 import { calculateSummary } from './utils';
 import { calculateData } from './calculations';
-import { menuHeight } from '../../utils/constants';
 import { colors } from '../../utils/theme';
 
 import { Backdrop, CircularProgress, styled } from '@mui/material';
@@ -19,11 +18,12 @@ interface CardProps {
 }
 
 const StyledContainer = styled(Paper)<CardProps>`
-    height: max(calc(100% - ${menuHeight + 50}px), 800px);
+    height: max(100%, 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
     padding: 24px;
     flex-direction: column;
+    width: 100%;
 `;
 
 const Card = (props: CardProps) => {
