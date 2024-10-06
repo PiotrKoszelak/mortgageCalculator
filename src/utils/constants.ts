@@ -28,6 +28,8 @@ export enum Parameters {
     minLimit = 'minLimit',
     maxLimit = 'maxLimit',
     mustBeInteger = 'mustBeInteger',
+    signIn = 'signIn',
+    about = 'about',
 }
 
 export const SummaryParameters = [
@@ -47,3 +49,8 @@ export const calculatorParameters = [
 ];
 
 export const menuHeight = 50;
+
+export enum MenuList {
+    signIn = 'signIn',
+    about = 'about',
+}

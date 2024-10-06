@@ -25,6 +25,8 @@ export const translationsEn = {
     [Parameters.minLimit]: 'Min limit:',
     [Parameters.maxLimit]: 'Max limit:',
     [Parameters.mustBeInteger]: 'Must be integer',
+    [Parameters.signIn]: 'Sign in',
+    [Parameters.about]: 'About',
 };
 
 export const translationsPl = {
@@ -52,4 +54,6 @@ export const translationsPl = {
     [Parameters.minLimit]: 'Dolny limit:',
     [Parameters.maxLimit]: 'Górny limit:',
     [Parameters.mustBeInteger]: 'Musi być liczbą całkowitą',
+    [Parameters.signIn]: 'Zaloguj',
+    [Parameters.about]: 'O mnie',
 };
