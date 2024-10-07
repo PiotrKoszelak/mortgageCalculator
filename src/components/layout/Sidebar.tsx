@@ -61,7 +61,7 @@ const CustomIconButton = () => {
     );
 };
 
-const Layout = () => {
+const Sidebar = () => {
     const isSidebarOpen = useAppSelector(selectIsSidebarOpen);
 
     const { width } = useWindowDimensions();
@@ -91,4 +91,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default Sidebar;

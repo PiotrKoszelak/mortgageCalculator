@@ -2,7 +2,7 @@ import { menuHeight } from '../../utils/constants';
 
 import { Box, styled } from '@mui/material';
 import Card from '../calculator/Card';
-import Layout from './Layout';
+import Sidebar from './Sidebar';
 
 const StyledContent = styled(Box)`
     width: 100%;
@@ -14,7 +14,7 @@ function Content() {
     return (
         <StyledContent>
             <Card isSingle />
-            <Layout />
+            <Sidebar />
         </StyledContent>
     );
 }
