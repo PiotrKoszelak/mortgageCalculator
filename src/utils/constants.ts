@@ -1,6 +1,6 @@
 export enum LanguageList {
-    pl = 'pl',
-    en = 'en',
+    pl = 'plPL',
+    en = 'enEN',
 }
 
 export enum Parameters {

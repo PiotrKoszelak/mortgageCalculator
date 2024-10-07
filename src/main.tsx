@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
 
-import { LanguageList } from './utils/constants.ts';
-
 import App from './App.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Provider store={store}>
-            <App language={LanguageList.en} />
+            <App />
         </Provider>
     </React.StrictMode>
 );
