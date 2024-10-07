@@ -4,7 +4,6 @@ import { selectDataInputs, selectLoadingStatus } from '../../store/cardSlice';
 
 import { calculateSummary } from './utils';
 import { calculateData } from './calculations';
-import { colors } from '../../utils/theme';
 
 import { Backdrop, CircularProgress, styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -24,6 +23,7 @@ const StyledContainer = styled(Paper)<CardProps>`
     padding: 24px;
     flex-direction: column;
     width: 100%;
+    overflow-x: hidden;
 `;
 
 const Card = (props: CardProps) => {
@@ -51,13 +51,7 @@ const Card = (props: CardProps) => {
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
-            <Backdrop
-                sx={(theme) => ({
-                    color: colors.white,
-                    zIndex: theme.zIndex.drawer + 1,
-                })}
-                open={canCalculate && isLoading}
-            >
+            <Backdrop open={canCalculate && isLoading}>
                 <CircularProgress color="inherit" />
             </Backdrop>
             <Form />
