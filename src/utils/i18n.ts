@@ -27,6 +27,8 @@ export const translationsEn = {
     [Parameters.mustBeInteger]: 'Must be integer',
     [Parameters.signIn]: 'Sign in',
     [Parameters.about]: 'About',
+    [Parameters.appDescription]:
+        'JustFin is an application that will allow you to quickly and easily calculate all the costs of your loan or mortgage.',
 };
 
 export const translationsPl = {
@@ -56,4 +58,6 @@ export const translationsPl = {
     [Parameters.mustBeInteger]: 'Musi być liczbą całkowitą',
     [Parameters.signIn]: 'Zaloguj',
     [Parameters.about]: 'O mnie',
+    [Parameters.appDescription]:
+        'JustFin to aplikacja, która pozwoli ci w szybki i łatwy sposób obliczyć wszystkie koszty twojego kredytu.',
 };

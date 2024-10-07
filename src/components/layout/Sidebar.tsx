@@ -7,6 +7,7 @@ import useWindowDimensions from '../../utils/hooks';
 import { Divider, Drawer, IconButton, styled } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import Panels from './panels/Panels';
 
 interface DrawerProps {
     isDrawerFloating: boolean;
@@ -86,6 +87,7 @@ const Sidebar = () => {
                     </DrawerHeader>
                 )}
                 <Divider />
+                <Panels />
             </StyledDrawer>
         </>
     );

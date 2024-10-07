@@ -30,6 +30,7 @@ export enum Parameters {
     mustBeInteger = 'mustBeInteger',
     signIn = 'signIn',
     about = 'about',
+    appDescription = 'appDescription',
 }
 
 export const SummaryParameters = [

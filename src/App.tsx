@@ -16,7 +16,6 @@ import './App.css';
 const StyledApp = styled.div`
     width: 100vw;
     height: 100vh;
-    font-family: Lato;
     background-color: ${colors.darkGrey};
 `;
 
