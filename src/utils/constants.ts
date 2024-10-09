@@ -31,6 +31,9 @@ export enum Parameters {
     signIn = 'signIn',
     about = 'about',
     appDescription = 'appDescription',
+    email = 'email',
+    password = 'password',
+    rememberMe = 'rememberMe',
 }
 
 export const SummaryParameters = [
