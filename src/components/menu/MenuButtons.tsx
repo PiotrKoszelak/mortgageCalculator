@@ -46,12 +46,16 @@ const MenuButtons = () => {
             }}
         >
             <StyledBottomNavigationAction
-                label={translations.signIn.toUpperCase()}
-                value={MenuList.signIn}
-            />
-            <StyledBottomNavigationAction
                 label={translations.about.toUpperCase()}
                 value={MenuList.about}
+            />
+            <StyledBottomNavigationAction
+                label={translations.contact.toUpperCase()}
+                value={MenuList.contact}
+            />
+            <StyledBottomNavigationAction
+                label={translations.signIn.toUpperCase()}
+                value={MenuList.signIn}
             />
         </StyledBottomNavigation>
     );

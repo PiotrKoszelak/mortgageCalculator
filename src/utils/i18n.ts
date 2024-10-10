@@ -27,11 +27,17 @@ export const translationsEn = {
     [Parameters.mustBeInteger]: 'Must be integer',
     [Parameters.signIn]: 'Sign in',
     [Parameters.about]: 'About',
+    [Parameters.contact]: 'Contact',
     [Parameters.appDescription]:
         'JustFin is an application that will allow you to quickly and easily calculate all the costs of your loan or mortgage.',
     [Parameters.email]: 'Email address',
     [Parameters.password]: 'Password',
     [Parameters.rememberMe]: 'Remember me',
+    [Parameters.benefitsForSignInUsers]: 'Sign in to have access to:',
+    [Parameters.multipleCalculators]: 'Multiple calculators',
+    [Parameters.easyComparison]: 'Easy comparison',
+    [Parameters.savedResults]: 'Saved results',
+    [Parameters.exportTo]: 'Export to PDF/Excel',
 };
 
 export const translationsPl = {
@@ -60,10 +66,16 @@ export const translationsPl = {
     [Parameters.maxLimit]: 'Górny limit:',
     [Parameters.mustBeInteger]: 'Musi być liczbą całkowitą',
     [Parameters.signIn]: 'Zaloguj',
-    [Parameters.about]: 'O mnie',
+    [Parameters.about]: 'Opis',
+    [Parameters.contact]: 'Kontakt',
     [Parameters.appDescription]:
         'JustFin to aplikacja, która pozwoli ci w szybki i łatwy sposób obliczyć wszystkie koszty twojego kredytu.',
     [Parameters.email]: 'Adres email',
     [Parameters.password]: 'Hasło',
     [Parameters.rememberMe]: 'Pamiętaj mnie',
+    [Parameters.benefitsForSignInUsers]: 'Zaloguj się by mieć dostęp do:',
+    [Parameters.multipleCalculators]: 'Wiele kalkulatorów',
+    [Parameters.easyComparison]: 'Łatwe porównywanie wyników',
+    [Parameters.savedResults]: 'Przechowywanie danych',
+    [Parameters.exportTo]: 'Eksport do PDF/Excel',
 };

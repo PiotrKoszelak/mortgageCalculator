@@ -13,6 +13,7 @@ import {
     TextField,
     Tooltip,
 } from '@mui/material';
+import Benefits from './Benefits';
 
 const StyledBox = styled(Box)`
     display: flex;
@@ -23,52 +24,63 @@ const StyledBox = styled(Box)`
 const SignInPanel = () => {
     const translations = useAppSelector(selectTranslations);
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+    };
+
     return (
         <StyledBox>
-            <div>{translations[Parameters.availableSoon]}</div>
+            <Benefits />
             <Divider />
-            <StyledBox>
-                <TextField
-                    required
-                    id={Parameters.email}
-                    label={translations.email}
-                    variant="outlined"
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
-                    size="small"
-                    type="email"
-                />
-                <TextField
-                    required
-                    id={Parameters.password}
-                    label={translations.password}
-                    variant="outlined"
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
-                    size="small"
-                    type="password"
-                />
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label={translations.rememberMe}
-                />
-                <Tooltip title={translations.availableSoon}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        onClick={() => {}}
-                    >
-                        {translations.signIn}
-                    </Button>
-                </Tooltip>
-            </StyledBox>
+            <form noValidate onSubmit={handleSubmit}>
+                <StyledBox>
+                    <TextField
+                        required
+                        id={Parameters.email}
+                        label={translations.email}
+                        variant="outlined"
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            },
+                        }}
+                        size="small"
+                        type="email"
+                        autoFocus
+                    />
+
+                    <TextField
+                        required
+                        id={Parameters.password}
+                        label={translations.password}
+                        variant="outlined"
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            },
+                        }}
+                        size="small"
+                        type="password"
+                        autoComplete="current-password"
+                        autoFocus
+                    />
+
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label={translations.rememberMe}
+                    />
+                    <Tooltip title={translations.availableSoon}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            onClick={() => {}}
+                        >
+                            {translations.signIn}
+                        </Button>
+                    </Tooltip>
+                </StyledBox>
+            </form>
         </StyledBox>
     );
 };

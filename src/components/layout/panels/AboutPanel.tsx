@@ -3,7 +3,8 @@ import { selectTranslations } from '../../../store/globalSlice';
 
 import { Parameters } from '../../../utils/constants';
 
-import { Box, Divider, styled } from '@mui/material';
+import { Box, Divider, styled, Typography } from '@mui/material';
+import Benefits from './Benefits';
 
 const StyledBox = styled(Box)`
     display: flex;
@@ -16,8 +17,11 @@ const AboutPanel = () => {
 
     return (
         <StyledBox>
-            <div>{translations[Parameters.appDescription]}</div>
+            <Typography variant="h6">
+                {translations[Parameters.appDescription]}
+            </Typography>
             <Divider />
+            <Benefits />
         </StyledBox>
     );
 };

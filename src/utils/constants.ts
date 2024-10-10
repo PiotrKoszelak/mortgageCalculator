@@ -30,10 +30,16 @@ export enum Parameters {
     mustBeInteger = 'mustBeInteger',
     signIn = 'signIn',
     about = 'about',
+    contact = 'contact',
     appDescription = 'appDescription',
     email = 'email',
     password = 'password',
     rememberMe = 'rememberMe',
+    benefitsForSignInUsers = 'benefitsForSignInUsers',
+    multipleCalculators = 'multipleCalculators',
+    easyComparison = 'easyComparison',
+    savedResults = 'savedResults',
+    exportTo = 'exportTo',
 }
 
 export const SummaryParameters = [
@@ -55,8 +61,9 @@ export const calculatorParameters = [
 export const menuHeight = 50;
 
 export enum MenuList {
-    signIn = 'signIn',
     about = 'about',
+    contact = 'contact',
+    signIn = 'signIn',
 }
 
 export const contentThreshold = 968;
