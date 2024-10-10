@@ -33,6 +33,10 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
             font-size: 12px;
         }
     }
+
+    @media (max-width: 768px) {
+        margin: 0;
+    }
 `;
 
 const MenuButtons = () => {
