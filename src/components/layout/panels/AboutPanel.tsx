@@ -17,6 +17,9 @@ const AboutPanel = () => {
 
     return (
         <StyledBox>
+            <Typography variant="h5">
+                {translations[Parameters.about]}
+            </Typography>
             <Typography variant="h6">
                 {translations[Parameters.appDescription]}
             </Typography>

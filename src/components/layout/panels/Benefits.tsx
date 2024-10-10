@@ -24,7 +24,7 @@ const Benefits = () => {
     return (
         <StyledBox>
             <Typography variant="subtitle1">
-                {translations.benefitsForSignInUsers}
+                {translations.signInUsersHaveAccessTo}
             </Typography>
             <StyledParagraph>
                 <TableViewIcon /> {translations.multipleCalculators}

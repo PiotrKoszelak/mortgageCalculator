@@ -12,6 +12,7 @@ import {
     styled,
     TextField,
     Tooltip,
+    Typography,
 } from '@mui/material';
 import Benefits from './Benefits';
 
@@ -30,6 +31,9 @@ const SignInPanel = () => {
 
     return (
         <StyledBox>
+            <Typography variant="h5">
+                {translations[Parameters.signIn]}
+            </Typography>
             <Benefits />
             <Divider />
             <form noValidate onSubmit={handleSubmit}>

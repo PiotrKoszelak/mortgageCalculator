@@ -35,11 +35,13 @@ export enum Parameters {
     email = 'email',
     password = 'password',
     rememberMe = 'rememberMe',
-    benefitsForSignInUsers = 'benefitsForSignInUsers',
+    signInUsersHaveAccessTo = 'signInUsersHaveAccessTo',
     multipleCalculators = 'multipleCalculators',
     easyComparison = 'easyComparison',
     savedResults = 'savedResults',
     exportTo = 'exportTo',
+    aboutAuthor = 'aboutAuthor',
+    authorDescription = 'authorDescription',
 }
 
 export const SummaryParameters = [

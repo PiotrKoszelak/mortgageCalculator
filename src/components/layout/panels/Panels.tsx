@@ -6,6 +6,7 @@ import { MenuList } from '../../../utils/constants';
 import { Box, styled } from '@mui/material';
 import AboutPanel from './AboutPanel';
 import SignInPanel from './SignInPanel';
+import ContactPanel from './Contact';
 
 const StyledBox = styled(Box)`
     padding: 24px;
@@ -20,6 +21,8 @@ const Panels = () => {
                 return <AboutPanel />;
             case MenuList.signIn:
                 return <SignInPanel />;
+            case MenuList.contact:
+                return <ContactPanel />;
             default:
                 return null;
         }

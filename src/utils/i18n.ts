@@ -33,11 +33,14 @@ export const translationsEn = {
     [Parameters.email]: 'Email address',
     [Parameters.password]: 'Password',
     [Parameters.rememberMe]: 'Remember me',
-    [Parameters.benefitsForSignInUsers]: 'Sign in to have access to:',
+    [Parameters.signInUsersHaveAccessTo]: 'Sign in users have access to:',
     [Parameters.multipleCalculators]: 'Multiple calculators',
     [Parameters.easyComparison]: 'Easy comparison',
     [Parameters.savedResults]: 'Saved results',
     [Parameters.exportTo]: 'Export to PDF/Excel',
+    [Parameters.aboutAuthor]: 'About author',
+    [Parameters.authorDescription]:
+        'My name is Piotr Koszelak. I am a software engineer and creating web applications is my hobby. This is what I do in my free time, apart from that I love all outdoor activities - I believe physical condition is very important for all computer freaks',
 };
 
 export const translationsPl = {
@@ -73,9 +76,13 @@ export const translationsPl = {
     [Parameters.email]: 'Adres email',
     [Parameters.password]: 'Hasło',
     [Parameters.rememberMe]: 'Pamiętaj mnie',
-    [Parameters.benefitsForSignInUsers]: 'Zaloguj się by mieć dostęp do:',
+    [Parameters.signInUsersHaveAccessTo]:
+        'Zalogowani użytkownicy mają dostęp do:',
     [Parameters.multipleCalculators]: 'Wiele kalkulatorów',
     [Parameters.easyComparison]: 'Łatwe porównywanie wyników',
     [Parameters.savedResults]: 'Przechowywanie danych',
     [Parameters.exportTo]: 'Eksport do PDF/Excel',
+    [Parameters.aboutAuthor]: 'O autorze',
+    [Parameters.authorDescription]:
+        'Nazywam się Piotr Koszelak. Jestem programistą, a tworzenie aplikacji internetowych to moje hobby. To jest to, co robię w wolnym czasie, poza tym uwielbiam wszelkie aktywności na świeżym powietrzu - uważam, że kondycja fizyczna jest bardzo ważna dla wszystkich komputerowych maniaków.',
 };
