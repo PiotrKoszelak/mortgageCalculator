@@ -20,6 +20,7 @@ const globalSlice = createSlice({
         },
         changeMenu: (state, action: PayloadAction<MenuList>) => {
             state.menu = action.payload;
+            state.isSidebarOpen = true;
         },
         toggleSidebar: (state) => {
             state.isSidebarOpen = !state.isSidebarOpen;
