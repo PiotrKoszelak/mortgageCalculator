@@ -65,8 +65,6 @@ const SignInPanel = () => {
                         }}
                         size="small"
                         type="password"
-                        autoComplete="current-password"
-                        autoFocus
                     />
 
                     <FormControlLabel
