@@ -50,7 +50,6 @@ const SignInPanel = () => {
                         }}
                         size="small"
                         type="email"
-                        autoFocus
                     />
 
                     <TextField
