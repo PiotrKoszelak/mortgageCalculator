@@ -21,7 +21,6 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
     font-weight: bold;
     opacity: 0.7;
     height: ${menuHeight}px;
-
     &:active,
     &:hover {
         opacity: 1;
@@ -29,6 +28,10 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
 
     &.Mui-selected {
         opacity: 1;
+
+        span {
+            font-size: 12px;
+        }
     }
 `;
 

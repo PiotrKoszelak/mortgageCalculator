@@ -1,20 +1,20 @@
 import { createTheme } from '@mui/material';
 
 export const colors = {
-    darkPurple: '#730099',
-    lightPurple: '#b300b3',
+    lightPurple: '#8d42f5',
+    darkPurple: '#ac79f2',
     white: '#fff',
-    darkGrey: '#404040',
-    lightGrey: '#595959',
+    lightGrey: '#404040',
+    darkGrey: '#303133',
 };
 
 export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: colors.white,
+            main: colors.lightPurple,
             light: colors.lightPurple,
-            dark: '#1565c0',
+            dark: colors.darkPurple,
             contrastText: colors.white,
         },
         background: {
