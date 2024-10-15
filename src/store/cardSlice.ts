@@ -23,7 +23,7 @@ const cardSlice = createSlice({
             state: CardState,
             action: PayloadAction<{
                 name: Parameters;
-                value: number | '';
+                value: number | string;
             }>
         ) => {
             const { name, value } = action.payload;
@@ -35,7 +35,7 @@ const cardSlice = createSlice({
             state: CardState,
             action: PayloadAction<{
                 nr: number;
-                value: number | '';
+                value: number | string;
             }>
         ) => {
             const { nr, value } = action.payload;
@@ -47,8 +47,7 @@ const cardSlice = createSlice({
     },
 });
 
-export const { updateDataInput, updateOverpaymentInput, stopLoading } =
-    cardSlice.actions;
+export const { updateDataInput, updateOverpaymentInput } = cardSlice.actions;
 
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;
 export const selectOverpayment = (state: RootState) =>
