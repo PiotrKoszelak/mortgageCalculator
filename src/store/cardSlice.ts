@@ -24,19 +24,19 @@ const cardSlice = createSlice({
             state: CardState,
             action: PayloadAction<{
                 name: Parameters;
-                value: number | string;
+                value: number | '';
             }>
         ) => {
             const { name, value } = action.payload;
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            state.dataInputs[name] = value;
+            state.dataInputs[name] = value || 0;
         },
         updateOverpaymentInput: (
             state: CardState,
             action: PayloadAction<{
                 nr: number;
-                value: number | string;
+                value: number | '';
             }>
         ) => {
             const { nr, value } = action.payload;
