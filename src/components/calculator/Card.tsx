@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useAppSelector } from '../../store/hooks';
-import { selectDataInputs, selectLoadingStatus } from '../../store/cardSlice';
+import { selectDataInputs } from '../../store/cardSlice';
+import { useCalculateQuery } from '../../store/services/calculate';
 
 import { calculateSummary } from './utils';
-import { calculateData } from './calculations';
 
 import { Backdrop, CircularProgress, styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -24,23 +24,29 @@ const StyledContainer = styled(Paper)<CardProps>`
     flex-direction: column;
     width: 100%;
     overflow-x: hidden;
+    position: relative;
+`;
+
+const StyledBackdrop = styled(Backdrop)<CardProps>`
+    height: max(100%, 800px);
+    max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
+    width: 100%;
+    position: absolute;
 `;
 
 const Card = (props: CardProps) => {
     const { isSingle } = props;
 
     const dataInputs = useAppSelector(selectDataInputs);
-    const isLoading = useAppSelector(selectLoadingStatus);
+
+    const { data: fetchedData, isFetching } = useCalculateQuery(dataInputs);
+
+    const data = useMemo(() => fetchedData?.data || [], [fetchedData]);
 
     const canCalculate = !!(
         dataInputs.totalPrincipal &&
         dataInputs.interestRate &&
         dataInputs.numberOfMonths
-    );
-
-    const data = useMemo(
-        () => (canCalculate ? calculateData(dataInputs) : []),
-        [canCalculate, dataInputs]
     );
 
     const { overpayment, totalPrincipal } = dataInputs;
@@ -51,9 +57,12 @@ const Card = (props: CardProps) => {
 
     return (
         <StyledContainer variant="outlined" isSingle={isSingle}>
-            <Backdrop open={canCalculate && isLoading}>
-                <CircularProgress color="inherit" />
-            </Backdrop>
+            <StyledBackdrop
+                open={canCalculate && isFetching}
+                isSingle={isSingle}
+            >
+                <CircularProgress color="inherit" size="large" />
+            </StyledBackdrop>
             <Form />
             {canCalculate ? (
                 <>

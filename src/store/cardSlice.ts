@@ -5,7 +5,6 @@ import { Parameters } from '../utils/constants';
 import { type CardState } from './types';
 
 const initialState: CardState = {
-    isLoading: false,
     dataInputs: {
         [Parameters.totalPrincipal]: 0,
         [Parameters.interestRate]: 0,
@@ -45,9 +44,6 @@ const cardSlice = createSlice({
                 state.dataInputs.overpayment[nr] = value as number;
             }
         },
-        stopLoading: (state: CardState) => {
-            state.isLoading = false;
-        },
     },
 });
 
@@ -57,6 +53,5 @@ export const { updateDataInput, updateOverpaymentInput, stopLoading } =
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;
 export const selectOverpayment = (state: RootState) =>
     state.card.dataInputs.overpayment;
-export const selectLoadingStatus = (state: RootState) => state.card.isLoading;
 
 export default cardSlice.reducer;

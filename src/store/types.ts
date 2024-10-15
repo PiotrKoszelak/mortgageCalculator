@@ -8,6 +8,5 @@ export interface GlobalState {
 }
 
 export interface CardState {
-    isLoading: boolean;
     dataInputs: DataInputs;
 }
