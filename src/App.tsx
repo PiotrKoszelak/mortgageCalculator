@@ -1,26 +1,22 @@
-import { colors, darkTheme } from './utils/theme';
+import { Provider } from 'react-redux';
+import { store } from './store/store.ts';
 
+import { darkTheme } from './utils/theme';
 import { ThemeProvider } from '@mui/material';
-import styled from 'styled-components';
-import Content from './components/layout/Content';
+
 import MenuToolbar from './components/menu/MenuToolbar';
+import MainView from './views/MainView';
 
 import './App.css';
 
-const StyledApp = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-color: ${colors.darkGrey};
-`;
-
 function App() {
     return (
-        <StyledApp>
+        <Provider store={store}>
             <ThemeProvider theme={darkTheme}>
                 <MenuToolbar />
-                <Content />
+                <MainView />
             </ThemeProvider>
-        </StyledApp>
+        </Provider>
     );
 }
 
