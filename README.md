@@ -2,40 +2,47 @@
 
 https://www.justfin.site/
 
-> NOTE  
-> The app is under development
-
 The app provides sophisticated dashboard for loans/mortgage calculations.
 It contains:
 
--   amount, interest, time, installment type and overpayment result inputs
+-   amount, interest rate, time, installment type and overpayment result inputs
 -   summary about total calculated values
 -   customizable monthly overpayments
 
+> NOTE  
+> The app is under development. List of features that will be available soon includes:
+>
+> -   advanced calculator options
+> -   graphs
+> -   saving results to a database
+> -   exporting results to Excel/PDF file
+
 ![Alt text](src/assets/app.png?raw=true 'Justfin app screenshoot')
 
-## Configuration
+## Tech Stack
 
-### Framework
+-   React
+-   Redux
+-   TypeScript
+-   Vite
 
-1. React + Redux
+### Additional libraries
 
-2. TypeScript
+-   Material UI
+-   React Window
 
-3. Material UI
+### Testing tools
 
-4. Vite
+-   Vitest
+-   React Testing Library
 
-### Integrated tools
+### Additional tools
 
-1. Prettier
+-   ESlint
+-   Prettier
+-   Husky
 
-2. ESLint
+## Backend service
 
-3. Husky
-
-### Testing
-
-1. Vitest
-
-2. React Testing Library
+-   Node
+-   PostgreSQL (future)
