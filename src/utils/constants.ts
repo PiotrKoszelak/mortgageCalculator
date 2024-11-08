@@ -60,12 +60,12 @@ export const calculatorParameters = [
     Parameters.overpayment,
 ];
 
-export const menuHeight = 50;
-
 export enum MenuList {
     about = 'about',
     contact = 'contact',
     signIn = 'signIn',
 }
 
-export const contentThreshold = 968;
+export const menuHeight = 50;
+
+export const mobileWidth = 768;

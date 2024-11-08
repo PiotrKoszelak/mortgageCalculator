@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectIsSidebarOpen, toggleSidebar } from '../../store/globalSlice';
 
-import { contentThreshold, menuHeight } from '../../utils/constants';
-import useWindowDimensions from '../../utils/hooks';
+import { menuHeight } from '../../utils/constants';
+import { useIsMobile } from '../../hooks/common';
 
 import { Divider, Drawer, IconButton, styled } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -65,9 +65,7 @@ const CustomIconButton = () => {
 const Sidebar = () => {
     const isSidebarOpen = useAppSelector(selectIsSidebarOpen);
 
-    const { width } = useWindowDimensions();
-
-    const isDrawerFloating = width <= contentThreshold;
+    const isDrawerFloating = useIsMobile();
     const drawerVariant = isDrawerFloating ? 'temporary' : 'persistent';
 
     return (

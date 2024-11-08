@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { mobileWidth } from '../utils/constants';
 
-const useWindowDimensions = () => {
+export const useWindowDimensions = () => {
     const [dimensions, setDimensions] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -20,4 +21,10 @@ const useWindowDimensions = () => {
     return dimensions;
 };
 
-export default useWindowDimensions;
+export const useIsMobile = () => {
+    const { width } = useWindowDimensions();
+
+    const isMobile = width <= mobileWidth;
+
+    return isMobile;
+};
