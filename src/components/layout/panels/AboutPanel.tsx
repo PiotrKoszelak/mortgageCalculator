@@ -20,7 +20,7 @@ const AboutPanel = () => {
             <Typography variant="h5">
                 {translations[Parameters.about]}
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="subtitle1">
                 {translations[Parameters.appDescription]}
             </Typography>
             <Divider />

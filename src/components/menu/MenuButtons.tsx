@@ -19,18 +19,22 @@ const StyledBottomNavigation = styled(BottomNavigation)`
 const StyledBottomNavigationAction = styled(BottomNavigationAction)`
     margin: 0 10px;
     font-weight: bold;
-    opacity: 0.7;
+    opacity: 0.8;
     height: ${menuHeight}px;
     &:active,
     &:hover {
         opacity: 1;
     }
 
+    span {
+        font-size: 14px;
+    }
+
     &.Mui-selected {
         opacity: 1;
 
         span {
-            font-size: 12px;
+            font-size: 14px;
         }
     }
 `;
