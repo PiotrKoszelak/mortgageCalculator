@@ -17,7 +17,7 @@ interface CalculatorProps {
 }
 
 const StyledContainer = styled(Paper)<CalculatorProps>`
-    height: max(100%, 800px);
+    height: max(inherit, 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
     padding: 24px;

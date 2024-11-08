@@ -6,10 +6,12 @@ import { MenuList } from '../../../utils/constants';
 import { Box, styled } from '@mui/material';
 import AboutPanel from './AboutPanel';
 import SignInPanel from './SignInPanel';
-import ContactPanel from './Contact';
+import ContactPanel from './ContactPanel';
 
 const StyledContainer = styled(Box)`
     padding: 24px;
+    width: inherit;
+    box-sizing: border-box;
 `;
 
 const Panels = () => {

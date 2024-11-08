@@ -68,4 +68,4 @@ export enum MenuList {
 
 export const menuHeight = 50;
 
-export const mobileWidth = 768;
+export const mobileWidth = 900;
