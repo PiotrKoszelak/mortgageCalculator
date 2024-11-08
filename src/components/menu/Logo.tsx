@@ -7,6 +7,8 @@ const StyledLogo = styled(Image)`
     height: 50px;
 `;
 
-const Logo = () => <StyledLogo alt="JustFin logo" src={JustFinLogo} />;
+const Logo = () => (
+    <StyledLogo alt="JustFin logo" src={JustFinLogo} size={50} />
+);
 
 export default Logo;

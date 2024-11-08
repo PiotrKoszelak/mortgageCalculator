@@ -6,6 +6,7 @@ import TableViewIcon from '@mui/icons-material/TableView';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import SaveIcon from '@mui/icons-material/Save';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import Icon from '../../common/Icon';
 
 const StyledBox = styled(Box)`
     display: flex;
@@ -16,6 +17,7 @@ const StyledBox = styled(Box)`
 const StyledParagraph = styled('p')`
     display: flex;
     gap: 20px;
+    line-height: 40px;
 `;
 
 const Benefits = () => {
@@ -27,16 +29,28 @@ const Benefits = () => {
                 {translations.signInUsersHaveAccessTo}
             </Typography>
             <StyledParagraph>
-                <TableViewIcon /> {translations.multipleCalculators}
+                <Icon>
+                    <TableViewIcon />
+                </Icon>
+                {translations.multipleCalculators}
             </StyledParagraph>
             <StyledParagraph>
-                <CompareArrowsIcon /> {translations.easyComparison}
+                <Icon>
+                    <CompareArrowsIcon />
+                </Icon>{' '}
+                {translations.easyComparison}
             </StyledParagraph>
             <StyledParagraph>
-                <SaveIcon /> {translations.savedResults}
+                <Icon>
+                    <SaveIcon />
+                </Icon>{' '}
+                {translations.savedResults}
             </StyledParagraph>
             <StyledParagraph>
-                <GetAppIcon /> {translations.exportTo}
+                <Icon>
+                    <GetAppIcon />
+                </Icon>{' '}
+                {translations.exportTo}
             </StyledParagraph>
         </StyledBox>
     );
