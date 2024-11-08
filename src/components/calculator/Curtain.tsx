@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import { colors } from '../../utils/theme';
+import { appColors } from '../../utils/theme';
 
 import styled from 'styled-components';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
@@ -13,7 +13,7 @@ const StyledContainer = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    background-color: ${colors.darkGrey};
+    background-color: ${appColors.darkGrey};
 `;
 
 const Curtain = () => {

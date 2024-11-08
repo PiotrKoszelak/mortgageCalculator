@@ -1,14 +1,15 @@
-import { Box, colors, styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import { appColors } from '../../utils/theme';
 
 interface IconProps {
     children: JSX.Element;
 }
 
 const StyledIcon = styled(Box)`
-    color: ${colors.purple[300]};
+    color: ${appColors.lightPurple};
     width: 40px;
     height: 40px;
-    border: 1px solid ${colors.purple[300]};
+    border: 1px solid ${appColors.lightPurple};
     border-radius: 50%;
     display: flex;
     align-items: center;

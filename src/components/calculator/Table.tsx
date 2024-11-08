@@ -5,7 +5,7 @@ import { calculatorParameters, Parameters } from '../../utils/constants';
 import { parseNumber } from './utils';
 
 import { styled } from '@mui/material';
-import { colors } from '../../utils/theme';
+import { appColors } from '../../utils/theme';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -43,13 +43,13 @@ const StyledTableContainer = styled(TableContainer)`
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: ${colors.lightPurple};
+        background: ${appColors.lightPurple};
         border-radius: 10px;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: ${colors.darkPurple};
+        background: ${appColors.darkPurple};
     }
 `;
 
