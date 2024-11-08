@@ -33,10 +33,6 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
             font-size: 12px;
         }
     }
-
-    @media (max-width: 768px) {
-        margin: 0;
-    }
 `;
 
 const MenuButtons = () => {
@@ -60,10 +56,10 @@ const MenuButtons = () => {
                 label={translations.contact.toUpperCase()}
                 value={MenuList.contact}
             />
-            <StyledBottomNavigationAction
+            {/* <StyledBottomNavigationAction
                 label={translations.signIn.toUpperCase()}
                 value={MenuList.signIn}
-            />
+            /> */}
         </StyledBottomNavigation>
     );
 };
