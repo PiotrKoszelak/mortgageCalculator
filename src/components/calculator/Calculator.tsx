@@ -5,12 +5,13 @@ import { useCalculateQuery } from '../../store/services/calculate';
 
 import { calculateSummary } from './utils';
 
-import { Backdrop, CircularProgress, styled } from '@mui/material';
+import { Backdrop, styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import DataTable from './Table';
 import Form from './Form';
 import Summary from './Summary';
 import Curtain from './Curtain';
+import Loader from '../common/Loader';
 
 interface CalculatorProps {
     isSingle?: boolean;
@@ -61,7 +62,7 @@ const Calculator = (props: CalculatorProps) => {
                 open={canCalculate && isFetching}
                 isSingle={isSingle}
             >
-                <CircularProgress color="inherit" size="large" />
+                <Loader size="50px" />
             </StyledBackdrop>
             <Form />
             {canCalculate ? (
