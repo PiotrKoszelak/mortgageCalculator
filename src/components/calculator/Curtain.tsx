@@ -2,10 +2,10 @@ import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { appColors } from '../../utils/theme';
 
-import styled from 'styled-components';
+import { Box, styled } from '@mui/material';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(Box)`
     height: 100%;
     width: 100%;
     display: flex;

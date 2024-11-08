@@ -8,7 +8,7 @@ import AboutPanel from './AboutPanel';
 import SignInPanel from './SignInPanel';
 import ContactPanel from './Contact';
 
-const StyledBox = styled(Box)`
+const StyledContainer = styled(Box)`
     padding: 24px;
 `;
 
@@ -29,9 +29,9 @@ const Panels = () => {
     };
 
     return (
-        <StyledBox>
+        <StyledContainer>
             <Content />
-        </StyledBox>
+        </StyledContainer>
     );
 };
 

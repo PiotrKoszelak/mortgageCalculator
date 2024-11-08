@@ -23,7 +23,7 @@ interface TableProps {
     data: DataRow[];
 }
 
-const StyledPaper = styled(Paper)`
+const StyledContainer = styled(Paper)`
     overflow: hidden;
     width: 100%;
 `;
@@ -74,7 +74,7 @@ function DataTable(props: TableProps) {
     };
 
     return (
-        <StyledPaper>
+        <StyledContainer>
             <StyledTableContainer>
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
@@ -131,7 +131,7 @@ function DataTable(props: TableProps) {
                     </TableBody>
                 </Table>
             </StyledTableContainer>
-        </StyledPaper>
+        </StyledContainer>
     );
 }
 

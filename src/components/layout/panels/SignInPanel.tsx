@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import Benefits from './Benefits';
 
-const StyledBox = styled(Box)`
+const StyledContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -30,14 +30,14 @@ const SignInPanel = () => {
     };
 
     return (
-        <StyledBox>
+        <StyledContainer>
             <Typography variant="h5">
                 {translations[Parameters.signIn]}
             </Typography>
             <Benefits />
             <Divider />
             <form noValidate onSubmit={handleSubmit}>
-                <StyledBox>
+                <StyledContainer>
                     <TextField
                         required
                         id={Parameters.email}
@@ -80,9 +80,9 @@ const SignInPanel = () => {
                             {translations.signIn}
                         </Button>
                     </Tooltip>
-                </StyledBox>
+                </StyledContainer>
             </form>
-        </StyledBox>
+        </StyledContainer>
     );
 };
 

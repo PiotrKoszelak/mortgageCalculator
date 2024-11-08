@@ -9,7 +9,7 @@ import Icon from '../../common/Icon';
 import Image from '../../common/Image';
 import AuthorImage from '../../../assets/author.jpg';
 
-const StyledBox = styled(Box)`
+const StyledContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -33,7 +33,7 @@ const ContactPanel = () => {
     const translations = useAppSelector(selectTranslations);
 
     return (
-        <StyledBox>
+        <StyledContainer>
             <Typography variant="h5">
                 {translations[Parameters.contact]}
             </Typography>
@@ -51,7 +51,7 @@ const ContactPanel = () => {
             <StyledParagraph>
                 {translations[Parameters.authorDescription]}
             </StyledParagraph>
-        </StyledBox>
+        </StyledContainer>
     );
 };
 

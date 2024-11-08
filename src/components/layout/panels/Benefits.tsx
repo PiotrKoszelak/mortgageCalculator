@@ -8,7 +8,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Icon from '../../common/Icon';
 
-const StyledBox = styled(Box)`
+const StyledContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -24,7 +24,7 @@ const Benefits = () => {
     const translations = useAppSelector(selectTranslations);
 
     return (
-        <StyledBox>
+        <StyledContainer>
             <Typography variant="subtitle1">
                 {translations.signInUsersHaveAccessTo}
             </Typography>
@@ -52,7 +52,7 @@ const Benefits = () => {
                 </Icon>{' '}
                 {translations.exportTo}
             </StyledParagraph>
-        </StyledBox>
+        </StyledContainer>
     );
 };
 

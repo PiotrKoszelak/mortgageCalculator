@@ -12,11 +12,11 @@ import Form from './Form';
 import Summary from './Summary';
 import Curtain from './Curtain';
 
-interface CardProps {
+interface CalculatorProps {
     isSingle?: boolean;
 }
 
-const StyledContainer = styled(Paper)<CardProps>`
+const StyledContainer = styled(Paper)<CalculatorProps>`
     height: max(100%, 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
@@ -27,14 +27,14 @@ const StyledContainer = styled(Paper)<CardProps>`
     position: relative;
 `;
 
-const StyledBackdrop = styled(Backdrop)<CardProps>`
+const StyledBackdrop = styled(Backdrop)<CalculatorProps>`
     height: max(100%, 800px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     width: 100%;
     position: absolute;
 `;
 
-const Calculator = (props: CardProps) => {
+const Calculator = (props: CalculatorProps) => {
     const { isSingle } = props;
 
     const dataInputs = useAppSelector(selectDataInputs);

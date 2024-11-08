@@ -6,7 +6,7 @@ import { Parameters } from '../../../utils/constants';
 import { Box, Divider, styled, Typography } from '@mui/material';
 import Benefits from './Benefits';
 
-const StyledBox = styled(Box)`
+const StyledContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -16,7 +16,7 @@ const AboutPanel = () => {
     const translations = useAppSelector(selectTranslations);
 
     return (
-        <StyledBox>
+        <StyledContainer>
             <Typography variant="h5">
                 {translations[Parameters.about]}
             </Typography>
@@ -25,7 +25,7 @@ const AboutPanel = () => {
             </Typography>
             <Divider />
             <Benefits />
-        </StyledBox>
+        </StyledContainer>
     );
 };
 
