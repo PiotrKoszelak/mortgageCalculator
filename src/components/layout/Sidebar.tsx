@@ -2,34 +2,26 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectIsSidebarOpen, toggleSidebar } from '../../store/globalSlice';
 
 import { menuHeight } from '../../utils/constants';
-import { useIsMobile } from '../../hooks/common';
 
 import { Divider, Drawer, IconButton, styled } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Panels from './panels/Panels';
+import { appColors } from '../../utils/theme';
+
+interface SidebarProps {
+    children: JSX.Element;
+}
 
 interface DrawerProps {
-    isDrawerFloating: boolean;
     isSidebarOpen: boolean;
 }
 
 const StyledDrawer = styled(Drawer)<DrawerProps>`
-    width: ${(props) =>
-        props.isDrawerFloating
-            ? props.isSidebarOpen
-                ? '80%'
-                : '40px'
-            : '500px'};
+    width: ${(props) => (props.isSidebarOpen ? '80%' : '40px')};
+    background-color: ${appColors.lightGrey};
     .MuiDrawer-paper {
-        width: ${(props) =>
-            props.isDrawerFloating
-                ? props.isSidebarOpen
-                    ? '80%'
-                    : '40px'
-                : '500px'};
+        width: ${(props) => (props.isSidebarOpen ? '80%' : '40px')};
         box-sizing: border-box;
-        top: ${menuHeight}px;
     }
 `;
 
@@ -62,30 +54,25 @@ const CustomIconButton = () => {
     );
 };
 
-const Sidebar = () => {
+const Sidebar = (props: SidebarProps) => {
     const isSidebarOpen = useAppSelector(selectIsSidebarOpen);
-
-    const isDrawerFloating = useIsMobile();
-    const drawerVariant = isDrawerFloating ? 'temporary' : 'persistent';
 
     return (
         <>
-            {isDrawerFloating && !isSidebarOpen && <CustomIconButton />}
+            {!isSidebarOpen && <CustomIconButton />}
             <StyledDrawer
                 anchor="right"
-                open={isDrawerFloating ? isSidebarOpen : true}
-                variant={drawerVariant}
-                isDrawerFloating={isDrawerFloating}
+                open={isSidebarOpen}
+                variant="persistent"
                 isSidebarOpen={isSidebarOpen}
                 hideBackdrop
             >
-                {isDrawerFloating && (
-                    <DrawerHeader>
-                        <CustomIconButton />
-                    </DrawerHeader>
-                )}
+                <DrawerHeader>
+                    <CustomIconButton />
+                </DrawerHeader>
+
                 <Divider />
-                <Panels />
+                {props.children}
             </StyledDrawer>
         </>
     );
