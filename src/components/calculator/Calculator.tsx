@@ -34,7 +34,7 @@ const StyledBackdrop = styled(Backdrop)<CardProps>`
     position: absolute;
 `;
 
-const Card = (props: CardProps) => {
+const Calculator = (props: CardProps) => {
     const { isSingle } = props;
 
     const dataInputs = useAppSelector(selectDataInputs);
@@ -76,4 +76,4 @@ const Card = (props: CardProps) => {
     );
 };
 
-export default Card;
+export default Calculator;
