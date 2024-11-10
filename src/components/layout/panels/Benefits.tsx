@@ -47,7 +47,7 @@ const Benefits = () => {
     return (
         <StyledContainer>
             <Typography variant="subtitle1">
-                {translations.signInUsersHaveAccessTo}
+                {translations.availableSoon}
             </Typography>
             <SingleBenefit
                 icon={<TableViewIcon />}
