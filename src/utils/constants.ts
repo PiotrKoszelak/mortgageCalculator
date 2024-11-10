@@ -42,6 +42,10 @@ export enum Parameters {
     exportTo = 'exportTo',
     aboutAuthor = 'aboutAuthor',
     authorDescription = 'authorDescription',
+    multipleCalculatorsDesc = 'multipleCalculatorsDesc',
+    easyComparisonDesc = 'easyComparisonDesc',
+    savedResultsDesc = 'savedResultsDesc',
+    exportToDesc = 'exportToDesc',
 }
 
 export const SummaryParameters = [

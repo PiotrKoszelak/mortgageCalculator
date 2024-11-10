@@ -8,6 +8,10 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
     height: ${menuHeight}px;
 `;
 
+const StyledToggleButton = styled(ToggleButton)`
+    transition: background-color 0.4s;
+`;
+
 function LanguageToggle() {
     const dispatch = useAppDispatch();
     const selectedLanguage = useAppSelector(selectLanguage);
@@ -27,8 +31,8 @@ function LanguageToggle() {
             onChange={handleChange}
             aria-label="LanguageList"
         >
-            <ToggleButton value={LanguageList.pl}>Pl</ToggleButton>
-            <ToggleButton value={LanguageList.en}>En</ToggleButton>
+            <StyledToggleButton value={LanguageList.pl}>Pl</StyledToggleButton>
+            <StyledToggleButton value={LanguageList.en}>En</StyledToggleButton>
         </StyledToggleButtonGroup>
     );
 }

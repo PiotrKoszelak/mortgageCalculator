@@ -19,11 +19,12 @@ const StyledBottomNavigation = styled(BottomNavigation)`
 const StyledBottomNavigationAction = styled(BottomNavigationAction)`
     margin: 0 10px;
     font-weight: bold;
-    opacity: 0.8;
+    opacity: 1;
     height: ${menuHeight}px;
+    transition: opacity 0.4s;
     &:active,
     &:hover {
-        opacity: 1;
+        opacity: 0.7;
     }
 
     span {

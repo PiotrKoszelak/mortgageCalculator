@@ -41,6 +41,12 @@ export const translationsEn = {
     [Parameters.aboutAuthor]: 'About author',
     [Parameters.authorDescription]:
         'My name is Piotr Koszelak. I am a software engineer and creating web applications is my hobby. This is what I do in my free time, apart from that I love all outdoor activities - I believe physical condition is very important for all computer freaks',
+    [Parameters.multipleCalculatorsDesc]:
+        'Create many calculators with different parameters',
+    [Parameters.easyComparisonDesc]:
+        'Compare different results with the same view',
+    [Parameters.savedResultsDesc]: 'Keep the results in the database storage',
+    [Parameters.exportToDesc]: 'Extract the results to a file',
 };
 
 export const translationsPl = {
@@ -85,4 +91,10 @@ export const translationsPl = {
     [Parameters.aboutAuthor]: 'O autorze',
     [Parameters.authorDescription]:
         'Nazywam się Piotr Koszelak. Jestem programistą, a tworzenie aplikacji internetowych to moje hobby. To jest to, co robię w wolnym czasie, poza tym uwielbiam wszelkie aktywności na świeżym powietrzu - uważam, że kondycja fizyczna jest bardzo ważna dla wszystkich komputerowych maniaków.',
+    [Parameters.multipleCalculatorsDesc]:
+        'Twórz wiele kalkulatorów z różnymi parametrami',
+    [Parameters.easyComparisonDesc]:
+        'Porównuj wyniki korzystając z tego samego widoku',
+    [Parameters.savedResultsDesc]: 'Przechowuj wyniki w bazie danych',
+    [Parameters.exportToDesc]: 'Exportuj wyniki do pliku',
 };
