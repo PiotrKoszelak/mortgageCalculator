@@ -44,3 +44,9 @@ export interface TextFieldRules {
 }
 
 export type OverpaymentData = { [nr: number]: number };
+
+export interface parseNumberToStringParams {
+    number: number;
+    isSpace: boolean;
+    isDecimal: boolean;
+}

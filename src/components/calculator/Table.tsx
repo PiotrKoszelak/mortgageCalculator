@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { type DataRow } from './types';
 import { calculatorParameters, Parameters } from '../../utils/constants';
-import { parseNumber } from './utils';
+import { parseNumberToString } from './utils';
 
 import { styled } from '@mui/material';
 import { appColors } from '../../utils/theme';
@@ -96,16 +96,32 @@ function DataTable(props: TableProps) {
                                     {row.month}
                                 </StyledTableCell> */}
                                 <StyledTableCell align="right">
-                                    {parseNumber(row.principalBalance)}
+                                    {parseNumberToString({
+                                        number: row.principalBalance,
+                                        isSpace: true,
+                                        isDecimal: true,
+                                    })}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {parseNumber(row.principalInstallment)}
+                                    {parseNumberToString({
+                                        number: row.principalInstallment,
+                                        isSpace: true,
+                                        isDecimal: true,
+                                    })}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {parseNumber(row.interest)}
+                                    {parseNumberToString({
+                                        number: row.interest,
+                                        isSpace: true,
+                                        isDecimal: true,
+                                    })}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {parseNumber(row.installmentAmount)}
+                                    {parseNumberToString({
+                                        number: row.installmentAmount,
+                                        isSpace: true,
+                                        isDecimal: true,
+                                    })}
                                 </StyledTableCell>
 
                                 <StyledTableCell align="right">

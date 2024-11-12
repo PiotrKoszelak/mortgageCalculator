@@ -1,5 +1,10 @@
 import { Parameters } from '../../utils/constants';
-import { type OverpaymentData, type DataRow, type SummaryData } from './types';
+import {
+    type OverpaymentData,
+    type DataRow,
+    type SummaryData,
+    type parseNumberToStringParams,
+} from './types';
 
 export const fallbackSummaryValue = {
     [Parameters.totalPayment]: 0,
@@ -29,16 +34,21 @@ export const calculateSummary = (
     };
 };
 
-function numberWithSpaces(number: number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+function numberWithSpaces(value: string) {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-export const parseNumber = (number: number, noSpace?: boolean) => {
-    if (number) {
-        if (noSpace) return Number(number.toFixed(2));
+export const parseNumberToString = (params: parseNumberToStringParams) => {
+    const { number, isDecimal, isSpace } = params;
 
-        return numberWithSpaces(Number(number.toFixed(2)));
-    }
+    const parsedNumber = isDecimal ? number.toFixed(2) : String(number);
+    if (isSpace) return numberWithSpaces(parsedNumber);
 
-    return 0;
+    return parsedNumber;
+};
+
+export const parseStringToNumber = (value: string) => {
+    if (!value) return 0;
+
+    return Number(value.replaceAll(' ', '').replaceAll(',', '.'));
 };
