@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { selectDataInputs, updateDataInput } from '../../store/cardSlice';
 import { Parameters } from '../../utils/constants';
+import type { UpdateInputFunction } from './types';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -13,12 +14,13 @@ const Form = () => {
     const translations = useAppSelector(selectTranslations);
     const dataInputs = useAppSelector(selectDataInputs);
 
-    const updateInputValue = (
-        name: Parameters | number,
-        value: number | string
-    ) => {
+    const updateInputValue: UpdateInputFunction = (name, value) => {
         const typedName = name as Parameters;
         dispatch(updateDataInput({ name: typedName, value }));
+    };
+
+    const updateSelectValue = (name: Parameters, value: string) => {
+        dispatch(updateDataInput({ name, value }));
     };
 
     const {
@@ -80,7 +82,7 @@ const Form = () => {
                     size="small"
                     value={installementType}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
+                        updateSelectValue(
                             Parameters.installementType,
                             event.target.value
                         );
@@ -104,7 +106,7 @@ const Form = () => {
                     size="small"
                     value={overpaymentResult}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        updateInputValue(
+                        updateSelectValue(
                             Parameters.overpaymentResult,
                             event.target.value
                         );

@@ -34,7 +34,7 @@ export type Translations = { [key: string]: string };
 
 export type UpdateInputFunction = (
     name: number | Parameters,
-    value: number | string
+    value: number
 ) => void;
 
 export interface TextFieldRules {

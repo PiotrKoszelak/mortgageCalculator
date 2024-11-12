@@ -1,7 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import { type DataRow } from './types';
-import { calculatorParameters, Parameters } from '../../utils/constants';
+import {
+    selectOverpayment,
+    updateOverpaymentInput,
+} from '../../store/cardSlice';
+
+import type { DataRow, UpdateInputFunction } from './types';
+import { calculatorParameters } from '../../utils/constants';
 import { parseNumberToString } from './utils';
 
 import { styled } from '@mui/material';
@@ -14,10 +19,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Input from './Input';
-import {
-    selectOverpayment,
-    updateOverpaymentInput,
-} from '../../store/cardSlice';
 
 interface TableProps {
     data: DataRow[];
@@ -65,12 +66,9 @@ function DataTable(props: TableProps) {
     const translations = useAppSelector(selectTranslations);
     const overpayment = useAppSelector(selectOverpayment);
 
-    const updateInputValue = (
-        nr: Parameters | number,
-        value: number | string
-    ) => {
-        const typedNr = nr as number;
-        dispatch(updateOverpaymentInput({ nr: typedNr, value }));
+    const updateInputValue: UpdateInputFunction = (name, value) => {
+        const typedName = name as number;
+        dispatch(updateOverpaymentInput({ nr: typedName, value }));
     };
 
     return (
@@ -130,7 +128,7 @@ function DataTable(props: TableProps) {
                                             parameter={row.nr}
                                             translations={translations}
                                             updateInputValue={updateInputValue}
-                                            value={overpayment[row.nr] || ''}
+                                            value={overpayment[row.nr] || 0}
                                             rules={{
                                                 integer: false,
                                                 min: 0,

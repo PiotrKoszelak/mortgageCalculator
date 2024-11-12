@@ -5,7 +5,7 @@ import {
     type UpdateInputFunction,
     type TextFieldRules,
 } from './types';
-import { parseNumber } from './utils';
+import { parseNumberToString, parseStringToNumber } from './utils';
 
 import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
@@ -14,7 +14,7 @@ interface InputProps {
     parameter: Parameters | number;
     translations: Translations;
     updateInputValue: UpdateInputFunction;
-    value: number | string;
+    value: number;
     endAdornment?: string;
     rules?: TextFieldRules;
 }
@@ -31,15 +31,22 @@ const Input = (props: InputProps) => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [inputValue, setInputValue] = useState<number | string>(value);
+    const [inputValue, setInputValue] = useState<string>(
+        parseNumberToString({
+            number: value,
+            isSpace: true,
+            isDecimal: false,
+        })
+    );
 
     const updateValue = () => {
-        if (isValidValue(inputValue) && value !== inputValue) {
+        const newValue = parseStringToNumber(inputValue);
+        if (isValidValue(newValue) && value !== newValue) {
             const name =
                 typeof parameter === 'number'
                     ? parameter
                     : Parameters[parameter];
-            updateInputValue(name, inputValue);
+            updateInputValue(name, newValue);
         }
     };
 
@@ -49,29 +56,26 @@ const Input = (props: InputProps) => {
         }
     };
 
-    const isValidValue = (value: number | string) => {
-        if (typeof value === 'string') {
-            setErrorMessage('');
-            return true;
-        }
-
+    const isValidValue = (value: number) => {
         if (rules?.integer && !Number.isInteger(value)) {
             setErrorMessage(translations.mustBeInteger);
             return false;
-        } else if (
-            rules?.min !== undefined &&
-            value < (parseNumber(rules.min, true) as number)
-        ) {
+        } else if (rules?.min !== undefined && value < rules.min) {
             setErrorMessage(
-                `${translations.minLimit} ${parseNumber(rules.min)}`
+                `${translations.minLimit} ${parseNumberToString({
+                    number: rules.min,
+                    isSpace: true,
+                    isDecimal: !rules?.integer,
+                })}`
             );
             return false;
-        } else if (
-            rules?.max !== undefined &&
-            value > (parseNumber(rules.max, true) as number)
-        ) {
+        } else if (rules?.max !== undefined && value > rules.max) {
             setErrorMessage(
-                `${translations.maxLimit} ${parseNumber(rules.max)}`
+                `${translations.maxLimit} ${parseNumberToString({
+                    number: rules.max,
+                    isSpace: true,
+                    isDecimal: !rules?.integer,
+                })}`
             );
             return false;
         }
@@ -90,7 +94,7 @@ const Input = (props: InputProps) => {
             helperText={errorMessage}
             id={`${parameter}`}
             label={tableInput ? '' : translations[parameter]}
-            type="number"
+            type="text"
             size="small"
             slotProps={{
                 inputLabel: {
@@ -110,9 +114,19 @@ const Input = (props: InputProps) => {
             }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const value = event.target.value;
-                const newValue = value === '' ? value : Number(value);
-                isValidValue(newValue);
-                setInputValue(newValue);
+                const numberValue = parseStringToNumber(value);
+                if (!isNaN(numberValue)) {
+                    isValidValue(numberValue);
+                    setInputValue(
+                        rules?.integer && value !== ''
+                            ? parseNumberToString({
+                                  number: numberValue,
+                                  isSpace: true,
+                                  isDecimal: false,
+                              })
+                            : value
+                    );
+                }
             }}
             onKeyDown={handleKeyDown}
         />

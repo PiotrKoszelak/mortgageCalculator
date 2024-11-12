@@ -35,13 +35,13 @@ const cardSlice = createSlice({
             state: CardState,
             action: PayloadAction<{
                 nr: number;
-                value: number | string;
+                value: number;
             }>
         ) => {
             const { nr, value } = action.payload;
             if (!value) delete state.dataInputs.overpayment[nr];
             else {
-                state.dataInputs.overpayment[nr] = value as number;
+                state.dataInputs.overpayment[nr] = value;
             }
         },
     },
