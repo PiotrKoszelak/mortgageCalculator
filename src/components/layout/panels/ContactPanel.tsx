@@ -47,7 +47,7 @@ const ContactPanel = () => {
             <Typography variant="h6">
                 {translations[Parameters.aboutAuthor]}
             </Typography>
-            <StyledLogo alt="Author" src={AuthorImage} size={150} />
+            <StyledLogo alt="Author" src={AuthorImage} size={150} center />
             <StyledParagraph>
                 {translations[Parameters.authorDescription]}
             </StyledParagraph>
