@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
     changeMenu,
@@ -5,6 +6,7 @@ import {
     selectTranslations,
 } from '../../store/globalSlice';
 
+import { useIsMobile } from '../../hooks/common';
 import { menuHeight, MenuList } from '../../utils/constants';
 
 import { styled } from '@mui/material';
@@ -44,6 +46,14 @@ const MenuButtons = () => {
     const dispatch = useAppDispatch();
     const selectedMenu = useAppSelector(selectMenu);
     const translations = useAppSelector(selectTranslations);
+
+    const isMobile = useIsMobile();
+
+    useEffect(() => {
+        if (!isMobile && selectedMenu === MenuList.notSelected) {
+            dispatch(changeMenu(MenuList.about));
+        }
+    }, [isMobile, dispatch, selectedMenu]);
 
     return (
         <StyledBottomNavigation

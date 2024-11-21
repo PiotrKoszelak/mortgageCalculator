@@ -46,6 +46,7 @@ export enum Parameters {
     easyComparisonDesc = 'easyComparisonDesc',
     savedResultsDesc = 'savedResultsDesc',
     exportToDesc = 'exportToDesc',
+    showCalculator = 'showCalculator',
 }
 
 export const SummaryParameters = [
@@ -68,6 +69,7 @@ export enum MenuList {
     about = 'about',
     contact = 'contact',
     signIn = 'signIn',
+    notSelected = 'notSelected',
 }
 
 export const menuHeight = 50;

@@ -47,6 +47,7 @@ export const translationsEn = {
         'Compare different results with the same view',
     [Parameters.savedResultsDesc]: 'Keep the results in the database storage',
     [Parameters.exportToDesc]: 'Extract the results to a file',
+    [Parameters.showCalculator]: 'Show calculator',
 };
 
 export const translationsPl = {
@@ -97,4 +98,5 @@ export const translationsPl = {
         'Porównuj wyniki korzystając z tego samego widoku',
     [Parameters.savedResultsDesc]: 'Przechowuj wyniki w bazie danych',
     [Parameters.exportToDesc]: 'Exportuj wyniki do pliku',
+    [Parameters.showCalculator]: 'Otwórz kalkulator',
 };
