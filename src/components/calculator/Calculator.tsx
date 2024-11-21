@@ -40,15 +40,17 @@ const Calculator = (props: CalculatorProps) => {
 
     const dataInputs = useAppSelector(selectDataInputs);
 
-    const { data: fetchedData, isFetching } = useCalculateQuery(dataInputs);
-
-    const data = useMemo(() => fetchedData?.data || [], [fetchedData]);
-
     const canCalculate = !!(
         dataInputs.totalPrincipal &&
         dataInputs.interestRate &&
         dataInputs.numberOfMonths
     );
+
+    const { data: fetchedData, isFetching } = useCalculateQuery(dataInputs, {
+        skip: !canCalculate,
+    });
+
+    const data = useMemo(() => fetchedData?.data || [], [fetchedData]);
 
     const { overpayment, totalPrincipal } = dataInputs;
     const summaryData = useMemo(
