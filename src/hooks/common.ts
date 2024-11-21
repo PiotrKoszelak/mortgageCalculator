@@ -1,30 +1,17 @@
 import { useState, useEffect } from 'react';
 import { mobileWidth } from '../utils/constants';
 
-export const useWindowDimensions = () => {
-    const [dimensions, setDimensions] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
-    });
+export const useIsMobile = () => {
+    const mediaQueryList = window.matchMedia(`(max-width: ${mobileWidth}px)`);
+    const [isMobile, setIsMobile] = useState(mediaQueryList.matches);
 
     useEffect(() => {
-        const handleResize = () => {
-            setDimensions({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
+        const handleChange = (e: MediaQueryListEvent) => {
+            setIsMobile(e.matches);
         };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    return dimensions;
-};
-
-export const useIsMobile = () => {
-    const { width } = useWindowDimensions();
-
-    const isMobile = width <= mobileWidth;
+        mediaQueryList.addEventListener('change', handleChange);
+        return () => mediaQueryList.removeEventListener('change', handleChange);
+    }, [mediaQueryList]);
 
     return isMobile;
 };
