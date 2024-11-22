@@ -24,7 +24,6 @@ const globalSlice = createSlice({
         },
         hidePanel: (state) => {
             state.isPanelVisible = false;
-            state.menu = MenuList.notSelected;
         },
     },
 });
