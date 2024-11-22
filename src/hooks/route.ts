@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../store/hooks';
 import { changeMenu, hidePanel } from '../store/globalSlice';
-import { MenuList } from '../utils/constants';
+import { MenuList, seoValues } from '../utils/constants';
 import { useIsMobile } from './common';
 
 export const useRoute = () => {
@@ -24,4 +24,22 @@ export const useRoute = () => {
             });
         }
     }, [pathname, dispatch, navigate, isMobile]);
+};
+
+export const useSeo = () => {
+    const [seoParams, setSeoParams] = useState(seoValues.default);
+    const { pathname } = useLocation();
+    const isMobile = useIsMobile();
+
+    useEffect(() => {
+        if (pathname === `/${MenuList.calculator}` && isMobile) {
+            setSeoParams(seoValues[MenuList.calculator]);
+        } else if (pathname === `/${MenuList.contact}`) {
+            setSeoParams(seoValues[MenuList.contact]);
+        } else {
+            setSeoParams(seoValues.default);
+        }
+    }, [pathname, isMobile, setSeoParams]);
+
+    return seoParams;
 };

@@ -29,7 +29,7 @@ export const translationsEn = {
     [Parameters.about]: 'About',
     [Parameters.contact]: 'Contact',
     [Parameters.appDescription]:
-        'JustFin is an application that will allow you to quickly and easily calculate all the costs of your loan or mortgage.',
+        'Justfin is an application that will allow you to quickly and easily calculate all the costs of your loan or mortgage.',
     [Parameters.email]: 'Email address',
     [Parameters.password]: 'Password',
     [Parameters.rememberMe]: 'Remember me',
@@ -79,7 +79,7 @@ export const translationsPl = {
     [Parameters.about]: 'Opis',
     [Parameters.contact]: 'Kontakt',
     [Parameters.appDescription]:
-        'JustFin to aplikacja, która pozwoli ci w szybki i łatwy sposób obliczyć wszystkie koszty twojego kredytu.',
+        'Justfin to aplikacja, która pozwoli ci w szybki i łatwy sposób obliczyć wszystkie koszty twojego kredytu.',
     [Parameters.email]: 'Adres email',
     [Parameters.password]: 'Hasło',
     [Parameters.rememberMe]: 'Pamiętaj mnie',

@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { HelmetProvider } from 'react-helmet-async';
+
 import { store } from './store/store.ts';
 
 import { routesConfig } from './routes';
@@ -15,7 +17,9 @@ function App() {
     return (
         <Provider store={store}>
             <ThemeProvider theme={darkTheme}>
-                <RouterProvider router={router} />
+                <HelmetProvider>
+                    <RouterProvider router={router} />
+                </HelmetProvider>
             </ThemeProvider>
         </Provider>
     );

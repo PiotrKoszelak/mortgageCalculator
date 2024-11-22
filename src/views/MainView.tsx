@@ -2,7 +2,7 @@ import { useAppSelector } from '../store/hooks';
 import { selectIsPanelVisible } from '../store/globalSlice';
 
 import { useIsMobile } from '../hooks/common';
-import { useRoute } from '../hooks/route';
+import { useRoute, useSeo } from '../hooks/route';
 import { menuHeight } from '../utils/constants';
 
 import { Box, Paper, styled } from '@mui/material';
@@ -10,6 +10,7 @@ import Calculator from '../components/calculator/Calculator';
 import { OpenCalculatorButton } from '../components/layout/MainViewComponents';
 import Panels from '../components/layout/panels/Panels';
 import MenuToolbar from '../components/menu/MenuToolbar';
+import SeoWrapper from '../components/layout/SEO';
 
 const StyledView = styled(Box)`
     width: 100%;
@@ -25,6 +26,7 @@ const StyledPanel = styled(Paper)<{
 
 const MainView = () => {
     useRoute();
+    const seoParams = useSeo();
     const isPanelVisible = useAppSelector(selectIsPanelVisible);
     const isMobile = useIsMobile();
 
@@ -33,6 +35,7 @@ const MainView = () => {
 
     return (
         <>
+            <SeoWrapper {...seoParams} />
             <MenuToolbar />
             <StyledView>
                 {showCalculator && <Calculator isSingle />}
