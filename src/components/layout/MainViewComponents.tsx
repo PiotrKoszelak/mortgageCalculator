@@ -1,25 +1,31 @@
-import { useAppDispatch } from '../../store/hooks';
-import { hidePanel } from '../../store/globalSlice';
+import { useNavigate } from 'react-router-dom';
+
+import { useAppSelector } from '../../store/hooks';
+import { selectTranslations } from '../../store/globalSlice';
+import { MenuList } from '../../utils/constants';
 
 import { Box, Button, styled } from '@mui/material';
-
-interface CustomButtonProps {
-    title?: string;
-}
 
 const StyledContainer = styled(Box)`
     display: flex;
     justify-content: center;
 `;
 
-export const CustomButton = (props: CustomButtonProps) => {
-    const title = props.title || '';
-    const dispatch = useAppDispatch();
+export const OpenCalculatorButton = () => {
+    const translations = useAppSelector(selectTranslations);
+    const navigate = useNavigate();
 
     return (
         <StyledContainer>
-            <Button onClick={() => dispatch(hidePanel())} variant="outlined">
-                {title}
+            <Button
+                onClick={() =>
+                    navigate({
+                        pathname: `/${MenuList.calculator}`,
+                    })
+                }
+                variant="outlined"
+            >
+                {translations.showCalculator}
             </Button>
         </StyledContainer>
     );

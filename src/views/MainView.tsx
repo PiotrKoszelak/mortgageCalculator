@@ -1,13 +1,15 @@
 import { useAppSelector } from '../store/hooks';
-import { selectIsPanelVisible, selectTranslations } from '../store/globalSlice';
+import { selectIsPanelVisible } from '../store/globalSlice';
 
 import { useIsMobile } from '../hooks/common';
+import { useRoute } from '../hooks/route';
 import { menuHeight } from '../utils/constants';
 
 import { Box, Paper, styled } from '@mui/material';
 import Calculator from '../components/calculator/Calculator';
-import { CustomButton } from '../components/layout/MainViewComponents';
+import { OpenCalculatorButton } from '../components/layout/MainViewComponents';
 import Panels from '../components/layout/panels/Panels';
+import MenuToolbar from '../components/menu/MenuToolbar';
 
 const StyledView = styled(Box)`
     width: 100%;
@@ -22,25 +24,26 @@ const StyledPanel = styled(Paper)<{
 `;
 
 const MainView = () => {
+    useRoute();
     const isPanelVisible = useAppSelector(selectIsPanelVisible);
-    const translations = useAppSelector(selectTranslations);
     const isMobile = useIsMobile();
 
     const showPanel = !isMobile || (isPanelVisible && isMobile);
     const showCalculator = !isMobile || !(isPanelVisible && isMobile);
 
     return (
-        <StyledView>
-            {showCalculator && <Calculator isSingle />}
-            {showPanel && (
-                <StyledPanel isMobile={isMobile}>
-                    <Panels />
-                    {isMobile && (
-                        <CustomButton title={translations.showCalculator} />
-                    )}
-                </StyledPanel>
-            )}
-        </StyledView>
+        <>
+            <MenuToolbar />
+            <StyledView>
+                {showCalculator && <Calculator isSingle />}
+                {showPanel && (
+                    <StyledPanel isMobile={isMobile}>
+                        <Panels />
+                        {isMobile && <OpenCalculatorButton />}
+                    </StyledPanel>
+                )}
+            </StyledView>
+        </>
     );
 };
 

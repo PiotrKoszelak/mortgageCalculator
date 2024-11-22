@@ -1,6 +1,7 @@
 import { type MouseEvent, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { changeMenu, selectTranslations } from '../../store/globalSlice';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import { selectTranslations } from '../../store/globalSlice';
 
 import { MenuList } from '../../utils/constants';
 
@@ -8,7 +9,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const MenuHamburger = () => {
-    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const translations = useAppSelector(selectTranslations);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -21,8 +22,10 @@ const MenuHamburger = () => {
     };
 
     const handleChange = (value: MenuList) => {
-        dispatch(changeMenu(value));
         handleClose();
+        navigate({
+            pathname: `/${value}`,
+        });
     };
 
     return (

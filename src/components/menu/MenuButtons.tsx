@@ -1,9 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import {
-    changeMenu,
-    selectMenu,
-    selectTranslations,
-} from '../../store/globalSlice';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import { selectMenu, selectTranslations } from '../../store/globalSlice';
 
 import { menuHeight, MenuList } from '../../utils/constants';
 
@@ -41,7 +38,7 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
 `;
 
 const MenuButtons = () => {
-    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const selectedMenu = useAppSelector(selectMenu);
     const translations = useAppSelector(selectTranslations);
 
@@ -50,7 +47,9 @@ const MenuButtons = () => {
             showLabels
             value={selectedMenu}
             onChange={(_, newValue: MenuList) => {
-                dispatch(changeMenu(newValue));
+                navigate({
+                    pathname: `/${newValue}`,
+                });
             }}
         >
             <StyledBottomNavigationAction

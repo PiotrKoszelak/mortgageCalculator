@@ -69,6 +69,7 @@ export enum MenuList {
     about = 'about',
     contact = 'contact',
     signIn = 'signIn',
+    calculator = 'calculator',
 }
 
 export const menuHeight = 50;
