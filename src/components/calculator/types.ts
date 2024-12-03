@@ -1,39 +1,68 @@
-import { Parameters } from '../../utils/constants';
+export enum SummaryParams {
+    totalPayment = 'totalPayment',
+    totalInterestPayment = 'totalInterestPayment',
+    totalOverpayment = 'totalOverpayment',
+}
 
 export interface SummaryData {
-    [Parameters.totalPayment]: number;
-    [Parameters.totalInterestPayment]: number;
-    [Parameters.totalOverpayment]: number;
+    [SummaryParams.totalPayment]: number;
+    [SummaryParams.totalInterestPayment]: number;
+    [SummaryParams.totalOverpayment]: number;
 }
 
-export type InstallementType = Parameters.decreasing | Parameters.equal;
-
-export type OverpaymentResult =
-    | Parameters.lowerInterest
-    | Parameters.shortenTime;
-
-export interface DataRow {
-    [Parameters.nr]: number;
-    [Parameters.month]: string;
-    [Parameters.principalBalance]: number;
-    [Parameters.principalInstallment]: number;
-    [Parameters.interest]: number;
-    [Parameters.installmentAmount]: number;
+export enum InstallementType {
+    decreasing = 'decreasing',
+    equal = 'equal',
 }
+
+export enum OverpaymentResult {
+    lowerInterest = 'lowerInterest',
+    shortenTime = 'shortenTime',
+}
+
+export enum DataInputsParams {
+    totalPrincipal = 'totalPrincipal',
+    interestRate = 'interestRate',
+    numberOfMonths = 'numberOfMonths',
+    installementType = 'installementType',
+    overpaymentResult = 'overpaymentResult',
+    overpayment = 'overpayment',
+}
+
+export type OverpaymentData = { [nr: number]: number };
 
 export interface DataInputs {
-    [Parameters.totalPrincipal]: number;
-    [Parameters.interestRate]: number;
-    [Parameters.numberOfMonths]: number;
-    [Parameters.installementType]: InstallementType;
-    [Parameters.overpaymentResult]: OverpaymentResult;
-    [Parameters.overpayment]: OverpaymentData;
+    [DataInputsParams.totalPrincipal]: number;
+    [DataInputsParams.interestRate]: number;
+    [DataInputsParams.numberOfMonths]: number;
+    [DataInputsParams.installementType]: InstallementType;
+    [DataInputsParams.overpaymentResult]: OverpaymentResult;
+    [DataInputsParams.overpayment]: OverpaymentData;
+}
+
+export enum CalculatorParams {
+    nr = 'nr',
+    // month = 'month',
+    principalBalance = 'principalBalance',
+    principalInstallment = 'principalInstallment',
+    interest = 'interest',
+    installmentAmount = 'installmentAmount',
+    overpayment = 'overpayment',
+}
+
+export interface DataRow {
+    [CalculatorParams.nr]: number;
+    // [CalculatorParams.month]: string;
+    [CalculatorParams.principalBalance]: number;
+    [CalculatorParams.principalInstallment]: number;
+    [CalculatorParams.interest]: number;
+    [CalculatorParams.installmentAmount]: number;
 }
 
 export type Translations = { [key: string]: string };
 
 export type UpdateInputFunction = (
-    name: number | Parameters,
+    name: number | DataInputsParams,
     value: number
 ) => void;
 
@@ -42,8 +71,6 @@ export interface TextFieldRules {
     min: number;
     max: number;
 }
-
-export type OverpaymentData = { [nr: number]: number };
 
 export interface parseNumberToStringParams {
     number: number;

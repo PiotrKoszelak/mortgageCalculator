@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
-import { Parameters } from '../utils/constants';
 import { type CardState } from './types';
+import {
+    DataInputsParams,
+    InstallementType,
+    OverpaymentResult,
+} from '../components/calculator/types';
 
 const initialState: CardState = {
     dataInputs: {
-        [Parameters.totalPrincipal]: 0,
-        [Parameters.interestRate]: 0,
-        [Parameters.numberOfMonths]: 0,
-        [Parameters.installementType]: Parameters.equal,
-        [Parameters.overpaymentResult]: Parameters.lowerInterest,
-        [Parameters.overpayment]: {},
+        [DataInputsParams.totalPrincipal]: 0,
+        [DataInputsParams.interestRate]: 0,
+        [DataInputsParams.numberOfMonths]: 0,
+        [DataInputsParams.installementType]: InstallementType.equal,
+        [DataInputsParams.overpaymentResult]: OverpaymentResult.lowerInterest,
+        [DataInputsParams.overpayment]: {},
     },
 };
 
@@ -22,7 +26,7 @@ const cardSlice = createSlice({
         updateDataInput: (
             state: CardState,
             action: PayloadAction<{
-                name: Parameters;
+                name: DataInputsParams;
                 value: number | string;
             }>
         ) => {

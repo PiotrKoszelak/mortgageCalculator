@@ -1,8 +1,6 @@
 import { useAppSelector } from '../../../store/hooks';
 import { selectTranslations } from '../../../store/globalSlice';
 
-import { Parameters } from '../../../utils/constants';
-
 import {
     Box,
     Button,
@@ -31,16 +29,14 @@ const SignInPanel = () => {
 
     return (
         <StyledContainer>
-            <Typography variant="h5">
-                {translations[Parameters.signIn]}
-            </Typography>
+            <Typography variant="h5">{translations.signIn}</Typography>
             <Benefits />
             <Divider />
             <form noValidate onSubmit={handleSubmit}>
                 <StyledContainer>
                     <TextField
                         required
-                        id={Parameters.email}
+                        id={'email'}
                         label={translations.email}
                         variant="outlined"
                         slotProps={{
@@ -54,7 +50,7 @@ const SignInPanel = () => {
 
                     <TextField
                         required
-                        id={Parameters.password}
+                        id={'password'}
                         label={translations.password}
                         variant="outlined"
                         slotProps={{

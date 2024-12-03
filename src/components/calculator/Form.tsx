@@ -1,8 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { selectDataInputs, updateDataInput } from '../../store/cardSlice';
-import { Parameters } from '../../utils/constants';
-import type { UpdateInputFunction } from './types';
+import {
+    type UpdateInputFunction,
+    DataInputsParams,
+    InstallementType,
+    OverpaymentResult,
+} from './types';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -15,11 +19,11 @@ const Form = () => {
     const dataInputs = useAppSelector(selectDataInputs);
 
     const updateInputValue: UpdateInputFunction = (name, value) => {
-        const typedName = name as Parameters;
+        const typedName = name as DataInputsParams;
         dispatch(updateDataInput({ name: typedName, value }));
     };
 
-    const updateSelectValue = (name: Parameters, value: string) => {
+    const updateSelectValue = (name: DataInputsParams, value: string) => {
         dispatch(updateDataInput({ name, value }));
     };
 
@@ -40,7 +44,7 @@ const Form = () => {
         >
             <div>
                 <Input
-                    parameter={Parameters.totalPrincipal}
+                    parameter={DataInputsParams.totalPrincipal}
                     translations={translations}
                     updateInputValue={updateInputValue}
                     value={totalPrincipal}
@@ -51,7 +55,7 @@ const Form = () => {
                     }}
                 />
                 <Input
-                    parameter={Parameters.interestRate}
+                    parameter={DataInputsParams.interestRate}
                     translations={translations}
                     updateInputValue={updateInputValue}
                     value={interestRate}
@@ -63,7 +67,7 @@ const Form = () => {
                     }}
                 />
                 <Input
-                    parameter={Parameters.numberOfMonths}
+                    parameter={DataInputsParams.numberOfMonths}
                     translations={translations}
                     updateInputValue={updateInputValue}
                     value={numberOfMonths}
@@ -74,53 +78,56 @@ const Form = () => {
                     }}
                 />
                 <TextField
-                    id={Parameters.installementType}
+                    id={DataInputsParams.installementType}
                     select
                     label={translations.installementType}
-                    defaultValue={Parameters.equal}
+                    defaultValue={InstallementType.equal}
                     required
                     size="small"
                     value={installementType}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateSelectValue(
-                            Parameters.installementType,
+                            DataInputsParams.installementType,
                             event.target.value
                         );
                     }}
                 >
-                    <MenuItem key={Parameters.equal} value={Parameters.equal}>
+                    <MenuItem
+                        key={InstallementType.equal}
+                        value={InstallementType.equal}
+                    >
                         {translations.equal}
                     </MenuItem>
                     <MenuItem
-                        key={Parameters.decreasing}
-                        value={Parameters.decreasing}
+                        key={InstallementType.decreasing}
+                        value={InstallementType.decreasing}
                     >
                         {translations.decreasing}
                     </MenuItem>
                 </TextField>
                 <TextField
-                    id={Parameters.overpaymentResult}
+                    id={DataInputsParams.overpaymentResult}
                     select
                     label={translations.overpaymentResult}
-                    defaultValue={Parameters.lowerInterest}
+                    defaultValue={OverpaymentResult.lowerInterest}
                     size="small"
                     value={overpaymentResult}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         updateSelectValue(
-                            Parameters.overpaymentResult,
+                            DataInputsParams.overpaymentResult,
                             event.target.value
                         );
                     }}
                 >
                     <MenuItem
-                        key={Parameters.lowerInterest}
-                        value={Parameters.lowerInterest}
+                        key={OverpaymentResult.lowerInterest}
+                        value={OverpaymentResult.lowerInterest}
                     >
                         {translations.lowerInterest}
                     </MenuItem>
                     <MenuItem
-                        key={Parameters.shortenTime}
-                        value={Parameters.shortenTime}
+                        key={OverpaymentResult.shortenTime}
+                        value={OverpaymentResult.shortenTime}
                     >
                         {translations.shortenTime}
                     </MenuItem>

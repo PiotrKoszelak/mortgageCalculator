@@ -1,8 +1,6 @@
 import { useAppSelector } from '../../../store/hooks';
 import { selectTranslations } from '../../../store/globalSlice';
 
-import { Parameters } from '../../../utils/constants';
-
 import { Box, Divider, styled, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Icon from '../../common/Icon';
@@ -34,9 +32,7 @@ const ContactPanel = () => {
 
     return (
         <StyledContainer>
-            <Typography variant="h5">
-                {translations[Parameters.contact]}
-            </Typography>
+            <Typography variant="h5">{translations.contact}</Typography>
             <StyledParagraph>
                 <Icon>
                     <SendIcon />
@@ -44,13 +40,9 @@ const ContactPanel = () => {
                 koszelak.piotr@gmail.com
             </StyledParagraph>
             <Divider />
-            <Typography variant="h6">
-                {translations[Parameters.aboutAuthor]}
-            </Typography>
+            <Typography variant="h6">{translations.aboutAuthor}</Typography>
             <StyledLogo alt="Author" src={AuthorImage} size={150} center />
-            <StyledParagraph>
-                {translations[Parameters.authorDescription]}
-            </StyledParagraph>
+            <StyledParagraph>{translations.authorDescription}</StyledParagraph>
         </StyledContainer>
     );
 };

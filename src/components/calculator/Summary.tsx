@@ -1,7 +1,6 @@
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import { type SummaryData } from './types';
-import { SummaryParameters } from '../../utils/constants';
+import { SummaryParams, type SummaryData } from './types';
 import { parseNumberToString } from './utils';
 
 import { Box, styled } from '@mui/material';
@@ -30,8 +29,8 @@ function Summary(props: SumamryProps) {
     const { data } = props;
     const translations = useAppSelector(selectTranslations);
 
-    const summaryValues = SummaryParameters.map((param) => ({
-        name: translations[param],
+    const summaryValues = Object.keys(SummaryParams).map((param) => ({
+        name: translations[param as keyof SummaryData],
         value: data[param as keyof SummaryData],
         key: param,
     }));

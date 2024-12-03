@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Parameters } from '../../utils/constants';
 import {
     type Translations,
     type UpdateInputFunction,
     type TextFieldRules,
+    DataInputsParams,
 } from './types';
 import { parseNumberToString, parseStringToNumber } from './utils';
 
@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
 
 interface InputProps {
-    parameter: Parameters | number;
+    parameter: DataInputsParams | number;
     translations: Translations;
     updateInputValue: UpdateInputFunction;
     value: number;
@@ -45,7 +45,7 @@ const Input = (props: InputProps) => {
             const name =
                 typeof parameter === 'number'
                     ? parameter
-                    : Parameters[parameter];
+                    : DataInputsParams[parameter];
             updateInputValue(name, newValue);
         }
     };

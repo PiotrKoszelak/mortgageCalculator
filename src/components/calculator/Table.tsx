@@ -5,8 +5,11 @@ import {
     updateOverpaymentInput,
 } from '../../store/cardSlice';
 
-import type { DataRow, UpdateInputFunction } from './types';
-import { calculatorParameters } from '../../utils/constants';
+import {
+    CalculatorParams,
+    type DataRow,
+    type UpdateInputFunction,
+} from './types';
 import { parseNumberToString } from './utils';
 
 import { styled } from '@mui/material';
@@ -77,9 +80,9 @@ function DataTable(props: TableProps) {
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {calculatorParameters.map((name) => (
+                            {Object.keys(CalculatorParams).map((name) => (
                                 <StyledTableCell align="center" key={name}>
-                                    {translations[name]}
+                                    {translations[name as keyof DataRow]}
                                 </StyledTableCell>
                             ))}
                         </TableRow>

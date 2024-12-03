@@ -1,15 +1,15 @@
-import { Parameters } from '../../utils/constants';
 import {
     type OverpaymentData,
     type DataRow,
     type SummaryData,
     type parseNumberToStringParams,
+    SummaryParams,
 } from './types';
 
 export const fallbackSummaryValue = {
-    [Parameters.totalPayment]: 0,
-    [Parameters.totalInterestPayment]: 0,
-    [Parameters.totalOverpayment]: 0,
+    [SummaryParams.totalPayment]: 0,
+    [SummaryParams.totalInterestPayment]: 0,
+    [SummaryParams.totalOverpayment]: 0,
 };
 
 const sumValues = (data: number[]) =>
@@ -28,9 +28,9 @@ export const calculateSummary = (
             .filter((interest) => interest >= 0)
     );
     return {
-        [Parameters.totalPayment]: totalInterestPayment + totalPrincipal,
-        [Parameters.totalInterestPayment]: totalInterestPayment,
-        [Parameters.totalOverpayment]: sumValues(Object.values(overpayment)),
+        [SummaryParams.totalPayment]: totalInterestPayment + totalPrincipal,
+        [SummaryParams.totalInterestPayment]: totalInterestPayment,
+        [SummaryParams.totalOverpayment]: sumValues(Object.values(overpayment)),
     };
 };
 
