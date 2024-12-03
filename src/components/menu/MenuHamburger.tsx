@@ -23,8 +23,9 @@ const MenuHamburger = () => {
 
     const handleChange = (value: MenuList) => {
         handleClose();
+        const pathname = value === MenuList.about ? `/` : `/${value}`;
         navigate({
-            pathname: `/${value}`,
+            pathname,
         });
     };
 

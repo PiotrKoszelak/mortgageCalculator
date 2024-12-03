@@ -1,45 +1,43 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../store/hooks';
 import { changeMenu, hidePanel } from '../store/globalSlice';
 import { MenuList, seoValues } from '../utils/constants';
 import { useIsMobile } from './common';
 
-export const useRoute = () => {
-    const { pathname } = useLocation();
+export const useRoute = (view: MenuList) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const isMobile = useIsMobile();
 
     useEffect(() => {
-        if (pathname === `/${MenuList.calculator}` && isMobile) {
+        if (view === MenuList.calculator && isMobile) {
             dispatch(hidePanel());
-        } else if (pathname === `/${MenuList.contact}`) {
+        } else if (view === MenuList.contact) {
             dispatch(changeMenu(MenuList.contact));
         } else {
             dispatch(changeMenu(MenuList.about));
-            navigate({
-                pathname: '/',
+            navigate('/', {
+                replace: true,
             });
         }
-    }, [pathname, dispatch, navigate, isMobile]);
+    }, [view, dispatch, navigate, isMobile]);
 };
 
-export const useSeo = () => {
+export const useSeo = (view: MenuList) => {
     const [seoParams, setSeoParams] = useState(seoValues.default);
-    const { pathname } = useLocation();
     const isMobile = useIsMobile();
 
     useEffect(() => {
-        if (pathname === `/${MenuList.calculator}` && isMobile) {
+        if (view === MenuList.calculator && isMobile) {
             setSeoParams(seoValues[MenuList.calculator]);
-        } else if (pathname === `/${MenuList.contact}`) {
+        } else if (view === MenuList.contact) {
             setSeoParams(seoValues[MenuList.contact]);
         } else {
             setSeoParams(seoValues.default);
         }
-    }, [pathname, isMobile, setSeoParams]);
+    }, [view, isMobile, setSeoParams]);
 
     return seoParams;
 };

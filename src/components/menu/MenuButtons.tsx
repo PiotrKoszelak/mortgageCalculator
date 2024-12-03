@@ -47,8 +47,10 @@ const MenuButtons = () => {
             showLabels
             value={selectedMenu}
             onChange={(_, newValue: MenuList) => {
+                const pathname =
+                    newValue === MenuList.about ? `/` : `/${newValue}`;
                 navigate({
-                    pathname: `/${newValue}`,
+                    pathname,
                 });
             }}
         >
