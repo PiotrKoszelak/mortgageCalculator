@@ -34,6 +34,7 @@ const StyledBackdrop = styled(Backdrop)<CalculatorProps>`
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     width: 100%;
     position: absolute;
+    z-index: 10;
 `;
 
 const Calculator = (props: CalculatorProps) => {
