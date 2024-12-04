@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     type Translations,
     type UpdateInputFunction,
@@ -6,6 +6,7 @@ import {
     DataInputsParams,
 } from './types';
 import { parseNumberToString, parseStringToNumber } from './utils';
+import { useCurrencyFormat } from '../../hooks/common';
 
 import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
@@ -29,15 +30,34 @@ const Input = (props: InputProps) => {
         rules,
     } = props;
 
+    const noCurrency =
+        parameter === DataInputsParams.totalPrincipal ||
+        typeof parameter === 'number';
+
+    const currencyFormat = useCurrencyFormat({
+        noCurrency,
+        noFormat: !noCurrency,
+    });
+
     const [errorMessage, setErrorMessage] = useState('');
 
     const [inputValue, setInputValue] = useState<string>(
         parseNumberToString({
             number: value,
-            isSpace: true,
-            isDecimal: false,
+            format: currencyFormat,
         })
     );
+
+    useEffect(() => {
+        rules?.integer &&
+            inputValue !== '' &&
+            setInputValue(
+                parseNumberToString({
+                    number: parseStringToNumber(inputValue),
+                    format: currencyFormat,
+                })
+            );
+    }, [currencyFormat, inputValue, rules]);
 
     const updateValue = () => {
         const newValue = parseStringToNumber(inputValue);
@@ -64,8 +84,7 @@ const Input = (props: InputProps) => {
             setErrorMessage(
                 `${translations.minLimit} ${parseNumberToString({
                     number: rules.min,
-                    isSpace: true,
-                    isDecimal: !rules?.integer,
+                    format: currencyFormat,
                 })}`
             );
             return false;
@@ -73,8 +92,7 @@ const Input = (props: InputProps) => {
             setErrorMessage(
                 `${translations.maxLimit} ${parseNumberToString({
                     number: rules.max,
-                    isSpace: true,
-                    isDecimal: !rules?.integer,
+                    format: currencyFormat,
                 })}`
             );
             return false;
@@ -115,18 +133,18 @@ const Input = (props: InputProps) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const value = event.target.value;
                 const numberValue = parseStringToNumber(value);
-                if (!isNaN(numberValue)) {
-                    isValidValue(numberValue);
-                    setInputValue(
-                        rules?.integer && value !== ''
-                            ? parseNumberToString({
-                                  number: numberValue,
-                                  isSpace: true,
-                                  isDecimal: false,
-                              })
-                            : value
-                    );
-                }
+                const skip =
+                    (!rules?.integer && !isNaN(Number(value))) || value === '';
+
+                isValidValue(numberValue);
+                setInputValue(
+                    !skip
+                        ? parseNumberToString({
+                              number: numberValue,
+                              format: currencyFormat,
+                          })
+                        : value
+                );
             }}
             onKeyDown={handleKeyDown}
         />

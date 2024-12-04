@@ -34,21 +34,25 @@ export const calculateSummary = (
     };
 };
 
-function numberWithSpaces(value: string) {
-    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
-
 export const parseNumberToString = (params: parseNumberToStringParams) => {
-    const { number, isDecimal, isSpace } = params;
+    const { number, format } = params;
 
-    const parsedNumber = isDecimal ? number.toFixed(2) : String(number);
-    if (isSpace) return numberWithSpaces(parsedNumber);
+    if (!format) {
+        return String(number);
+    }
 
-    return parsedNumber;
+    const { locale, currency } = format;
+    const options: { [name: string]: string | number } = {
+        maximumFractionDigits: 2,
+    };
+    if (currency) {
+        options.style = 'currency';
+        options.currency = currency;
+    }
+    return number.toLocaleString(locale, options);
 };
 
 export const parseStringToNumber = (value: string) => {
     if (!value) return 0;
-
-    return Number(value.replaceAll(' ', '').replaceAll(',', '.'));
+    return Number(value.replace(/[^0-9-.]+/g, ''));
 };

@@ -2,6 +2,7 @@ import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import { SummaryParams, type SummaryData } from './types';
 import { parseNumberToString } from './utils';
+import { useCurrencyFormat } from '../../hooks/common';
 
 import { Box, styled } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -28,6 +29,7 @@ const StyledTableCell = styled(TableCell)`
 function Summary(props: SumamryProps) {
     const { data } = props;
     const translations = useAppSelector(selectTranslations);
+    const currencyFormat = useCurrencyFormat();
 
     const summaryValues = Object.keys(SummaryParams).map((param) => ({
         name: translations[param as keyof SummaryData],
@@ -54,8 +56,7 @@ function Summary(props: SumamryProps) {
                                 <StyledTableCell align="right">
                                     {parseNumberToString({
                                         number: value,
-                                        isSpace: true,
-                                        isDecimal: true,
+                                        format: currencyFormat,
                                     })}
                                 </StyledTableCell>
                             </TableRow>

@@ -12,6 +12,7 @@ import {
     type UpdateInputFunction,
 } from './types';
 import { parseNumberToString } from './utils';
+import { useCurrencyFormat } from '../../hooks/common';
 
 import { styled } from '@mui/material';
 import { appColors } from '../../utils/theme';
@@ -67,6 +68,7 @@ const StyledTableCell = styled(TableCell)`
 function DataTable(props: TableProps) {
     const { data } = props;
     const dispatch = useAppDispatch();
+    const currencyFormat = useCurrencyFormat();
     const translations = useAppSelector(selectTranslations);
     const overpayment = useAppSelector(selectOverpayment);
     const dataOptions = useAppSelector(selectDataOptions);
@@ -113,8 +115,7 @@ function DataTable(props: TableProps) {
                                     <StyledTableCell align="right">
                                         {parseNumberToString({
                                             number: row.principalBalance,
-                                            isSpace: true,
-                                            isDecimal: true,
+                                            format: currencyFormat,
                                         })}
                                     </StyledTableCell>
                                 )}
@@ -122,8 +123,7 @@ function DataTable(props: TableProps) {
                                     <StyledTableCell align="right">
                                         {parseNumberToString({
                                             number: row.principalInstallment,
-                                            isSpace: true,
-                                            isDecimal: true,
+                                            format: currencyFormat,
                                         })}
                                     </StyledTableCell>
                                 )}
@@ -131,8 +131,7 @@ function DataTable(props: TableProps) {
                                     <StyledTableCell align="right">
                                         {parseNumberToString({
                                             number: row.interest,
-                                            isSpace: true,
-                                            isDecimal: true,
+                                            format: currencyFormat,
                                         })}
                                     </StyledTableCell>
                                 )}
@@ -140,8 +139,7 @@ function DataTable(props: TableProps) {
                                     <StyledTableCell align="right">
                                         {parseNumberToString({
                                             number: row.installmentAmount,
-                                            isSpace: true,
-                                            isDecimal: true,
+                                            format: currencyFormat,
                                         })}
                                     </StyledTableCell>
                                 )}

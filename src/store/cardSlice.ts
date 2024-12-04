@@ -10,6 +10,8 @@ import {
     CalculatorParams,
 } from '../components/calculator/types';
 
+import { Currency } from '../utils/constants';
+
 const initialState: CardState = {
     dataInputs: {
         [DataInputsParams.totalPrincipal]: 0,
@@ -27,6 +29,10 @@ const initialState: CardState = {
             [CalculatorParams.interest]: true,
             [CalculatorParams.installmentAmount]: true,
             [CalculatorParams.overpayment]: true,
+        },
+        currency: {
+            enabled: false,
+            value: Currency.pln,
         },
     },
 };
@@ -72,6 +78,17 @@ const cardSlice = createSlice({
             state.dataOptions.columnsVisibility[name] =
                 !state.dataOptions.columnsVisibility[name];
         },
+        toggleCurrency: (state: CardState) => {
+            state.dataOptions.currency.enabled =
+                !state.dataOptions.currency.enabled;
+        },
+        changeCurrency: (
+            state: CardState,
+            action: PayloadAction<{ value: Currency }>
+        ) => {
+            const { value } = action.payload;
+            state.dataOptions.currency.value = value;
+        },
     },
 });
 
@@ -79,11 +96,17 @@ export const {
     updateDataInput,
     updateOverpaymentInput,
     toggleColumnVisibility,
+    toggleCurrency,
+    changeCurrency,
 } = cardSlice.actions;
 
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;
 export const selectOverpayment = (state: RootState) =>
     state.card.dataInputs.overpayment;
 export const selectDataOptions = (state: RootState) => state.card.dataOptions;
+export const selectCurrency = (state: RootState) =>
+    selectDataOptions(state).currency.enabled
+        ? selectDataOptions(state).currency.value
+        : null;
 
 export default cardSlice.reducer;

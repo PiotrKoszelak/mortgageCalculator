@@ -1,6 +1,6 @@
 export enum LanguageList {
-    pl = 'plPL',
-    en = 'enEN',
+    pl = 'pl-PL',
+    en = 'en-EN',
 }
 
 export enum MenuList {
@@ -30,3 +30,9 @@ export const seoValues = {
             'Justfin calculator that allows calculating all the costs of loan or mortgage',
     },
 };
+
+export enum Currency {
+    dollar = 'USD',
+    pln = 'PLN',
+    euro = 'EUR',
+}

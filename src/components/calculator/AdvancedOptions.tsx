@@ -3,15 +3,20 @@ import { selectTranslations } from '../../store/globalSlice';
 import {
     selectDataOptions,
     toggleColumnVisibility,
+    toggleCurrency,
+    changeCurrency,
 } from '../../store/cardSlice';
 
 import { DataOptions } from './types';
+import { Currency } from '../../utils/constants';
 
 import {
     Box,
     FormControlLabel,
+    MenuItem,
     styled,
     Switch,
+    TextField,
     Typography,
 } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
@@ -30,7 +35,7 @@ const StyledContainer = styled(Accordion)`
 
 const StyledDetails = styled(AccordionDetails)`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 `;
 
 const StyledSection = styled(Box)`
@@ -43,7 +48,9 @@ const OptionSection = (props: OptionSectionProps) => {
 
     return (
         <StyledSection>
-            <Typography>{title}</Typography>
+            <Typography align="center" gutterBottom>
+                {title}
+            </Typography>
             {content}
         </StyledSection>
     );
@@ -81,6 +88,46 @@ const ColumnsVisibility = () => {
     );
 };
 
+const CurrencySection = () => {
+    const dataOptions = useAppSelector(selectDataOptions);
+    const dispatch = useAppDispatch();
+    const {
+        currency: { value, enabled },
+    } = dataOptions;
+
+    return (
+        <StyledDetails>
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={enabled}
+                        onChange={() => dispatch(toggleCurrency())}
+                    />
+                }
+                label={''}
+            />
+            <TextField
+                select
+                defaultValue={Currency.pln}
+                size="small"
+                value={value}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const value = event.target.value as Currency;
+                    dispatch(changeCurrency({ value }));
+                }}
+            >
+                {Object.values(Currency).map((value) => {
+                    return (
+                        <MenuItem key={value} value={value}>
+                            {value}
+                        </MenuItem>
+                    );
+                })}
+            </TextField>
+        </StyledDetails>
+    );
+};
+
 const AdvancedOptions = () => {
     const translations = useAppSelector(selectTranslations);
 
@@ -98,18 +145,18 @@ const AdvancedOptions = () => {
                     title={translations.columnsVisibility}
                     content={<ColumnsVisibility />}
                 />
-                <OptionSection
+                {/* <OptionSection
                     title={translations.month}
                     content={<ColumnsVisibility />}
-                />
+                /> */}
                 <OptionSection
                     title={translations.currency}
-                    content={<ColumnsVisibility />}
+                    content={<CurrencySection />}
                 />
-                <OptionSection
+                {/* <OptionSection
                     title={translations.cycleOverpayment}
                     content={<ColumnsVisibility />}
-                />
+                /> */}
             </StyledDetails>
         </StyledContainer>
     );

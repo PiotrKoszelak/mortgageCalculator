@@ -1,3 +1,5 @@
+import { Currency, LanguageList } from '../../utils/constants';
+
 export enum SummaryParams {
     totalPayment = 'totalPayment',
     totalInterestPayment = 'totalInterestPayment',
@@ -74,8 +76,10 @@ export interface TextFieldRules {
 
 export interface parseNumberToStringParams {
     number: number;
-    isSpace: boolean;
-    isDecimal: boolean;
+    format: {
+        locale: LanguageList;
+        currency: Currency | null;
+    } | null;
 }
 
 export interface DataOptions {
@@ -86,5 +90,9 @@ export interface DataOptions {
         [CalculatorParams.interest]: boolean;
         [CalculatorParams.installmentAmount]: boolean;
         [CalculatorParams.overpayment]: boolean;
+    };
+    currency: {
+        enabled: boolean;
+        value: Currency;
     };
 }
