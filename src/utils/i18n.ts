@@ -42,6 +42,10 @@ enum TranslationParams {
     savedResultsDesc = 'savedResultsDesc',
     exportToDesc = 'exportToDesc',
     showCalculator = 'showCalculator',
+    advancedOptions = 'advancedOptions',
+    columnsVisibility = 'columnsVisibility',
+    currency = 'currency',
+    cycleOverpayment = 'cycleOverpayment',
 }
 
 export const translationsEn = {
@@ -94,6 +98,10 @@ export const translationsEn = {
         'Keep the results in the database storage',
     [TranslationParams.exportToDesc]: 'Extract the results to a file',
     [TranslationParams.showCalculator]: 'Show calculator',
+    [TranslationParams.advancedOptions]: 'More options',
+    [TranslationParams.columnsVisibility]: 'Show/hide columns',
+    [TranslationParams.currency]: 'Currency',
+    [TranslationParams.cycleOverpayment]: 'Cycle overpayment',
 };
 
 export const translationsPl = {
@@ -145,4 +153,8 @@ export const translationsPl = {
     [TranslationParams.savedResultsDesc]: 'Przechowuj wyniki w bazie danych',
     [TranslationParams.exportToDesc]: 'Exportuj wyniki do pliku',
     [TranslationParams.showCalculator]: 'Otwórz kalkulator',
+    [TranslationParams.advancedOptions]: 'Opcje zaawansowane',
+    [TranslationParams.columnsVisibility]: 'Pokaż/ukryj kolumny',
+    [TranslationParams.currency]: 'Waluta',
+    [TranslationParams.cycleOverpayment]: 'Cykliczna nadpłata',
 };

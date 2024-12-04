@@ -1,4 +1,4 @@
-import { DataInputs } from '../components/calculator/types';
+import { DataInputs, DataOptions } from '../components/calculator/types';
 import { LanguageList, MenuList } from '../utils/constants';
 
 export interface GlobalState {
@@ -9,4 +9,5 @@ export interface GlobalState {
 
 export interface CardState {
     dataInputs: DataInputs;
+    dataOptions: DataOptions;
 }

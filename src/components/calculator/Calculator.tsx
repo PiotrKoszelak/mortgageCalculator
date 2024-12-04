@@ -12,13 +12,14 @@ import Form from './Form';
 import Summary from './Summary';
 import Curtain from './Curtain';
 import Loader from '../common/Loader';
+import AdvancedOptions from './AdvancedOptions';
 
 interface CalculatorProps {
     isSingle?: boolean;
 }
 
 const StyledContainer = styled(Paper)<CalculatorProps>`
-    height: max(inherit, 800px);
+    height: min(inherit, 1000px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     display: flex;
     padding: 24px;
@@ -29,7 +30,7 @@ const StyledContainer = styled(Paper)<CalculatorProps>`
 `;
 
 const StyledBackdrop = styled(Backdrop)<CalculatorProps>`
-    height: max(100%, 800px);
+    height: min(100%, 1000px);
     max-width: ${(props) => (props.isSingle ? '100%' : '500px')};
     width: 100%;
     position: absolute;
@@ -67,6 +68,7 @@ const Calculator = (props: CalculatorProps) => {
                 <Loader size="50px" />
             </StyledBackdrop>
             <Form />
+            <AdvancedOptions />
             {canCalculate ? (
                 <>
                     <Summary data={summaryData} />

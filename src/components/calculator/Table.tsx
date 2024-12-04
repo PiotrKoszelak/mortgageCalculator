@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import {
+    selectDataOptions,
     selectOverpayment,
     updateOverpaymentInput,
 } from '../../store/cardSlice';
@@ -68,6 +69,8 @@ function DataTable(props: TableProps) {
     const dispatch = useAppDispatch();
     const translations = useAppSelector(selectTranslations);
     const overpayment = useAppSelector(selectOverpayment);
+    const dataOptions = useAppSelector(selectDataOptions);
+    const { columnsVisibility } = dataOptions;
 
     const updateInputValue: UpdateInputFunction = (name, value) => {
         const typedName = name as number;
@@ -80,69 +83,90 @@ function DataTable(props: TableProps) {
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {Object.keys(CalculatorParams).map((name) => (
-                                <StyledTableCell align="center" key={name}>
-                                    {translations[name as keyof DataRow]}
-                                </StyledTableCell>
-                            ))}
+                            {Object.keys(CalculatorParams).map((name) => {
+                                const typedName = name as CalculatorParams;
+                                return (
+                                    columnsVisibility[typedName] && (
+                                        <StyledTableCell
+                                            align="center"
+                                            key={name}
+                                        >
+                                            {translations[typedName]}
+                                        </StyledTableCell>
+                                    )
+                                );
+                            })}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data.map((row, index) => (
                             <TableRow key={row.nr}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.nr}
-                                </StyledTableCell>
+                                {columnsVisibility.nr && (
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.nr}
+                                    </StyledTableCell>
+                                )}
                                 {/* <StyledTableCell align="right">
                                     {row.month}
                                 </StyledTableCell> */}
-                                <StyledTableCell align="right">
-                                    {parseNumberToString({
-                                        number: row.principalBalance,
-                                        isSpace: true,
-                                        isDecimal: true,
-                                    })}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    {parseNumberToString({
-                                        number: row.principalInstallment,
-                                        isSpace: true,
-                                        isDecimal: true,
-                                    })}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    {parseNumberToString({
-                                        number: row.interest,
-                                        isSpace: true,
-                                        isDecimal: true,
-                                    })}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    {parseNumberToString({
-                                        number: row.installmentAmount,
-                                        isSpace: true,
-                                        isDecimal: true,
-                                    })}
-                                </StyledTableCell>
-
-                                <StyledTableCell align="right">
-                                    {row.interest > 0 ? (
-                                        <Input
-                                            parameter={row.nr}
-                                            translations={translations}
-                                            updateInputValue={updateInputValue}
-                                            value={overpayment[row.nr] || 0}
-                                            rules={{
-                                                integer: false,
-                                                min: 0,
-                                                max: data[index]
-                                                    .principalBalance,
-                                            }}
-                                        />
-                                    ) : (
-                                        ''
-                                    )}
-                                </StyledTableCell>
+                                {columnsVisibility.principalBalance && (
+                                    <StyledTableCell align="right">
+                                        {parseNumberToString({
+                                            number: row.principalBalance,
+                                            isSpace: true,
+                                            isDecimal: true,
+                                        })}
+                                    </StyledTableCell>
+                                )}
+                                {columnsVisibility.principalInstallment && (
+                                    <StyledTableCell align="right">
+                                        {parseNumberToString({
+                                            number: row.principalInstallment,
+                                            isSpace: true,
+                                            isDecimal: true,
+                                        })}
+                                    </StyledTableCell>
+                                )}
+                                {columnsVisibility.interest && (
+                                    <StyledTableCell align="right">
+                                        {parseNumberToString({
+                                            number: row.interest,
+                                            isSpace: true,
+                                            isDecimal: true,
+                                        })}
+                                    </StyledTableCell>
+                                )}
+                                {columnsVisibility.installmentAmount && (
+                                    <StyledTableCell align="right">
+                                        {parseNumberToString({
+                                            number: row.installmentAmount,
+                                            isSpace: true,
+                                            isDecimal: true,
+                                        })}
+                                    </StyledTableCell>
+                                )}
+                                {columnsVisibility.overpayment && (
+                                    <StyledTableCell align="right">
+                                        {row.interest > 0 ? (
+                                            <Input
+                                                parameter={row.nr}
+                                                translations={translations}
+                                                updateInputValue={
+                                                    updateInputValue
+                                                }
+                                                value={overpayment[row.nr] || 0}
+                                                rules={{
+                                                    integer: false,
+                                                    min: 0,
+                                                    max: data[index]
+                                                        .principalBalance,
+                                                }}
+                                            />
+                                        ) : (
+                                            ''
+                                        )}
+                                    </StyledTableCell>
+                                )}
                             </TableRow>
                         ))}
                     </TableBody>

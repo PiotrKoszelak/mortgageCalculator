@@ -77,3 +77,14 @@ export interface parseNumberToStringParams {
     isSpace: boolean;
     isDecimal: boolean;
 }
+
+export interface DataOptions {
+    columnsVisibility: {
+        [CalculatorParams.nr]: boolean;
+        [CalculatorParams.principalBalance]: boolean;
+        [CalculatorParams.principalInstallment]: boolean;
+        [CalculatorParams.interest]: boolean;
+        [CalculatorParams.installmentAmount]: boolean;
+        [CalculatorParams.overpayment]: boolean;
+    };
+}

@@ -6,6 +6,8 @@ import {
     DataInputsParams,
     InstallementType,
     OverpaymentResult,
+    DataOptions,
+    CalculatorParams,
 } from '../components/calculator/types';
 
 const initialState: CardState = {
@@ -16,6 +18,16 @@ const initialState: CardState = {
         [DataInputsParams.installementType]: InstallementType.equal,
         [DataInputsParams.overpaymentResult]: OverpaymentResult.lowerInterest,
         [DataInputsParams.overpayment]: {},
+    },
+    dataOptions: {
+        columnsVisibility: {
+            [CalculatorParams.nr]: true,
+            [CalculatorParams.principalBalance]: true,
+            [CalculatorParams.principalInstallment]: true,
+            [CalculatorParams.interest]: true,
+            [CalculatorParams.installmentAmount]: true,
+            [CalculatorParams.overpayment]: true,
+        },
     },
 };
 
@@ -48,13 +60,30 @@ const cardSlice = createSlice({
                 state.dataInputs.overpayment[nr] = value;
             }
         },
+        toggleColumnVisibility: (
+            state: CardState,
+            action: PayloadAction<{
+                name: keyof DataOptions['columnsVisibility'];
+            }>
+        ) => {
+            const { name } = action.payload;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            state.dataOptions.columnsVisibility[name] =
+                !state.dataOptions.columnsVisibility[name];
+        },
     },
 });
 
-export const { updateDataInput, updateOverpaymentInput } = cardSlice.actions;
+export const {
+    updateDataInput,
+    updateOverpaymentInput,
+    toggleColumnVisibility,
+} = cardSlice.actions;
 
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;
 export const selectOverpayment = (state: RootState) =>
     state.card.dataInputs.overpayment;
+export const selectDataOptions = (state: RootState) => state.card.dataOptions;
 
 export default cardSlice.reducer;
