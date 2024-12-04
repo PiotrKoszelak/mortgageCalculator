@@ -34,10 +34,7 @@ const Input = (props: InputProps) => {
         parameter === DataInputsParams.totalPrincipal ||
         typeof parameter === 'number';
 
-    const currencyFormat = useCurrencyFormat({
-        noCurrency,
-        noFormat: !noCurrency,
-    });
+    const currencyFormat = useCurrencyFormat(!noCurrency, noCurrency);
 
     const [errorMessage, setErrorMessage] = useState('');
 

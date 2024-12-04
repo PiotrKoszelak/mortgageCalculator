@@ -4,11 +4,6 @@ import { useAppSelector } from '../store/hooks';
 import { selectCurrency } from '../store/cardSlice';
 import { selectLanguage } from '../store/globalSlice';
 
-interface CurrencyFormatProps {
-    noCurrency?: boolean;
-    noFormat?: boolean;
-}
-
 export const useWindowDimensions = () => {
     const [dimensions, setDimensions] = useState({
         width: window.innerWidth,
@@ -37,10 +32,7 @@ export const useIsMobile = () => {
     return isMobile;
 };
 
-export const useCurrencyFormat = (props: CurrencyFormatProps) => {
-    const noFormat = props?.noFormat || false;
-    const noCurrency = props?.noCurrency || false;
-
+export const useCurrencyFormat = (noFormat = false, noCurrency = false) => {
     const currency = useAppSelector(selectCurrency);
     const locale = useAppSelector(selectLanguage);
 
