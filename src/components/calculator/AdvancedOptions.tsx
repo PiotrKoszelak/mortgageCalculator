@@ -46,6 +46,7 @@ const StyledContainer = styled(Accordion)`
 const StyledDetails = styled(AccordionDetails)`
     display: flex;
     justify-content: space-between;
+    padding-top: 0;
 `;
 
 const StyledSection = styled(Box)`
@@ -150,6 +151,7 @@ const MonthSection = () => {
     return (
         <StyledDetails>
             <DateField
+                size="small"
                 label={translations.chooseStartingMonth}
                 format={MonthDateFormat}
                 value={formattedValue}
