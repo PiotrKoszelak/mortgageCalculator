@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import moment from 'moment';
+
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import {
@@ -6,13 +9,17 @@ import {
     toggleCurrency,
     changeCurrency,
     changeStartingMonth,
+    resetOverpayments,
+    selectDataInputs,
+    applyRegularOverpayments,
 } from '../../store/cardSlice';
 
-import { DataOptions } from './types';
+import { DataInputsParams, DataOptions, UpdateInputFunction } from './types';
 import { Currency, MonthDateFormat } from '../../utils/constants';
 
 import {
     Box,
+    Button,
     FormControlLabel,
     MenuItem,
     styled,
@@ -25,7 +32,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { DateField } from '@mui/x-date-pickers';
-import moment from 'moment';
+import Input from './Input';
 
 interface OptionSectionProps {
     title: string;
@@ -38,12 +45,13 @@ const StyledContainer = styled(Accordion)`
 
 const StyledDetails = styled(AccordionDetails)`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 `;
 
 const StyledSection = styled(Box)`
     display: flex;
     flex-direction: column;
+    gap: 5px;
 `;
 
 const OptionSection = (props: OptionSectionProps) => {
@@ -157,6 +165,47 @@ const MonthSection = () => {
     );
 };
 
+const OverpaymentSection = () => {
+    const translations = useAppSelector(selectTranslations);
+    const dataInputs = useAppSelector(selectDataInputs);
+    const dispatch = useAppDispatch();
+    const [cycleValue, setCycleValue] = useState(0);
+
+    const updateInputValue: UpdateInputFunction = (_, value: number) => {
+        setCycleValue(value);
+    };
+
+    return (
+        <>
+            <Input
+                parameter={100}
+                translations={translations}
+                updateInputValue={updateInputValue}
+                value={cycleValue}
+                rules={{
+                    integer: false,
+                    min: 0,
+                    max: dataInputs[DataInputsParams.totalPrincipal],
+                }}
+            />
+            <Button
+                onClick={() =>
+                    dispatch(applyRegularOverpayments({ value: cycleValue }))
+                }
+                variant="outlined"
+            >
+                {translations.applyRegularOverpayment}
+            </Button>
+            <Button
+                onClick={() => dispatch(resetOverpayments())}
+                variant="outlined"
+            >
+                {translations.resetAllOverpayments}
+            </Button>
+        </>
+    );
+};
+
 const AdvancedOptions = () => {
     const translations = useAppSelector(selectTranslations);
 
@@ -182,10 +231,10 @@ const AdvancedOptions = () => {
                     title={translations.currency}
                     content={<CurrencySection />}
                 />
-                {/* <OptionSection
-                    title={translations.cycleOverpayment}
-                    content={<ColumnsVisibility />}
-                /> */}
+                <OptionSection
+                    title={translations.overpayment}
+                    content={<OverpaymentSection />}
+                />
             </StyledDetails>
         </StyledContainer>
     );

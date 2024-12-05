@@ -7,7 +7,6 @@ interface SeoProps {
 
 const SeoWrapper = (props: SeoProps) => {
     const { title, description } = props;
-    console.log(description);
     return (
         <Helmet>
             <title>{title}</title>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { mobileWidth } from '../utils/constants';
 import { useAppSelector } from '../store/hooks';
 import { selectCurrency } from '../store/cardSlice';
@@ -36,10 +36,15 @@ export const useCurrencyFormat = (noFormat = false, noCurrency = false) => {
     const currency = useAppSelector(selectCurrency);
     const locale = useAppSelector(selectLanguage);
 
+    const format = useMemo(
+        () => ({
+            locale,
+            currency: noCurrency ? null : currency,
+        }),
+        [currency, locale, noCurrency]
+    );
+
     if (noFormat) return null;
 
-    return {
-        locale,
-        currency: noCurrency ? null : currency,
-    };
+    return format;
 };

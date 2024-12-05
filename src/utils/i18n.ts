@@ -45,8 +45,9 @@ enum TranslationParams {
     advancedOptions = 'advancedOptions',
     columnsVisibility = 'columnsVisibility',
     currency = 'currency',
-    cycleOverpayment = 'cycleOverpayment',
     chooseStartingMonth = 'chooseStartingMonth',
+    applyRegularOverpayment = 'applyRegularOverpayment',
+    resetAllOverpayments = 'resetAllOverpayments',
 }
 
 export const translationsEn = {
@@ -102,8 +103,9 @@ export const translationsEn = {
     [TranslationParams.advancedOptions]: 'More options',
     [TranslationParams.columnsVisibility]: 'Show/hide columns',
     [TranslationParams.currency]: 'Currency',
-    [TranslationParams.cycleOverpayment]: 'Cycle overpayment',
     [TranslationParams.chooseStartingMonth]: 'Choose first month',
+    [TranslationParams.applyRegularOverpayment]: 'Apply cycle overpayment',
+    [TranslationParams.resetAllOverpayments]: 'Clear all overpayments',
 };
 
 export const translationsPl = {
@@ -158,6 +160,7 @@ export const translationsPl = {
     [TranslationParams.advancedOptions]: 'Opcje zaawansowane',
     [TranslationParams.columnsVisibility]: 'Pokaż/ukryj kolumny',
     [TranslationParams.currency]: 'Waluta',
-    [TranslationParams.cycleOverpayment]: 'Cykliczna nadpłata',
     [TranslationParams.chooseStartingMonth]: 'Wybierz pierwszy miesiąc',
+    [TranslationParams.applyRegularOverpayment]: 'Zastosuj cykliczną nadpłatę',
+    [TranslationParams.resetAllOverpayments]: 'Zeruj wszystkie nadpłaty',
 };

@@ -10,6 +10,7 @@ import {
     OverpaymentResult,
     DataOptions,
     CalculatorParams,
+    OverpaymentData,
 } from '../components/calculator/types';
 import { Currency, MonthDateFormat } from '../utils/constants';
 
@@ -99,6 +100,21 @@ const cardSlice = createSlice({
             const { value } = action.payload;
             state.dataOptions.startingMonth = value;
         },
+        applyRegularOverpayments: (
+            state: CardState,
+            action: PayloadAction<{ value: number }>
+        ) => {
+            const nrOfMonths =
+                state.dataInputs[DataInputsParams.numberOfMonths];
+            const result: OverpaymentData = {};
+            [...Array(nrOfMonths).keys()].forEach((key) => {
+                result[key] = action.payload.value;
+            });
+            state.dataInputs.overpayment = result;
+        },
+        resetOverpayments: (state: CardState) => {
+            state.dataInputs.overpayment = {};
+        },
     },
 });
 
@@ -109,6 +125,8 @@ export const {
     toggleCurrency,
     changeCurrency,
     changeStartingMonth,
+    resetOverpayments,
+    applyRegularOverpayments,
 } = cardSlice.actions;
 
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;

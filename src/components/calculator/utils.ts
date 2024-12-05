@@ -30,7 +30,9 @@ export const calculateSummary = (
     return {
         [SummaryParams.totalPayment]: totalInterestPayment + totalPrincipal,
         [SummaryParams.totalInterestPayment]: totalInterestPayment,
-        [SummaryParams.totalOverpayment]: sumValues(Object.values(overpayment)),
+        [SummaryParams.totalOverpayment]: sumValues(
+            Object.values(overpayment).slice(0, data.length - 1)
+        ),
     };
 };
 
