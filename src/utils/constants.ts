@@ -36,3 +36,5 @@ export enum Currency {
     pln = 'PLN',
     euro = 'EUR',
 }
+
+export const MonthDateFormat = 'MM-YYYY';

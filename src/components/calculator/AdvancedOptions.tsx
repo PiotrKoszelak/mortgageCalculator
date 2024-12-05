@@ -5,10 +5,11 @@ import {
     toggleColumnVisibility,
     toggleCurrency,
     changeCurrency,
+    changeStartingMonth,
 } from '../../store/cardSlice';
 
 import { DataOptions } from './types';
-import { Currency } from '../../utils/constants';
+import { Currency, MonthDateFormat } from '../../utils/constants';
 
 import {
     Box,
@@ -23,6 +24,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { DateField } from '@mui/x-date-pickers';
+import moment from 'moment';
 
 interface OptionSectionProps {
     title: string;
@@ -128,6 +131,32 @@ const CurrencySection = () => {
     );
 };
 
+const MonthSection = () => {
+    const translations = useAppSelector(selectTranslations);
+    const dataOptions = useAppSelector(selectDataOptions);
+    const dispatch = useAppDispatch();
+    const { startingMonth } = dataOptions;
+
+    const formattedValue = moment(startingMonth, MonthDateFormat);
+
+    return (
+        <StyledDetails>
+            <DateField
+                label={translations.chooseStartingMonth}
+                format={MonthDateFormat}
+                value={formattedValue}
+                onChange={(newValue) =>
+                    dispatch(
+                        changeStartingMonth({
+                            value: newValue?.format(MonthDateFormat) || '',
+                        })
+                    )
+                }
+            />
+        </StyledDetails>
+    );
+};
+
 const AdvancedOptions = () => {
     const translations = useAppSelector(selectTranslations);
 
@@ -145,10 +174,10 @@ const AdvancedOptions = () => {
                     title={translations.columnsVisibility}
                     content={<ColumnsVisibility />}
                 />
-                {/* <OptionSection
+                <OptionSection
                     title={translations.month}
-                    content={<ColumnsVisibility />}
-                /> */}
+                    content={<MonthSection />}
+                />
                 <OptionSection
                     title={translations.currency}
                     content={<CurrencySection />}

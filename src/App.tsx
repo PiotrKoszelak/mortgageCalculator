@@ -8,6 +8,8 @@ import { routesConfig } from './routes';
 import { darkTheme } from './utils/theme';
 
 import { ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 import './App.css';
 
@@ -18,7 +20,9 @@ function App() {
         <Provider store={store}>
             <ThemeProvider theme={darkTheme}>
                 <HelmetProvider>
-                    <RouterProvider router={router} />
+                    <LocalizationProvider dateAdapter={AdapterMoment}>
+                        <RouterProvider router={router} />
+                    </LocalizationProvider>
                 </HelmetProvider>
             </ThemeProvider>
         </Provider>

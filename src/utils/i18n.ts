@@ -46,6 +46,7 @@ enum TranslationParams {
     columnsVisibility = 'columnsVisibility',
     currency = 'currency',
     cycleOverpayment = 'cycleOverpayment',
+    chooseStartingMonth = 'chooseStartingMonth',
 }
 
 export const translationsEn = {
@@ -102,6 +103,7 @@ export const translationsEn = {
     [TranslationParams.columnsVisibility]: 'Show/hide columns',
     [TranslationParams.currency]: 'Currency',
     [TranslationParams.cycleOverpayment]: 'Cycle overpayment',
+    [TranslationParams.chooseStartingMonth]: 'Choose first month',
 };
 
 export const translationsPl = {
@@ -157,4 +159,5 @@ export const translationsPl = {
     [TranslationParams.columnsVisibility]: 'Pokaż/ukryj kolumny',
     [TranslationParams.currency]: 'Waluta',
     [TranslationParams.cycleOverpayment]: 'Cykliczna nadpłata',
+    [TranslationParams.chooseStartingMonth]: 'Wybierz pierwszy miesiąc',
 };

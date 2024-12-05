@@ -44,7 +44,7 @@ export interface DataInputs {
 
 export enum CalculatorParams {
     nr = 'nr',
-    // month = 'month',
+    month = 'month',
     principalBalance = 'principalBalance',
     principalInstallment = 'principalInstallment',
     interest = 'interest',
@@ -54,7 +54,7 @@ export enum CalculatorParams {
 
 export interface DataRow {
     [CalculatorParams.nr]: number;
-    // [CalculatorParams.month]: string;
+    [CalculatorParams.month]: string;
     [CalculatorParams.principalBalance]: number;
     [CalculatorParams.principalInstallment]: number;
     [CalculatorParams.interest]: number;
@@ -85,6 +85,7 @@ export interface parseNumberToStringParams {
 export interface DataOptions {
     columnsVisibility: {
         [CalculatorParams.nr]: boolean;
+        [CalculatorParams.month]: boolean;
         [CalculatorParams.principalBalance]: boolean;
         [CalculatorParams.principalInstallment]: boolean;
         [CalculatorParams.interest]: boolean;
@@ -95,4 +96,5 @@ export interface DataOptions {
         enabled: boolean;
         value: Currency;
     };
+    startingMonth: string;
 }

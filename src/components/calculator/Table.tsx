@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
 import {
@@ -13,6 +14,7 @@ import {
 } from './types';
 import { parseNumberToString } from './utils';
 import { useCurrencyFormat } from '../../hooks/common';
+import { MonthDateFormat } from '../../utils/constants';
 
 import { styled } from '@mui/material';
 import { appColors } from '../../utils/theme';
@@ -72,7 +74,7 @@ function DataTable(props: TableProps) {
     const translations = useAppSelector(selectTranslations);
     const overpayment = useAppSelector(selectOverpayment);
     const dataOptions = useAppSelector(selectDataOptions);
-    const { columnsVisibility } = dataOptions;
+    const { columnsVisibility, startingMonth } = dataOptions;
 
     const updateInputValue: UpdateInputFunction = (name, value) => {
         const typedName = name as number;
@@ -104,15 +106,23 @@ function DataTable(props: TableProps) {
                         {data.map((row, index) => (
                             <TableRow key={row.nr}>
                                 {columnsVisibility.nr && (
-                                    <StyledTableCell component="th" scope="row">
+                                    <StyledTableCell
+                                        component="th"
+                                        scope="row"
+                                        align="center"
+                                    >
                                         {row.nr}
                                     </StyledTableCell>
                                 )}
-                                {/* <StyledTableCell align="right">
-                                    {row.month}
-                                </StyledTableCell> */}
+                                {columnsVisibility.month && (
+                                    <StyledTableCell align="center">
+                                        {moment(startingMonth, MonthDateFormat)
+                                            .add(index, 'months')
+                                            .format(MonthDateFormat)}
+                                    </StyledTableCell>
+                                )}
                                 {columnsVisibility.principalBalance && (
-                                    <StyledTableCell align="right">
+                                    <StyledTableCell align="center">
                                         {parseNumberToString({
                                             number: row.principalBalance,
                                             format: currencyFormat,
@@ -120,7 +130,7 @@ function DataTable(props: TableProps) {
                                     </StyledTableCell>
                                 )}
                                 {columnsVisibility.principalInstallment && (
-                                    <StyledTableCell align="right">
+                                    <StyledTableCell align="center">
                                         {parseNumberToString({
                                             number: row.principalInstallment,
                                             format: currencyFormat,
@@ -128,7 +138,7 @@ function DataTable(props: TableProps) {
                                     </StyledTableCell>
                                 )}
                                 {columnsVisibility.interest && (
-                                    <StyledTableCell align="right">
+                                    <StyledTableCell align="center">
                                         {parseNumberToString({
                                             number: row.interest,
                                             format: currencyFormat,
@@ -136,7 +146,7 @@ function DataTable(props: TableProps) {
                                     </StyledTableCell>
                                 )}
                                 {columnsVisibility.installmentAmount && (
-                                    <StyledTableCell align="right">
+                                    <StyledTableCell align="center">
                                         {parseNumberToString({
                                             number: row.installmentAmount,
                                             format: currencyFormat,
@@ -144,7 +154,7 @@ function DataTable(props: TableProps) {
                                     </StyledTableCell>
                                 )}
                                 {columnsVisibility.overpayment && (
-                                    <StyledTableCell align="right">
+                                    <StyledTableCell align="center">
                                         {row.interest > 0 ? (
                                             <Input
                                                 parameter={row.nr}

@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from 'moment';
+
 import { RootState } from './store';
 
 import { type CardState } from './types';
@@ -9,8 +11,7 @@ import {
     DataOptions,
     CalculatorParams,
 } from '../components/calculator/types';
-
-import { Currency } from '../utils/constants';
+import { Currency, MonthDateFormat } from '../utils/constants';
 
 const initialState: CardState = {
     dataInputs: {
@@ -24,6 +25,7 @@ const initialState: CardState = {
     dataOptions: {
         columnsVisibility: {
             [CalculatorParams.nr]: true,
+            [CalculatorParams.month]: false,
             [CalculatorParams.principalBalance]: true,
             [CalculatorParams.principalInstallment]: true,
             [CalculatorParams.interest]: true,
@@ -34,6 +36,7 @@ const initialState: CardState = {
             enabled: false,
             value: Currency.pln,
         },
+        startingMonth: moment().format(MonthDateFormat),
     },
 };
 
@@ -89,6 +92,13 @@ const cardSlice = createSlice({
             const { value } = action.payload;
             state.dataOptions.currency.value = value;
         },
+        changeStartingMonth: (
+            state: CardState,
+            action: PayloadAction<{ value: string }>
+        ) => {
+            const { value } = action.payload;
+            state.dataOptions.startingMonth = value;
+        },
     },
 });
 
@@ -98,6 +108,7 @@ export const {
     toggleColumnVisibility,
     toggleCurrency,
     changeCurrency,
+    changeStartingMonth,
 } = cardSlice.actions;
 
 export const selectDataInputs = (state: RootState) => state.card.dataInputs;
@@ -108,5 +119,7 @@ export const selectCurrency = (state: RootState) =>
     selectDataOptions(state).currency.enabled
         ? selectDataOptions(state).currency.value
         : null;
+export const selectStartingMonth = (state: RootState) =>
+    selectDataOptions(state).startingMonth;
 
 export default cardSlice.reducer;
