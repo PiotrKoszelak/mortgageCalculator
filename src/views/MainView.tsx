@@ -16,9 +16,12 @@ interface MainView {
     view: MenuList;
 }
 
-const StyledView = styled(Box)`
+const StyledView = styled(Box)<{
+    showCalculator: boolean;
+}>`
     width: 100%;
-    height: calc(100vh - ${menuHeight}px);
+    height: ${(props) =>
+        props.showCalculator ? `calc(100vh - ${menuHeight}px)` : 'max-content'};
     display: flex;
 `;
 
@@ -26,6 +29,7 @@ const StyledPanel = styled(Paper)<{
     isMobile: boolean;
 }>`
     width: ${(props) => (props.isMobile ? '100%' : '500px')};
+    min-height: calc(100vh - ${menuHeight}px);
 `;
 
 const MainView = (props: MainView) => {
@@ -42,7 +46,7 @@ const MainView = (props: MainView) => {
         <>
             <SeoWrapper {...seoParams} />
             <MenuToolbar />
-            <StyledView>
+            <StyledView showCalculator={showCalculator}>
                 {showCalculator && <Calculator isSingle />}
                 {showPanel && (
                     <StyledPanel isMobile={isMobile}>

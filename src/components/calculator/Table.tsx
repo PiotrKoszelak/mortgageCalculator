@@ -33,6 +33,7 @@ interface TableProps {
 
 const StyledContainer = styled(Paper)`
     overflow: hidden;
+    min-height: 300px;
     width: 100%;
 `;
 
