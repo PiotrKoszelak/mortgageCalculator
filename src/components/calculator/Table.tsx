@@ -17,7 +17,6 @@ import { useCurrencyFormat } from '../../hooks/common';
 import { MonthDateFormat } from '../../utils/constants';
 
 import { styled } from '@mui/material';
-import { appColors } from '../../utils/theme';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -26,6 +25,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Input from './Input';
+
+import { scrollbarStyle } from '../common/styles';
 
 interface TableProps {
     data: DataRow[];
@@ -39,27 +40,7 @@ const StyledContainer = styled(Paper)`
 
 const StyledTableContainer = styled(TableContainer)`
     height: 100%;
-
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: ${appColors.lightPurple};
-        border-radius: 10px;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: ${appColors.darkPurple};
-    }
+    ${scrollbarStyle}
 `;
 
 const StyledTableCell = styled(TableCell)`

@@ -14,6 +14,8 @@ import Curtain from './Curtain';
 import Loader from '../common/Loader';
 import AdvancedOptions from './AdvancedOptions';
 
+import { scrollbarStyle } from '../common/styles';
+
 interface CalculatorProps {
     isSingle?: boolean;
 }
@@ -27,6 +29,7 @@ const StyledContainer = styled(Paper)<CalculatorProps>`
     width: 100%;
     overflow-x: hidden;
     position: relative;
+    ${scrollbarStyle}
 `;
 
 const StyledBackdrop = styled(Backdrop)<CalculatorProps>`
