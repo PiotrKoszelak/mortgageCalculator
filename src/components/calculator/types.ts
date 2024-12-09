@@ -106,3 +106,10 @@ export type SummaryValues = {
     value: number;
     key: string;
 }[];
+
+export type ChartValue = {
+    id: string;
+    value: number;
+    label: string;
+    color: string;
+};

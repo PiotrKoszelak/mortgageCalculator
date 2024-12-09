@@ -6,6 +6,9 @@ export const appColors = {
     white: '#fff',
     lightGrey: colors.grey[900],
     darkGrey: '#171717',
+    coral: 'lightcoral',
+    blue: 'slateblue',
+    grey: 'grey',
 };
 
 export const darkTheme = createTheme({

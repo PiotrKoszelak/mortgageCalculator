@@ -48,6 +48,7 @@ enum TranslationParams {
     chooseStartingMonth = 'chooseStartingMonth',
     applyRegularOverpayment = 'applyRegularOverpayment',
     resetAllOverpayments = 'resetAllOverpayments',
+    principal = 'principal',
 }
 
 export const translationsEn = {
@@ -106,6 +107,7 @@ export const translationsEn = {
     [TranslationParams.chooseStartingMonth]: 'Choose first month',
     [TranslationParams.applyRegularOverpayment]: 'Apply cycle overpayment',
     [TranslationParams.resetAllOverpayments]: 'Clear all overpayments',
+    [TranslationParams.principal]: 'Principal',
 };
 
 export const translationsPl = {
@@ -163,4 +165,5 @@ export const translationsPl = {
     [TranslationParams.chooseStartingMonth]: 'Wybierz pierwszy miesiąc',
     [TranslationParams.applyRegularOverpayment]: 'Zastosuj cykliczną nadpłatę',
     [TranslationParams.resetAllOverpayments]: 'Zeruj wszystkie nadpłaty',
+    [TranslationParams.principal]: 'Kapitał',
 };
