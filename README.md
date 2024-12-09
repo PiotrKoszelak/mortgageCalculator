@@ -12,8 +12,7 @@ It contains:
 > NOTE  
 > The app is under development. List of features that will be available soon includes:
 >
-> -   advanced calculator options
-> -   graphs
+> -   signing in
 > -   saving results to a database
 > -   exporting results to Excel/PDF file
 
