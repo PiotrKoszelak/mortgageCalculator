@@ -47,6 +47,8 @@ const StyledDetails = styled(AccordionDetails)`
     display: flex;
     justify-content: space-between;
     padding-top: 0;
+    flex-wrap: wrap;
+    row-gap: 50px;
 `;
 
 const StyledSection = styled(Box)`
