@@ -2,13 +2,15 @@ import { Currency, LanguageList } from '../../utils/constants';
 
 export enum SummaryParams {
     totalPayment = 'totalPayment',
-    totalInterestPayment = 'totalInterestPayment',
+    totalPrincipal = 'totalPrincipal',
+    totalInterest = 'totalInterest',
     totalOverpayment = 'totalOverpayment',
 }
 
 export interface SummaryData {
     [SummaryParams.totalPayment]: number;
-    [SummaryParams.totalInterestPayment]: number;
+    [SummaryParams.totalPrincipal]: number;
+    [SummaryParams.totalInterest]: number;
     [SummaryParams.totalOverpayment]: number;
 }
 
@@ -98,3 +100,9 @@ export interface DataOptions {
     };
     startingMonth: string;
 }
+
+export type SummaryValues = {
+    name: string;
+    value: number;
+    key: string;
+}[];

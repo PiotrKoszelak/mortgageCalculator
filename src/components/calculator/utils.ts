@@ -8,7 +8,8 @@ import {
 
 export const fallbackSummaryValue = {
     [SummaryParams.totalPayment]: 0,
-    [SummaryParams.totalInterestPayment]: 0,
+    [SummaryParams.totalPrincipal]: 0,
+    [SummaryParams.totalInterest]: 0,
     [SummaryParams.totalOverpayment]: 0,
 };
 
@@ -22,14 +23,15 @@ export const calculateSummary = (
 ): SummaryData => {
     if (!data.length) return fallbackSummaryValue;
 
-    const totalInterestPayment = sumValues(
+    const totalInterest = sumValues(
         data
             .map((row) => row.interest as number)
             .filter((interest) => interest >= 0)
     );
     return {
-        [SummaryParams.totalPayment]: totalInterestPayment + totalPrincipal,
-        [SummaryParams.totalInterestPayment]: totalInterestPayment,
+        [SummaryParams.totalPayment]: totalInterest + totalPrincipal,
+        [SummaryParams.totalPrincipal]: totalPrincipal,
+        [SummaryParams.totalInterest]: totalInterest,
         [SummaryParams.totalOverpayment]: sumValues(
             Object.values(overpayment).slice(0, data.length - 1)
         ),

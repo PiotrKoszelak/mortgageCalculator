@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/hooks';
 import { selectTranslations } from '../../store/globalSlice';
-import { SummaryParams, type SummaryData } from './types';
+import { SummaryParams, type SummaryValues, type SummaryData } from './types';
 import { parseNumberToString } from './utils';
 import { useCurrencyFormat } from '../../hooks/common';
 
@@ -11,13 +11,20 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import CustomPieChart from './Chart';
 
 interface SumamryProps {
     data: SummaryData;
 }
 
+const StyledContainer = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+`;
+
 const StyledTableContainer = styled(TableContainer)`
-    height: 200px;
+    height: 260px;
 `;
 
 const StyledTableCell = styled(TableCell)`
@@ -31,14 +38,16 @@ function Summary(props: SumamryProps) {
     const translations = useAppSelector(selectTranslations);
     const currencyFormat = useCurrencyFormat();
 
-    const summaryValues = Object.keys(SummaryParams).map((param) => ({
-        name: translations[param as keyof SummaryData],
-        value: data[param as keyof SummaryData],
-        key: param,
-    }));
+    const summaryValues: SummaryValues = Object.keys(SummaryParams).map(
+        (param) => ({
+            name: translations[param as keyof SummaryData],
+            value: data[param as keyof SummaryData],
+            key: param,
+        })
+    );
 
     return (
-        <Box>
+        <StyledContainer>
             <StyledTableContainer>
                 <Table stickyHeader size="small" aria-label="sticky table">
                     <TableHead>
@@ -64,7 +73,8 @@ function Summary(props: SumamryProps) {
                     </TableBody>
                 </Table>
             </StyledTableContainer>
-        </Box>
+            <CustomPieChart summaryValues={summaryValues} />
+        </StyledContainer>
     );
 }
 
