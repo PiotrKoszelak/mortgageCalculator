@@ -69,7 +69,7 @@ const Calculator = (props: CalculatorProps) => {
                 open={canCalculate && isFetching}
                 isSingle={isSingle}
             >
-                <Loader size="50px" />
+                <Loader size={80} disableShrink />
             </StyledBackdrop>
             <Form />
             <AdvancedOptions />
